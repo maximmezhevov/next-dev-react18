@@ -3,25 +3,27 @@ import Link from 'next/link'
 export default function DevLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className='flex'>
-			<Sidebar />
+			<div className='w-fit shrink-0'>
+				<div className='sticky top-0 h-svh w-[inherit] border-r p-4'>
+					<Nav />
+				</div>
+			</div>
 			{children}
 		</div>
 	)
 }
 
-const PROJECTS = ['blog-action', 'blog-api', 'blog-api-client']
-const Sidebar: React.FC = () => {
+const ROUTES_PROJECT: { href: string; label?: string }[] = [{ href: 'blog' }]
+const Nav: React.FC = () => {
 	return (
-		<aside className='h-svh shrink-0 border-r p-4'>
-			<nav>
-				<ul>
-					{PROJECTS.map((item) => (
-						<li key={item}>
-							<Link href={`/dev/${item}`}>{item}</Link>
-						</li>
-					))}
-				</ul>
-			</nav>
-		</aside>
+		<nav>
+			<ul>
+				{ROUTES_PROJECT.map((item) => (
+					<li key={item.href}>
+						<Link href={`/dev/${item.href}`}>{item?.label || item.href}</Link>
+					</li>
+				))}
+			</ul>
+		</nav>
 	)
 }

@@ -1,3 +1,5 @@
 export default function Dev() {
-	return <main>dev</main>
+	return (
+		<main className='flex h-svh w-full items-center justify-center'>dev</main>
+	)
 }
