@@ -15,15 +15,15 @@ export interface LinkActiveProps extends VariantProps<typeof linkVariants> {
 	className?: string
 }
 
-const linkVariants = cva(' inline-block', {
+const linkVariants = cva('', {
 	variants: {
 		variant: {
 			default: '',
 			secondary:
-				'rounded-md px-2 data-[active=true]:bg-secondary data-[active=true]:hover:bg-secondary/80 hover:bg-secondary',
+				'rounded-md px-2 hover:bg-secondary data-[active=true]:bg-secondary data-[active=true]:hover:bg-secondary/80 inline-block',
 		},
 		size: {
-			sm_32: 'text-sm py-1.5 ',
+			sm_32: 'text-sm py-1.5',
 		},
 	},
 	defaultVariants: {
@@ -44,7 +44,10 @@ export const LinkActive: React.FC<LinkActiveProps> = ({
 		<Link
 			data-active={isActive || inheritIsActive}
 			href={path.href}
-			className={cn(linkVariants({ variant, size, className }))}
+			className={cn(
+				linkVariants({ variant, size, className }),
+				isActive || (inheritIsActive && 'pointer-events-none')
+			)}
 		>
 			{path.label}
 		</Link>

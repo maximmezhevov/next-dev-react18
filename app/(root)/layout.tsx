@@ -1,6 +1,10 @@
+import type { Path } from '@/types'
+
 import { ThemeModeToggleDropdown } from '@/components/theme'
+import { SettingsDropdown } from '@/components/settings'
+import { UserDropdown } from '@/components/auth'
+
 import { LinkActive } from '@/components/ui'
-import { Path } from '@/types'
 
 export default function RootLayout({
 	children,
@@ -8,43 +12,42 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<div className='flex'>
+		<>
 			<Aside />
 			{children}
-		</div>
+		</>
 	)
 }
 
 const Aside: React.FC = () => {
 	return (
-		<div className='w-fit shrink-0'>
-			<div className='sticky top-0 flex h-svh w-[inherit] flex-col justify-between border-r p-2'>
-				<Nav />
-				<ThemeModeToggleDropdown />
+		<div className='sticky top-0 h-[3rem] border-b bg-background/50 backdrop-blur-sm'>
+			<div className='mx-auto h-[inherit] max-w-screen-lg'>
+				<aside className='flex h-[inherit] items-center gap-0.5 px-2'>
+					<nav className='flex-1'>
+						<NavList />
+					</nav>
+					<ThemeModeToggleDropdown />
+					<SettingsDropdown />
+					<UserDropdown />
+				</aside>
 			</div>
 		</div>
 	)
 }
 
 const ROUTES: Path[] = [
-	{ href: '/', label: 'ndr18' },
+	{ href: '/', label: 'next-dev-react18' },
 	{ href: '/dev', label: 'dev' },
 ]
-const Nav: React.FC = () => {
+const NavList: React.FC = () => {
 	return (
-		<nav>
-			<ul className='space-y-0.5'>
-				{ROUTES.map((item) => (
-					<li key={item.href} className='w-full'>
-						<LinkActive
-							path={item}
-							variant='secondary'
-							size='sm_32'
-							className='w-full'
-						/>
-					</li>
-				))}
-			</ul>
-		</nav>
+		<ul className='space-x-0.5'>
+			{ROUTES.map((path) => (
+				<li key={path.href} className='inline-block'>
+					<LinkActive variant='secondary' size='sm_32' path={path} />
+				</li>
+			))}
+		</ul>
 	)
 }

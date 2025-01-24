@@ -23,9 +23,9 @@ export default async function BlogWithAnFetch() {
 	const posts = await getAllPosts()
 
 	return (
-		<main className='space-y-4'>
-			<div className='font-mono text-xs'>
-				api:&nbsp;
+		<main className='space-y-4 font-mono text-sm'>
+			<div>
+				API_URL:&nbsp;
 				<Link target='_blank' href={API_URL} className='hover:underline'>
 					{API_URL}
 				</Link>

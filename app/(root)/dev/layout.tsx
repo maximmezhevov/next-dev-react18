@@ -1,35 +1,30 @@
 import type { Path } from '@/types'
-import { LinkActive } from '@/components/ui'
+import DevLayout from '@/components/ui/dev-layout'
 
-export default function DevLayout({ children }: { children: React.ReactNode }) {
-	return (
-		<div className='flex w-full'>
-			<div className='w-fit shrink-0'>
-				<div className='sticky top-0 h-svh w-[inherit] border-r p-2'>
-					<Nav />
-				</div>
-			</div>
-			{children}
-		</div>
-	)
-}
+const ROUTES: Path[] = [
+	{ href: '/dev/blog', label: 'Блог' },
+	{ href: '/dev/next-auth', label: 'next-auth' },
+	{ href: '/dev/crud-todo', label: 'todo' },
+]
 
-const ROUTES: Path[] = [{ href: '/dev/blog', label: 'Блог' }]
-const Nav: React.FC = () => {
+export default function DevLayout_({
+	children,
+}: {
+	children: React.ReactNode
+}) {
 	return (
-		<nav>
-			<ul>
-				{ROUTES.map((path) => (
-					<li key={path.href} className='w-full'>
-						<LinkActive
-							path={path}
-							variant='secondary'
-							size='sm_32'
-							className='w-full'
-						/>
-					</li>
-				))}
-			</ul>
-		</nav>
+		<DevLayout className='min-h-[calc(100svh-3rem)]'>
+			<DevLayout.Aside className='sticky top-[3rem] h-[calc(100svh-3rem)]'>
+				<DevLayout.Nav>
+					<DevLayout.NavList routes={ROUTES} />
+				</DevLayout.Nav>
+			</DevLayout.Aside>
+			<DevLayout.Inset>
+				<DevLayout.InsetHeader className='sticky top-[3rem]'>
+					1
+				</DevLayout.InsetHeader>
+				{children}
+			</DevLayout.Inset>
+		</DevLayout>
 	)
 }

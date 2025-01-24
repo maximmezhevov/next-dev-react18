@@ -39,7 +39,7 @@ export const ThemeModeToggleDropdown: React.FC = () => {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent
-				collisionPadding={{ left: 8 }}
+				collisionPadding={{ right: 8 }}
 				onCloseAutoFocus={(e) => e.preventDefault()}
 			>
 				<DropdownMenuGroup className='space-y-0.5'>

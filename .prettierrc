@@ -10,5 +10,7 @@
 	"bracketSpacing": true,
 	"arrowParens": "always",
 	"endOfLine": "lf",
+	"tailwindAttributes": ["cva"],
+	"tailwindFunctions": ["clsx", "tw"],
 	"plugins": ["prettier-plugin-tailwindcss"]
 }

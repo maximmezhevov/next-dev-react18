@@ -7,7 +7,7 @@ import Link from 'next/link'
 const API_URL = `${process.env.API_URL}/blog/posts`
 // const API_URL = 'http://localhost:3000/api/blog/posts'
 
-export default async function BlogFetch() {
+export default async function BlogWithAnFetchNextApi() {
 	// const data = await fetch(API_URL)
 	// const posts = (await data.json()) as Post[]
 
@@ -22,8 +22,8 @@ export default async function BlogFetch() {
 
 	return (
 		<main className='space-y-4'>
-			<div className='font-mono text-xs'>
-				api:&nbsp;
+			<div className='font-mono text-sm'>
+				API_URL:&nbsp;
 				<Link target='_blank' href={API_URL} className='hover:underline'>
 					{API_URL}
 				</Link>
@@ -34,7 +34,14 @@ export default async function BlogFetch() {
 	)
 }
 
-const ERROR = `Error occurred prerendering page "/dev/blog/with-an-fetch-api". Read more: https://nextjs.org/docs/messages/prerender-error
+const CODE = `export default async function BlogWithAnFetchNextApi() {
+	const data = await fetch(API_URL)
+	const posts = (await data.json()) as Post[]
+
+	return ...
+}`
+
+const CODE_ERROR = `Error occurred prerendering page "/dev/blog/with-an-fetch-api". Read more: https://nextjs.org/docs/messages/prerender-error
 	TypeError: fetch failed
 		at node:internal/deps/undici/undici:13484:13
 		at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
@@ -44,9 +51,20 @@ const ERROR = `Error occurred prerendering page "/dev/blog/with-an-fetch-api". R
 `
 const Error: React.FC = () => {
 	return (
-		<section className='space-y-2 font-mono text-xs'>
-			<h2>build error</h2>
-			<code className='block whitespace-pre-wrap text-xs'>{ERROR}</code>
+		<section className='space-y-2 font-mono text-sm'>
+			<p>
+				example:&nbsp;
+				<Link
+					target='_blank'
+					href='https://nextjs.org/docs/app/building-your-application/data-fetching/fetching#examples'
+					className='hover:underline'
+				>
+					nextjs.org/docs/.../fetching#examples
+				</Link>
+			</p>
+			<code className='block whitespace-pre-wrap text-xs'>{CODE}</code>
+			<p>build error</p>
+			<code className='block whitespace-pre-wrap text-xs'>{CODE_ERROR}</code>
 		</section>
 	)
 }

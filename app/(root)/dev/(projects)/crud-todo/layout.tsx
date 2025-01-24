@@ -1,16 +1,14 @@
-import type { Path } from '@/types'
+import { Path } from '@/types'
 import DevLayout from '@/components/ui/dev-layout'
 
 const ROUTES: Path[] = [
-	{ href: '/dev/blog/with-an-prisma', label: 'prisma' },
 	{
-		href: '/dev/blog/with-an-fetch-next-api',
-		label: 'fetch-next-api ',
+		href: '/dev/todo/with-an-prisma',
+		label: 'with-an-prisma',
 	},
-	{ href: '/dev/blog/with-an-fetch-api', label: 'fetch-api' },
 ]
 
-export default function BlogLayout({
+export default function TodoLayout({
 	children,
 }: {
 	children: React.ReactNode
