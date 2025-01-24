@@ -6,7 +6,7 @@ import type { Path } from '@/types'
 import Link from 'next/link'
 import { cva } from 'class-variance-authority'
 
-import { useLinkActive } from '@/hooks/use-link-active'
+import { useLinkActive } from '@/hooks'
 import { cn } from '@/lib/utils'
 
 export interface LinkActiveProps extends VariantProps<typeof linkVariants> {
@@ -45,8 +45,8 @@ export const LinkActive: React.FC<LinkActiveProps> = ({
 			data-active={isActive || inheritIsActive}
 			href={path.href}
 			className={cn(
-				linkVariants({ variant, size, className }),
-				isActive || (inheritIsActive && 'pointer-events-none')
+				linkVariants({ variant, size, className })
+				// isActive || (inheritIsActive && 'pointer-events-none')
 			)}
 		>
 			{path.label}

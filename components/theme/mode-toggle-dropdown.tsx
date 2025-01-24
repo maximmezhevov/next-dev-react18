@@ -25,7 +25,7 @@ export const ThemeModeToggleDropdown: React.FC = () => {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
-					variant='secondary'
+					variant='ghost_secondary'
 					size='icon_32'
 					className='data-[state=open]:bg-secondary/80 data-[state=open]:text-foreground'
 				>

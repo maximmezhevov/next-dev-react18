@@ -3,12 +3,12 @@ import DevLayout from '@/components/ui/dev-layout'
 
 const ROUTES: Path[] = [
 	{
-		href: '/dev/todo/with-an-prisma',
+		href: '/dev/todos/with-an-prisma',
 		label: 'with-an-prisma',
 	},
 ]
 
-export default function TodoLayout({
+export default function TodosLayout({
 	children,
 }: {
 	children: React.ReactNode

@@ -18,24 +18,14 @@ const DevLayout: React.FC<{
 	Nav: React.FC<{ children: React.ReactNode }>
 	NavList: React.FC<{ routes: Path[] }>
 	Inset: React.FC<{ className?: string } & { children: React.ReactNode }>
+	InsetHeader: React.FC<{ className?: string } & { children: React.ReactNode }>
 } = ({ children, className }) => {
-	return (
-		<div className={cn('flex min-h-[calc(100svh-3rem)] w-full', className)}>
-			{children}
-		</div>
-	)
+	return <div className={cn('flex w-full', className)}>{children}</div>
 }
 
 DevLayout.Aside = ({ children, className }) => (
-	<aside className='min-h-[inherit] w-fit shrink-0'>
-		<div
-			className={cn(
-				'sticky top-[3rem] h-[calc(100svh-3rem)] w-[inherit] border-r p-2',
-				className
-			)}
-		>
-			{children}
-		</div>
+	<aside className='w-fit shrink-0'>
+		<div className={cn('w-[inherit] border-r p-2', className)}>{children}</div>
 	</aside>
 )
 DevLayout.Aside.displayName = 'Aside'
@@ -63,5 +53,17 @@ DevLayout.Inset = ({ children, className }) => (
 	<div className={cn('shrink grow', className)}>{children}</div>
 )
 DevLayout.Inset.displayName = 'Inset'
+
+DevLayout.InsetHeader = ({ children, className }) => (
+	<header
+		className={cn(
+			'flex h-[3rem] items-center border-b bg-background/50 px-2 backdrop-blur-sm',
+			className
+		)}
+	>
+		{children}
+	</header>
+)
+DevLayout.InsetHeader.displayName = 'InsetHeader'
 
 export default DevLayout

@@ -2,15 +2,15 @@ import type { Path } from '@/types'
 import DevLayout from '@/components/ui/dev-layout'
 
 const ROUTES: Path[] = [
-	{ href: '/dev/blog/with-an-prisma', label: 'prisma' },
+	{ href: '/dev/blogs/with-an-prisma', label: 'prisma' },
 	{
-		href: '/dev/blog/with-an-fetch-next-api',
+		href: '/dev/blogs/with-an-fetch-next-api',
 		label: 'fetch-next-api ',
 	},
-	{ href: '/dev/blog/with-an-fetch-api', label: 'fetch-api' },
+	{ href: '/dev/blogs/with-an-fetch-api', label: 'fetch-api' },
 ]
 
-export default function BlogLayout({
+export default function BlogsLayout({
 	children,
 }: {
 	children: React.ReactNode

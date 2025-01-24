@@ -1,36 +1,35 @@
 'use client'
 
 import { Settings2 } from 'lucide-react'
-import { useSettingsStore } from '@/store-zustand'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from '../shadcn/dropdown-menu'
-import { Button } from '../shadcn/button'
+} from '@/components/shadcn/dropdown-menu'
+import { Button } from '@/components/shadcn/button'
 
 export const SettingsDropdown = () => {
-	const { variantApp, variantDev } = useSettingsStore((store) => store)
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant='ghost_secondary' size='icon_32'>
+				<Button
+					variant='ghost_secondary'
+					size='icon_32'
+					className='data-[state=open]:bg-secondary/80 data-[state=open]:text-foreground'
+				>
 					<Settings2 />
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className='w-56'>
-				<DropdownMenuLabel>{variantApp}</DropdownMenuLabel>
+			<DropdownMenuContent
+				collisionPadding={{ right: 8 }}
+				onCloseAutoFocus={(e) => e.preventDefault()}
+			>
+				<DropdownMenuLabel>...</DropdownMenuLabel>
 				<DropdownMenuGroup>
-					<DropdownMenuItem>1</DropdownMenuItem>
-				</DropdownMenuGroup>
-				<DropdownMenuSeparator />
-				<DropdownMenuLabel>{variantDev}</DropdownMenuLabel>
-				<DropdownMenuGroup>
-					<DropdownMenuItem>2</DropdownMenuItem>
+					<DropdownMenuItem>...</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>

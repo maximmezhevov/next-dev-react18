@@ -2,9 +2,9 @@ import type { Path } from '@/types'
 import DevLayout from '@/components/ui/dev-layout'
 
 const ROUTES: Path[] = [
-	{ href: '/dev/blog', label: 'Блог' },
+	{ href: '/dev/blogs', label: 'Блог' },
+	{ href: '/dev/todos', label: 'Тодо' },
 	{ href: '/dev/next-auth', label: 'next-auth' },
-	{ href: '/dev/crud-todo', label: 'todo' },
 ]
 
 export default function DevLayout_({
