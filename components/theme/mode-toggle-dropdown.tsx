@@ -3,14 +3,7 @@
 import { useTheme } from 'next-themes'
 import { Moon, Sun } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '@/components/shadcn/dropdown-menu'
-import { Button } from '@/components/shadcn/button'
+import { Button, Dropdown } from '@/components/shadcn'
 
 const themeModeMap = {
 	light: 'Светлая',
@@ -22,8 +15,8 @@ export const ThemeModeToggleDropdown: React.FC = () => {
 	const { themes, theme, setTheme } = useTheme()
 
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
+		<Dropdown.Root>
+			<Dropdown.Trigger asChild>
 				<Button
 					variant='ghost_secondary'
 					size='icon_32'
@@ -37,14 +30,14 @@ export const ThemeModeToggleDropdown: React.FC = () => {
 					/>
 					<span className='sr-only'>theme mode toggle dropdown</span>
 				</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent
+			</Dropdown.Trigger>
+			<Dropdown.Content
 				collisionPadding={{ right: 8 }}
 				onCloseAutoFocus={(e) => e.preventDefault()}
 			>
-				<DropdownMenuGroup className='space-y-0.5'>
+				<Dropdown.Group className='space-y-0.5'>
 					{themes.map((item) => (
-						<DropdownMenuItem
+						<Dropdown.Item
 							key={item}
 							onClick={() => setTheme(item)}
 							className={cn(
@@ -52,10 +45,10 @@ export const ThemeModeToggleDropdown: React.FC = () => {
 							)}
 						>
 							{themeModeMap[item as 'light' | 'dark' | 'system']}
-						</DropdownMenuItem>
+						</Dropdown.Item>
 					))}
-				</DropdownMenuGroup>
-			</DropdownMenuContent>
-		</DropdownMenu>
+				</Dropdown.Group>
+			</Dropdown.Content>
+		</Dropdown.Root>
 	)
 }

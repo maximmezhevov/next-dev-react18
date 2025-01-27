@@ -9,7 +9,7 @@ export default async function BlogWithAnPrisma() {
 	const posts = await getAllPostsWithPrisma()
 
 	return (
-		<main>
+		<main className='mx-auto max-w-screen-md'>
 			<PostsList posts={posts} />
 		</main>
 	)

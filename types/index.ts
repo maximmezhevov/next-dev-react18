@@ -1,3 +1,6 @@
 // router
 
-export type Path = { href: string; label: string }
+export type Path = {
+	href: string
+	label: string
+}

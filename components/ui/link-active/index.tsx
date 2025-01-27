@@ -5,9 +5,9 @@ import type { Path } from '@/types'
 
 import Link from 'next/link'
 import { cva } from 'class-variance-authority'
-
-import { useLinkActive } from '@/hooks'
 import { cn } from '@/lib/utils'
+
+import { useLinkActive } from './use-link-active'
 
 export interface LinkActiveProps extends VariantProps<typeof linkVariants> {
 	path: Path

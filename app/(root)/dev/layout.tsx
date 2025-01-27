@@ -1,30 +1,33 @@
-import type { Path } from '@/types'
-import DevLayout from '@/components/ui/dev-layout'
+import { Sidebar } from '@/components/ui'
 
-const ROUTES: Path[] = [
-	{ href: '/dev/blogs', label: 'Блог' },
-	{ href: '/dev/todos', label: 'Тодо' },
+const ROUTES = [
+	{
+		href: '/dev/blogs',
+		label: 'Блог',
+		// sub: [
+		// 	{ href: '/dev/blogs/with-an-prisma', label: 'prisma' },
+		// 	{
+		// 		href: '/dev/blogs/with-an-fetch-next-api',
+		// 		label: 'fetch-next-api ',
+		// 	},
+		// 	{ href: '/dev/blogs/with-an-fetch-api', label: 'fetch-api' },
+		// ],
+	},
 	{ href: '/dev/next-auth', label: 'next-auth' },
 ]
 
-export default function DevLayout_({
-	children,
-}: {
-	children: React.ReactNode
-}) {
+export default function DevLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<DevLayout className='min-h-[calc(100svh-3rem)]'>
-			<DevLayout.Aside className='sticky top-[3rem] h-[calc(100svh-3rem)]'>
-				<DevLayout.Nav>
-					<DevLayout.NavList routes={ROUTES} />
-				</DevLayout.Nav>
-			</DevLayout.Aside>
-			<DevLayout.Inset>
-				<DevLayout.InsetHeader className='sticky top-[3rem]'>
-					1
-				</DevLayout.InsetHeader>
+		<Sidebar.Root>
+			<Sidebar.Sidebar>
+				<Sidebar.Nav>
+					<Sidebar.NavList routes={ROUTES} />
+				</Sidebar.Nav>
+			</Sidebar.Sidebar>
+			<Sidebar.Inset>
+				<Sidebar.InsetHeader>...</Sidebar.InsetHeader>
 				{children}
-			</DevLayout.Inset>
-		</DevLayout>
+			</Sidebar.Inset>
+		</Sidebar.Root>
 	)
 }
