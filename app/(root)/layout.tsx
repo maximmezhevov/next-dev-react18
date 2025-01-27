@@ -1,10 +1,11 @@
 import type { Path } from '@/types'
 
+import { cn } from '@/lib/utils'
+import { SidebarToggleDropdown } from '@/components/dev'
 import { ThemeModeToggleDropdown } from '@/components/theme'
 import { UserDropdown } from '@/components/auth'
-
 import { LinkActive } from '@/components/ui'
-import { cn } from '@/lib/utils'
+import { Separator } from '@/components/shadcn'
 
 export default function RootLayout({
 	children,
@@ -40,7 +41,9 @@ const Aside: React.FC<{ className?: string }> = ({ className }) => {
 					<nav className='flex-1'>
 						<NavList />
 					</nav>
+					<SidebarToggleDropdown triggerVariant='icon' />
 					<ThemeModeToggleDropdown />
+					<Separator orientation='vertical' className='mx-2 h-4' />
 					<UserDropdown />
 				</div>
 			</div>

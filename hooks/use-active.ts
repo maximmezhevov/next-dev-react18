@@ -3,7 +3,7 @@
 import type { Path } from '@/types'
 import { usePathname } from 'next/navigation'
 
-export const useLinkActive = (href: Path['href'], inherit: boolean) => {
+export const useActive = (href: Path['href'], inherit: boolean) => {
 	const pathname = usePathname()
 
 	const isActive = Boolean(!inherit && pathname == href)

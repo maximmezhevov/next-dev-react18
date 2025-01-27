@@ -2,11 +2,10 @@
 
 import { PanelLeft } from 'lucide-react'
 
-import { useStore } from './useStore'
+import { useStore } from './use-store'
+import { useIsMobile } from '@/hooks'
+import { cn } from '@/lib'
 import { Button, Sheet } from '@/components/shadcn'
-
-import { cn } from '@/lib/utils'
-import { useIsMobile } from '@/hooks/use-mobile'
 
 const SidebarRoot: React.FC<{
 	children: React.ReactNode

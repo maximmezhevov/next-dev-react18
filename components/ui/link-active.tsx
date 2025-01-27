@@ -1,13 +1,11 @@
 'use client'
 
-import type { VariantProps } from 'class-variance-authority'
-import type { Path } from '@/types'
-
 import Link from 'next/link'
-import { cva } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
 
-import { useLinkActive } from './use-link-active'
+import type { Path } from '@/types'
+import { useActive } from '@/hooks'
+import { cn } from '@/lib'
 
 export interface LinkActiveProps extends VariantProps<typeof linkVariants> {
 	path: Path
@@ -38,7 +36,7 @@ export const LinkActive: React.FC<LinkActiveProps> = ({
 	size,
 	className,
 }) => {
-	const { isActive, inheritIsActive } = useLinkActive(path.href, inherit)
+	const { isActive, inheritIsActive } = useActive(path.href, inherit)
 
 	return (
 		<Link

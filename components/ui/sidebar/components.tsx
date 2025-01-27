@@ -1,8 +1,6 @@
 import type { Path } from '@/types'
-import { cn } from '@/lib/utils'
-
+import { cn } from '@/lib'
 import { SidebarTriggers } from './components-client'
-
 import { LinkActive } from '@/components/ui'
 import { Separator } from '@/components/shadcn'
 
@@ -56,9 +54,9 @@ const SidebarInsetHeader: React.FC<InsetHeaderProps> = ({
 		)}
 	>
 		<div className='h-[inherit] lg:mx-auto lg:max-w-screen-lg'>
-			<div className='flex h-[inherit] items-center gap-2'>
+			<div className='flex h-[inherit] items-center gap-0.5'>
 				<SidebarTriggers />
-				<Separator orientation='vertical' className='me-2 h-3.5' />
+				<Separator orientation='vertical' className='me-4 ms-2 h-3.5' />
 				{children}
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { Sidebar } from '@/components/ui'
+import { SidebarVariant } from '@/components/dev'
 
 const ROUTES = [
 	{
@@ -17,17 +17,5 @@ const ROUTES = [
 ]
 
 export default function DevLayout({ children }: { children: React.ReactNode }) {
-	return (
-		<Sidebar.Root>
-			<Sidebar.Sidebar>
-				<Sidebar.Nav>
-					<Sidebar.NavList routes={ROUTES} />
-				</Sidebar.Nav>
-			</Sidebar.Sidebar>
-			<Sidebar.Inset>
-				<Sidebar.InsetHeader>...</Sidebar.InsetHeader>
-				{children}
-			</Sidebar.Inset>
-		</Sidebar.Root>
-	)
+	return <SidebarVariant routes={ROUTES}>{children}</SidebarVariant>
 }
