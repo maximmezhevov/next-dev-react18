@@ -6,7 +6,7 @@ export default function BlogsLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<Container variant='dev_layout' className='space-y-4'>
+		<Container variant='dev' className='space-y-4 px-2'>
 			<header className='flex h-[3rem] items-center border-b'>Блог</header>
 			{children}
 		</Container>

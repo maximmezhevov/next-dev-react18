@@ -62,8 +62,8 @@ const SidebarAside: React.FC<{
 		<aside className='sticky top-[3rem] h-[calc(100svh-3rem)] border-r'>
 			<div
 				className={cn(
-					'w-full overflow-hidden transition-[width]',
-					open ? 'w-[239px] ease-in' : 'w-0 ease-out',
+					'w-full overflow-hidden transition-[width] ease-in-out',
+					open ? 'w-[239px]' : 'w-0',
 					className
 				)}
 			>
