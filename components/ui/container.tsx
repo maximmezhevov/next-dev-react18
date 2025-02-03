@@ -5,13 +5,13 @@ export interface ContainerProps extends VariantProps<typeof containerVariants> {
 	className?: string
 }
 
-const containerVariants = cva(' mx-auto px-2', {
+const containerVariants = cva('mx-auto', {
 	variants: {
 		variant: {
 			default: '',
 			app: 'min-h-[inherit] max-w-screen-xl w-full', // inherit - body
 			root: 'min-h-[calc(100svh-3rem)] max-w-screen-xl w-full',
-			dev: 'min-h-[inherit] max-w-screen-xl', // inherit - sidebar inset control
+			dev: 'min-h-[inherit] max-w-screen-xl w-full', // inherit - sidebar inset control
 		},
 	},
 	defaultVariants: {

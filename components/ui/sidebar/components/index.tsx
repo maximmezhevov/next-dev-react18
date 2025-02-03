@@ -2,6 +2,7 @@
 
 import type { Routes } from '@/types'
 import type { LinkActiveProps } from '@/components/ui'
+import React from 'react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import {
 	ChevronRight,
@@ -121,7 +122,7 @@ const SidebarNavList: React.FC<{ routes: Routes[] }> = ({ routes }) => {
 	return (
 		<ul className='space-y-0.5 p-2'>
 			{routes.map((path) => (
-				<ul key={path.href}>
+				<React.Fragment key={path.href}>
 					<li>
 						<SidebarLinkActive path={path} />
 					</li>
@@ -132,7 +133,7 @@ const SidebarNavList: React.FC<{ routes: Routes[] }> = ({ routes }) => {
 							</li>
 						))}
 					</ul>
-				</ul>
+				</React.Fragment>
 			))}
 		</ul>
 	)
@@ -168,7 +169,7 @@ const SidebarInsetHeader: React.FC<{
 	children: React.ReactNode
 }> = ({ children }) => {
 	return (
-		<aside className='sticky top-[3rem] h-[3rem] border-b'>
+		<aside className='sticky top-[3rem] h-[3rem] border-b bg-background/50 backdrop-blur-sm'>
 			<div className='mx-auto h-[inherit] max-w-screen-xl'>{children}</div>
 		</aside>
 	)

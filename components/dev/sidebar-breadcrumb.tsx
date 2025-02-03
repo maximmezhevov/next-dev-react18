@@ -4,10 +4,7 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import {
-	Breadcrumb,
-	//Separator
-} from '@/components/shadcn'
+import { Breadcrumb } from '@/components/shadcn'
 
 export const SidebarBreadcrumb: React.FC<{ className?: string }> = ({
 	className,
@@ -28,22 +25,11 @@ export const SidebarBreadcrumb: React.FC<{ className?: string }> = ({
 
 	return (
 		<Breadcrumb.Root className={className}>
-			<Breadcrumb.List className='text-xs font-medium text-sidebar-foreground/70'>
-				{/* <Breadcrumb.Item>
-					<Breadcrumb.Link asChild className='py-2'>
-						<Link href='/'>ndr18</Link>
-					</Breadcrumb.Link>
-				</Breadcrumb.Item>
-				<Breadcrumb.Item>
-					<Breadcrumb.Link asChild className='py-2'>
-						<Link href='/me'>me</Link>
-					</Breadcrumb.Link>
-				</Breadcrumb.Item>
-				<Separator orientation='vertical' className='mx-1 h-4' /> */}
+			<Breadcrumb.List className='w-[100px] flex-nowrap overflow-y-scroll text-sm'>
 				<Breadcrumb.Item>
 					<Breadcrumb.Link
 						asChild
-						className={cn('py-2', !paths.length && 'font-bold text-foreground')}
+						className={cn('py-2', !paths.length && 'text-foreground')}
 					>
 						<Link href='/dev'>dev</Link>
 					</Breadcrumb.Link>
@@ -60,11 +46,11 @@ export const SidebarBreadcrumb: React.FC<{ className?: string }> = ({
 							<Breadcrumb.Separator />
 							<Breadcrumb.Item>
 								{!isLastLink ? (
-									<Breadcrumb.Link asChild className='py-2'>
+									<Breadcrumb.Link asChild className='whitespace-nowrap py-2'>
 										<Link href={`/dev${href}`}>{label}</Link>
 									</Breadcrumb.Link>
 								) : (
-									<Breadcrumb.Page className='py-2 font-bold'>
+									<Breadcrumb.Page className='whitespace-nowrap py-2'>
 										{label}
 									</Breadcrumb.Page>
 								)}
