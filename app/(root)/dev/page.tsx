@@ -1,4 +1,4 @@
-import { SidebarToggleDropdown } from '@/components/dev'
+import { DevLayoutVariantToggleDropdown } from '@/components/dev'
 import { Container } from '@/components/ui'
 
 export default async function Dev() {
@@ -12,7 +12,7 @@ export default async function Dev() {
 					</p>
 				</header>
 				<section>
-					<SidebarToggleDropdown triggerVariant='value' />
+					<DevLayoutVariantToggleDropdown triggerVariant='value' />
 				</section>
 			</main>
 		</Container>

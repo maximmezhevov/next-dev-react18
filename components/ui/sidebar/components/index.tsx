@@ -17,6 +17,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import React from 'react'
 import { LinkActive } from '../..'
 import { Routes } from '@/types'
+import { LinkActiveProps } from '../../link-active'
 
 const SidebarRoot: React.FC<{
 	children: React.ReactNode
@@ -43,21 +44,120 @@ const SidebarRoot: React.FC<{
 	)
 }
 
-const SidebarSeparator: React.FC<{
-	trigger: boolean
-	variant: 'edges' | 'sidebar'
-}> = ({ trigger, variant }) => {
+// SIDEBAR DESKTOP/MOBILE
+
+const Sidebars: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+	const isMobile = useIsMobile()
+	if (isMobile) {
+		return <SidebarMobile>{children}</SidebarMobile>
+	}
+	return <SidebarDesktop>{children}</SidebarDesktop>
+}
+
+const SidebarDesktop: React.FC<{ children: React.ReactNode }> = ({
+	children,
+}) => {
+	const open = useStore((state) => state.open)
 	return (
-		<div
-			className={cn(
-				'shrink-0 bg-border transition-[width] duration-300 ease-in-out',
-				trigger ? 'w-[1px]' : 'w-0',
-				variant == 'edges' && 'hidden xl:block',
-				variant == 'sidebar' && ''
-			)}
+		<div className='flex'>
+			<div
+				className={cn(
+					'sticky top-[3rem] h-[calc(100svh-3rem)] overflow-hidden overflow-y-scroll transition-[width] duration-300 ease-in-out',
+					open ? 'w-[calc(16rem-1px)]' : 'w-0' // xl(1280) - lg(1024) = 16rem/256px - "border"
+				)}
+			>
+				{children}
+			</div>
+			<SidebarSeparator trigger={open} variant='sidebar' />
+		</div>
+	)
+}
+
+const SidebarMobile: React.FC<{ children: React.ReactNode }> = ({
+	children,
+}) => {
+	const { sheet, setSheet } = useStore((state) => state)
+	return (
+		<Sheet.Root open={sheet} onOpenChange={setSheet}>
+			<Sheet.Content side='left'>
+				<VisuallyHidden>
+					<Sheet.Title>Sheet Content</Sheet.Title>
+					<Sheet.Description>
+						This is a hidden description for screen readers.
+					</Sheet.Description>
+				</VisuallyHidden>
+				{children}
+			</Sheet.Content>
+		</Sheet.Root>
+	)
+}
+
+const SidebarTriggers: React.FC = () => {
+	const isMobile = useIsMobile()
+	if (isMobile) {
+		return <SidebarMobileTrigger />
+	}
+	return <SidebarDesktopTrigger />
+}
+
+const SidebarMobileTrigger: React.FC = () => {
+	const setSheet = useStore((state) => state.setSheet)
+	return (
+		<Button onClick={setSheet} variant='ghost_secondary' size='icon-32'>
+			<Menu />
+		</Button>
+	)
+}
+
+const SidebarDesktopTrigger: React.FC = () => {
+	const setOpen = useStore((state) => state.setOpen)
+	return (
+		<Button onClick={setOpen} variant='ghost_secondary' size='icon-32'>
+			<ChevronRight className='group-data-[sidebar-open=true]/sidebar-root:rotate-[180deg]' />
+		</Button>
+	)
+}
+
+// SIDEBAR CONTENT
+
+const SidebarNavList: React.FC<{ routes: Routes[] }> = ({ routes }) => {
+	return (
+		<ul className='space-y-0.5 p-2'>
+			{routes.map((path) => (
+				<ul key={path.href}>
+					<li>
+						<SidebarLinkActive path={path} />
+					</li>
+					<ul className='ml-2 space-y-0.5 border-l pl-2'>
+						{path.variants?.map((variantPath) => (
+							<li key={variantPath.href}>
+								<SidebarLinkActive path={variantPath} />
+							</li>
+						))}
+					</ul>
+				</ul>
+			))}
+		</ul>
+	)
+}
+
+type SidebarLinkActiveProps = Pick<LinkActiveProps, 'path'>
+const SidebarLinkActive: React.FC<SidebarLinkActiveProps> = ({ path }) => {
+	const setSheet = useStore((state) => state.setSheet)
+	const isMobile = useIsMobile()
+	const handlerSetSheet = () => isMobile && setSheet()
+	return (
+		<LinkActive
+			variant='secondary'
+			size='sm_32'
+			path={path}
+			className='w-full'
+			onClick={handlerSetSheet}
 		/>
 	)
 }
+
+// SIDEBAR INSET
 
 const SidebarInset: React.FC<{
 	children: React.ReactNode
@@ -84,6 +184,8 @@ const SidebarInsetHeader: React.FC<{
 	)
 }
 
+// SIDEBAR SETTINGS
+
 const SidebarScreenCropTrigger: React.FC = () => {
 	const { crop, setCrop } = useStore((state) => state)
 	return (
@@ -98,109 +200,30 @@ const SidebarScreenCropTrigger: React.FC = () => {
 	)
 }
 
-export { SidebarRoot, SidebarInset, SidebarInsetHeader }
+// SIDEBAR COMPONENTS
 
-//
-
-const Sidebars: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const isMobile = useIsMobile()
-	if (isMobile) {
-		return <SidebarMobile>{children}</SidebarMobile>
-	}
-	return <Sidebar>{children}</Sidebar>
-}
-
-const SidebarTriggers: React.FC = () => {
-	const isMobile = useIsMobile()
-	if (isMobile) {
-		return <SidebarMobileTrigger />
-	}
-	return <SidebarTrigger />
-}
-
-const Sidebar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const open = useStore((state) => state.open)
+const SidebarSeparator: React.FC<{
+	trigger: boolean
+	variant: 'edges' | 'sidebar'
+}> = ({ trigger, variant }) => {
 	return (
-		<div className='flex'>
-			<div
-				className={cn(
-					'sticky top-[3rem] h-[calc(100svh-3rem)] overflow-hidden overflow-y-scroll transition-[width] duration-300 ease-in-out',
-					open ? 'w-[calc(16rem-1px)]' : 'w-0' // xl(1280) - lg(1024) = 16rem/256px - "border"
-				)}
-			>
-				<div className='p-2'>
-					{/* <div className='h-[calc(100svh-3rem-16px)] border-b px-2'>...</div>
-					<div className='h-[calc(100svh-3rem-16px)] px-2'>...</div> */}
-					{children}
-				</div>
-			</div>
-			<SidebarSeparator trigger={open} variant='sidebar' />
-		</div>
-	)
-}
-const SidebarTrigger: React.FC = () => {
-	const setOpen = useStore((state) => state.setOpen)
-	return (
-		<Button onClick={setOpen} variant='ghost_secondary' size='icon-32'>
-			<ChevronRight className='group-data-[sidebar-open=true]/sidebar-root:rotate-[180deg]' />
-		</Button>
+		<div
+			className={cn(
+				'shrink-0 bg-border transition-[width] duration-300 ease-in-out',
+				trigger ? 'w-[1px]' : 'w-0',
+				variant == 'edges' && 'hidden xl:block',
+				variant == 'sidebar' && ''
+			)}
+		/>
 	)
 }
 
-const SidebarMobile: React.FC<{ children: React.ReactNode }> = ({
-	children,
-}) => {
-	const { sheet, setSheet } = useStore((state) => state)
-	return (
-		<Sheet.Root open={sheet} onOpenChange={setSheet}>
-			<Sheet.Content side='left'>
-				<VisuallyHidden>
-					<Sheet.Title>Sheet Content</Sheet.Title>
-					<Sheet.Description>
-						This is a hidden description for screen readers.
-					</Sheet.Description>
-				</VisuallyHidden>
-				{children}
-			</Sheet.Content>
-		</Sheet.Root>
-	)
-}
-const SidebarMobileTrigger: React.FC = () => {
-	const setSheet = useStore((state) => state.setSheet)
-	return (
-		<Button onClick={setSheet} variant='ghost_secondary' size='icon-32'>
-			<Menu />
-		</Button>
-	)
-}
+// EXPORT
 
-const SidebarNavList: React.FC<{ routes: Routes[] }> = ({ routes }) => (
-	<ul className='space-y-0.5'>
-		{routes.map((path) => (
-			<React.Fragment key={path.href}>
-				<li>
-					<LinkActive
-						variant='secondary'
-						size='sm_32'
-						path={path}
-						className='w-full'
-					/>
-				</li>
-				<ul className='ml-2 space-y-0.5 border-l pl-2'>
-					{path.variants?.map((variantPath) => (
-						<li key={variantPath.href}>
-							<LinkActive
-								variant='secondary'
-								size='sm_32'
-								path={variantPath}
-								className='w-full'
-							/>
-						</li>
-					))}
-				</ul>
-			</React.Fragment>
-		))}
-	</ul>
-)
-
-export { Sidebars, SidebarNavList }
+export { SidebarRoot }
+// SIDEBAR DESKTOP/MOBILE
+export { Sidebars, SidebarTriggers }
+// SIDEBAR CONTENT
+export { SidebarNavList }
+// SIDEBAR INSET
+export { SidebarInset, SidebarInsetHeader }

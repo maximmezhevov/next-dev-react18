@@ -1,5 +1,5 @@
 import type { Path, User } from '@/types'
-import { LayoutVariantToggleDropdown } from '@/components/dev'
+import { DevLayoutVariantToggleDropdown } from '@/components/dev'
 import { ThemeModeToggleDropdown } from '@/components/theme'
 import { UserDropdown } from '@/components/auth'
 import { LinkActive } from '@/components/ui'
@@ -49,7 +49,7 @@ const RootHeader: React.FC<{ routes: Path[]; user: User }> = ({
 					<NavList routes={routes} />
 				</nav>
 				<div className='inline-flex items-center'>
-					<LayoutVariantToggleDropdown triggerVariant='icon' />
+					<DevLayoutVariantToggleDropdown triggerVariant='icon' />
 					<ThemeModeToggleDropdown />
 					<div className='mx-2 h-4 w-[1px] shrink-0 bg-border' />
 					<UserDropdown user={user} />

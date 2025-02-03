@@ -10,6 +10,7 @@ import { cn } from '@/lib'
 export interface LinkActiveProps extends VariantProps<typeof linkVariants> {
 	path: Path
 	inherit?: boolean
+	onClick?: () => void
 	className?: string
 }
 
@@ -32,6 +33,7 @@ const linkVariants = cva('whitespace-nowrap', {
 export const LinkActive: React.FC<LinkActiveProps> = ({
 	path,
 	inherit = true,
+	onClick,
 	variant,
 	size,
 	className,
@@ -42,6 +44,7 @@ export const LinkActive: React.FC<LinkActiveProps> = ({
 		<Link
 			data-active={isActive || inheritIsActive}
 			href={path.href}
+			onClick={onClick}
 			className={cn(
 				linkVariants({ variant, size, className })
 				// isActive || (inheritIsActive && 'pointer-events-none')
