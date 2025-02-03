@@ -1,18 +1,17 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib'
 
 export interface ContainerProps extends VariantProps<typeof containerVariants> {
 	children: React.ReactNode
 	className?: string
 }
 
-const containerVariants = cva('', {
+const containerVariants = cva(' mx-auto px-2', {
 	variants: {
 		variant: {
 			default: '',
-			app: 'min-h-[inherit] max-w-screen-lg mx-auto',
-			root: 'min-h-[calc(100svh-3rem)] max-w-screen-lg mx-auto',
-			dev: 'min-h-[inherit] lg:max-w-screen-lg lg:mx-auto',
+			app: 'min-h-[inherit] max-w-screen-xl w-full', // inherit - body
+			root: 'min-h-[calc(100svh-3rem)] max-w-screen-xl w-full',
+			dev: 'min-h-[inherit] max-w-screen-xl', // inherit - sidebar inset control
 		},
 	},
 	defaultVariants: {
@@ -27,14 +26,10 @@ export const Container: React.FC<ContainerProps> = ({
 }) => {
 	return (
 		<div
-			className={cn(
-				variant == 'dev' && 'px-2 xl:px-0',
-				(variant == 'dev' || variant == 'app') && 'min-h-[inherit]'
-			)}
+			data-i='container'
+			className={containerVariants({ variant, className })}
 		>
-			<div className={containerVariants({ variant, className })}>
-				{children}
-			</div>
+			{children}
 		</div>
 	)
 }

@@ -1,21 +1,35 @@
-import { SidebarVariant } from '@/components/dev'
+import type { Routes } from '@/types'
+import { LayoutVariant } from '@/components/dev'
 
-const ROUTES = [
+const ROUTES: Routes[] = [
 	{
-		href: '/dev/blogs',
-		label: 'Блог',
-		// sub: [
-		// 	{ href: '/dev/blogs/with-an-prisma', label: 'prisma' },
-		// 	{
-		// 		href: '/dev/blogs/with-an-fetch-next-api',
-		// 		label: 'fetch-next-api ',
-		// 	},
-		// 	{ href: '/dev/blogs/with-an-fetch-api', label: 'fetch-api' },
-		// ],
+		label: 'next',
+		href: '/dev/next',
 	},
-	{ href: '/dev/next-auth', label: 'next-auth' },
+	{
+		label: 'next-auth',
+		href: '/dev/next-auth',
+	},
+	{
+		label: 'Блог',
+		href: '/dev/blog',
+		variants: [
+			{
+				label: 'with an prisma',
+				href: '/dev/blog/with-an-prisma',
+			},
+			{
+				label: 'with an fetch next api',
+				href: '/dev/blog/with-an-fetch-next-api',
+			},
+			{
+				label: 'with an fetch api',
+				href: '/dev/blog/with-an-fetch-api',
+			},
+		],
+	},
 ]
 
 export default function DevLayout({ children }: { children: React.ReactNode }) {
-	return <SidebarVariant routes={ROUTES}>{children}</SidebarVariant>
+	return <LayoutVariant routes={ROUTES}>{children}</LayoutVariant>
 }

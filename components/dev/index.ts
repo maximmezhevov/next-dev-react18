@@ -1,2 +1,3 @@
-export { DevSidebarVariant as SidebarVariant } from './sidebar-variant'
-export { DevSidebarToggleDropdown as SidebarToggleDropdown } from './sidebar-variant'
+export { DevLayoutVariant as LayoutVariant } from './layout-variant'
+export { DevLayoutVariantToggleDropdown as LayoutVariantToggleDropdown } from './layout-variant'
+export { SidebarBreadcrumb } from './sidebar-breadcrumb'

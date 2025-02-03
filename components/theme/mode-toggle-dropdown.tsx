@@ -51,10 +51,7 @@ export const Content: React.FC<{
 	handleSetTheme: (value: string) => void
 }> = ({ themes, theme, handleSetTheme }) => {
 	return (
-		<Dropdown.Content
-			collisionPadding={{ right: 8 }}
-			onCloseAutoFocus={(e) => e.preventDefault()}
-		>
+		<Dropdown.Content>
 			<Dropdown.Group className='space-y-0.5'>
 				{themes.map((item) => (
 					<Dropdown.Item

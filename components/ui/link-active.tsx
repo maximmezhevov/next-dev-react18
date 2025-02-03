@@ -13,7 +13,7 @@ export interface LinkActiveProps extends VariantProps<typeof linkVariants> {
 	className?: string
 }
 
-const linkVariants = cva('', {
+const linkVariants = cva('whitespace-nowrap', {
 	variants: {
 		variant: {
 			default: '',

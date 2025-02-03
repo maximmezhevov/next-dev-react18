@@ -1,18 +1,44 @@
-import Link from 'next/link'
-import { User2 } from 'lucide-react'
-import { Button } from '@/components/shadcn/button'
+import type { User } from '@/types'
+import { UserAvatar } from '@/components/ui'
+import { Dropdown } from '@/components/shadcn'
 
-const AUTH = false
+export const UserDropdown: React.FC<{ user: User }> = ({ user }) => {
+	return (
+		<Dropdown.Root>
+			<Dropdown.Trigger asChild>
+				<UserAvatar user={user} />
+			</Dropdown.Trigger>
+			<Content user={user} />
+		</Dropdown.Root>
+	)
+}
 
-export const UserDropdown: React.FC = () => {
-	if (!AUTH) {
-		return (
-			<Button asChild variant='outline' size='icon_32'>
-				<Link href='/login'>
-					<User2 />
-				</Link>
-			</Button>
-		)
-	}
-	return null
+const Content: React.FC<{ user: User }> = ({ user }) => {
+	return (
+		<Dropdown.Content>
+			<DropdownProfile user={user} />
+			<Dropdown.Separator />
+			<Dropdown.Group>
+				<Dropdown.Item>...</Dropdown.Item>
+			</Dropdown.Group>
+			<Dropdown.Separator />
+			<Dropdown.Group>
+				<Dropdown.Item>Log out</Dropdown.Item>
+			</Dropdown.Group>
+		</Dropdown.Content>
+	)
+}
+
+const DropdownProfile: React.FC<{ user: User }> = ({ user }) => {
+	return (
+		<Dropdown.Label className='p-0 font-normal'>
+			<div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
+				<UserAvatar user={user} className='cursor-default bg-secondary' />
+				<div className='grid flex-1 text-left text-sm leading-tight'>
+					<span className='truncate font-semibold'>{user?.name}</span>
+					<span className='truncate text-xs'>{user?.email}</span>
+				</div>
+			</div>
+		</Dropdown.Label>
+	)
 }

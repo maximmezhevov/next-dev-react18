@@ -1,31 +1,31 @@
 'use client'
 
 import { ChevronDown, Settings2 } from 'lucide-react'
-import { type DevSidebarVariant, useStore } from './use-store'
+import { type DevLayoutVariant, useStore } from './use-store'
 import { useActive } from '@/hooks'
 import { cn } from '@/lib'
 import { Button, Dropdown } from '@/components/shadcn'
 
 type TriggerVariant = 'value' | 'icon'
 
-const VARIANTS: DevSidebarVariant[] = ['children', 'sidebar', 'sidebar-shadcn']
+const VARIANTS: DevLayoutVariant[] = ['sidebar-ui', 'sidebar-shadcn']
 
-export const DevSidebarToggleDropdown: React.FC<{
+export const DevLayoutVariantToggleDropdown: React.FC<{
 	triggerVariant: TriggerVariant
 }> = ({ triggerVariant }) => {
 	const { inheritIsActive } = useActive('/dev', true)
-	const { devSidebarVariant, setDevSidebarVariant } = useStore((state) => state)
+	const { devLayoutVariant, setDevLayoutVariant } = useStore((state) => state)
 
 	if (!inheritIsActive) return null
 	return (
 		<Dropdown.Root>
 			<Trigger
 				triggerVariant={triggerVariant}
-				devSidebarVariant={devSidebarVariant}
+				devSidebarVariant={devLayoutVariant}
 			/>
 			<Content
-				devSidebarVariant={devSidebarVariant}
-				setDevSidebarVariant={setDevSidebarVariant}
+				devSidebarVariant={devLayoutVariant}
+				setDevSidebarVariant={setDevLayoutVariant}
 			/>
 		</Dropdown.Root>
 	)
@@ -33,12 +33,12 @@ export const DevSidebarToggleDropdown: React.FC<{
 
 const Trigger: React.FC<{
 	triggerVariant: TriggerVariant
-	devSidebarVariant: DevSidebarVariant
+	devSidebarVariant: DevLayoutVariant
 }> = ({ triggerVariant, devSidebarVariant }) => {
 	return (
 		<Dropdown.Trigger asChild>
 			<Button
-				variant={triggerVariant == 'value' ? 'secondary' : 'ghost_secondary'}
+				variant={triggerVariant == 'value' ? 'outline' : 'ghost_secondary'}
 				size={triggerVariant == 'value' ? 'default' : 'icon_32'}
 				className='group data-[state=open]:bg-secondary/80 data-[state=open]:text-foreground'
 			>
@@ -56,11 +56,11 @@ const Trigger: React.FC<{
 }
 
 const Content: React.FC<{
-	devSidebarVariant: DevSidebarVariant
-	setDevSidebarVariant: (value: DevSidebarVariant) => void
+	devSidebarVariant: DevLayoutVariant
+	setDevSidebarVariant: (value: DevLayoutVariant) => void
 }> = ({ devSidebarVariant, setDevSidebarVariant }) => {
 	return (
-		<Dropdown.Content onCloseAutoFocus={(e) => e.preventDefault()}>
+		<Dropdown.Content>
 			<Dropdown.Group className='space-y-0.5'>
 				{VARIANTS.map((variant) => (
 					<Dropdown.Item

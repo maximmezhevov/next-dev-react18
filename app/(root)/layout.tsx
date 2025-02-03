@@ -1,11 +1,16 @@
-import type { Path } from '@/types'
-
-import { cn } from '@/lib/utils'
-import { SidebarToggleDropdown } from '@/components/dev'
+import type { Path, User } from '@/types'
+import { LayoutVariantToggleDropdown } from '@/components/dev'
 import { ThemeModeToggleDropdown } from '@/components/theme'
 import { UserDropdown } from '@/components/auth'
 import { LinkActive } from '@/components/ui'
-import { Separator } from '@/components/shadcn'
+
+const ROUTES: Path[] = [
+	{ href: '/', label: 'ndr18' },
+	{ href: '/dev', label: 'dev' },
+	{ href: '/me', label: 'me' },
+]
+
+const USER: User = { name: 'name', email: 'example@email.io', avatar: '' }
 
 export default function RootLayout({
 	children,
@@ -14,53 +19,51 @@ export default function RootLayout({
 }) {
 	return (
 		<div className='flex flex-col-reverse'>
-			{
-				children
-				/* peer/sidebar-root / data-sidebar={boolean} / width siderat 239px  */
-			}
-			<Aside
-				className={cn(
-					'transition-[padding] ease-in-out lg:peer-data-[sidebar=true]/sidebar-root:pl-[calc(239px+8px)] xl:peer-data-[sidebar=true]/sidebar-root:pl-[239px]',
-					'px-2 xl:px-0'
-				)}
-			/>
+			{children}
+			<RootHeader routes={ROUTES} user={USER} />
 		</div>
 	)
 }
 
-const Aside: React.FC<{ className?: string }> = ({ className }) => {
+const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	return (
-		<aside
-			className={cn(
-				'sticky top-0 h-[3rem] border-b bg-background/50 pl-0 backdrop-blur-sm',
-				className
-			)}
-		>
-			<div className='h-[inherit] lg:mx-auto lg:max-w-screen-lg'>
-				<div className='flex h-[inherit] items-center gap-0.5'>
-					<nav className='flex-1'>
-						<NavList />
-					</nav>
-					<SidebarToggleDropdown triggerVariant='icon' />
-					<ThemeModeToggleDropdown />
-					<Separator orientation='vertical' className='mx-2 h-4' />
-					<UserDropdown />
+		<aside className='sticky top-0 h-[3rem] bg-background/50 backdrop-blur-sm'>
+			<div className='flex h-full flex-col'>
+				<div className='mx-auto w-full max-w-screen-xl shrink-0 grow px-2 xl:px-0'>
+					{children}
 				</div>
+				<div className='h-[1px] w-full shrink-0 bg-border' />
 			</div>
 		</aside>
 	)
 }
 
-const ROUTES: Path[] = [
-	{ href: '/', label: 'next-dev-react18' },
-	{ href: '/dev', label: 'dev' },
-	{ href: '/me', label: 'me' },
-]
-const NavList: React.FC = () => {
+const RootHeader: React.FC<{ routes: Path[]; user: User }> = ({
+	routes,
+	user,
+}) => {
 	return (
-		<ul className='space-x-0.5'>
-			{ROUTES.map((path) => (
-				<li key={path.href} className='inline-block'>
+		<Header>
+			<div className='flex h-full items-center justify-between'>
+				<nav>
+					<NavList routes={routes} />
+				</nav>
+				<div className='inline-flex items-center'>
+					<LayoutVariantToggleDropdown triggerVariant='icon' />
+					<ThemeModeToggleDropdown />
+					<div className='mx-2 h-4 w-[1px] shrink-0 bg-border' />
+					<UserDropdown user={user} />
+				</div>
+			</div>
+		</Header>
+	)
+}
+
+const NavList: React.FC<{ routes: Path[] }> = ({ routes }) => {
+	return (
+		<ul className='space-x-0.5 *:inline-block'>
+			{routes.map((path) => (
+				<li key={path.href}>
 					<LinkActive variant='secondary' size='sm_32' path={path} />
 				</li>
 			))}

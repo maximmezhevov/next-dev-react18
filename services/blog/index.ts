@@ -2,10 +2,14 @@ import { prisma } from '@/lib/prisma'
 
 // with an prisma
 
-export function getAllPostsWithPrisma() {
+export function getAllPosts_WithAnPrisma() {
 	return prisma.post.findMany()
 }
 
-// with an fetch next api
-
-// export async function getAllPostsWithFetchNextAPI() {}
+export function getPostById_WithAsPrisma(id: string) {
+	return prisma.post.findUnique({
+		where: {
+			id,
+		},
+	})
+}

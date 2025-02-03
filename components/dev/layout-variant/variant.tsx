@@ -1,19 +1,17 @@
 'use client'
 
-import type { Path } from '@/types'
+import type { Routes } from '@/types'
 import { useStore } from './use-store'
 import { DevSidebar } from '../sidebar'
 import { DevSidebarShadcn } from '../sidebar-shadcn'
 
-export const DevSidebarVariant: React.FC<{
+export const DevLayoutVariant: React.FC<{
 	children: React.ReactNode
-	routes: Path[]
+	routes: Routes[]
 }> = ({ children, routes }) => {
-	const devSidebarVariant = useStore((state) => state.devSidebarVariant)
-	switch (devSidebarVariant) {
-		case 'children':
-			return children
-		case 'sidebar':
+	const devLayoutVariant = useStore((state) => state.devLayoutVariant)
+	switch (devLayoutVariant) {
+		case 'sidebar-ui':
 			return <DevSidebar routes={routes}>{children}</DevSidebar>
 		case 'sidebar-shadcn':
 			return <DevSidebarShadcn routes={routes}>{children}</DevSidebarShadcn>
