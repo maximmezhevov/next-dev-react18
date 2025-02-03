@@ -1,5 +1,5 @@
 import type { Routes } from '@/types'
-import { LayoutVariant } from '@/components/dev'
+import { DevLayoutVariant } from '@/components/dev'
 
 const ROUTES: Routes[] = [
 	{
@@ -31,5 +31,5 @@ const ROUTES: Routes[] = [
 ]
 
 export default function DevLayout({ children }: { children: React.ReactNode }) {
-	return <LayoutVariant routes={ROUTES}>{children}</LayoutVariant>
+	return <DevLayoutVariant routes={ROUTES}>{children}</DevLayoutVariant>
 }

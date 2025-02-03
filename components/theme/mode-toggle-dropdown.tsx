@@ -26,12 +26,12 @@ export const ThemeModeToggleDropdown: React.FC = () => {
 	)
 }
 
-export const Trigger: React.FC = () => {
+const Trigger: React.FC = () => {
 	return (
 		<Dropdown.Trigger asChild>
 			<Button
-				variant='ghost_secondary'
-				size='icon_32'
+				variant='ghost-secondary'
+				size='32-i'
 				className='data-[state=open]:bg-secondary/80 data-[state=open]:text-foreground'
 			>
 				<Sun
@@ -45,7 +45,7 @@ export const Trigger: React.FC = () => {
 	)
 }
 
-export const Content: React.FC<{
+const Content: React.FC<{
 	themes: string[]
 	theme: string | undefined
 	handleSetTheme: (value: string) => void

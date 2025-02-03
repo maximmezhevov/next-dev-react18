@@ -64,7 +64,7 @@ const NavList: React.FC<{ routes: Path[] }> = ({ routes }) => {
 		<ul className='space-x-0.5 *:inline-block'>
 			{routes.map((path) => (
 				<li key={path.href}>
-					<LinkActive variant='secondary' size='sm_32' path={path} />
+					<LinkActive variant='secondary' size='32-sm' path={path} />
 				</li>
 			))}
 		</ul>

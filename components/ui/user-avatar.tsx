@@ -10,8 +10,8 @@ export const UserAvatar: React.FC<{ user: User; className?: string }> = ({
 	if (!user.avatar) {
 		return (
 			<Button
-				variant='ghost_secondary'
-				size='icon_32'
+				variant='ghost-secondary'
+				size='32-i'
 				className={cn('data-[state=open]:bg-secondary/80', className)}
 			>
 				<User2 />

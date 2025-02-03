@@ -1,9 +1,8 @@
 'use client'
 
+import type { Path } from '@/types'
 import Link from 'next/link'
 import { cva, type VariantProps } from 'class-variance-authority'
-
-import type { Path } from '@/types'
 import { useActive } from '@/hooks'
 import { cn } from '@/lib'
 
@@ -22,7 +21,7 @@ const linkVariants = cva('whitespace-nowrap', {
 				'rounded-md px-2 hover:bg-secondary data-[active=true]:bg-secondary data-[active=true]:hover:bg-secondary/80 inline-block',
 		},
 		size: {
-			sm_32: 'text-sm py-1.5',
+			'32-sm': 'text-sm py-1.5',
 		},
 	},
 	defaultVariants: {

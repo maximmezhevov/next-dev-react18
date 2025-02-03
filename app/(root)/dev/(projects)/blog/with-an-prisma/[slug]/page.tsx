@@ -30,13 +30,13 @@ export default async function BlogWithAnPrismaLayoutPost({ params }: Props) {
 					<Button
 						type='submit'
 						variant='secondary'
-						size='size_32'
+						size='32'
 						className='w-[inherit]'
 					>
 						Удалить
 					</Button>
 				</form>
-				<Button asChild variant='secondary' size='size_32' className='w-full'>
+				<Button asChild variant='secondary' size='32' className='w-full'>
 					<Link href={`/dev/blog/with-an-prisma/${id}/edit`}>
 						Редактировать
 					</Link>

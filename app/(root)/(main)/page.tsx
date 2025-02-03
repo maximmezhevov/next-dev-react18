@@ -23,7 +23,7 @@ export default async function Main() {
 						</Button>
 					</section>
 					<section className='inline-flex h-[3rem] items-center'>
-						<Button asChild variant='link' size='size_32'>
+						<Button asChild variant='link' size='32'>
 							<Link
 								target='_blank'
 								href='https://github.com/maximmezhevov/next-dev-react18'

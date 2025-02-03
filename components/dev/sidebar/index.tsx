@@ -1,6 +1,7 @@
 import type { Routes } from '@/types'
 import { Sidebar } from '@/components/ui'
 import { SidebarBreadcrumb } from '../sidebar-breadcrumb'
+import { Separator } from '@/components/shadcn'
 
 export const DevSidebar: React.FC<{
 	children: React.ReactNode
@@ -30,7 +31,14 @@ const SidebarInset: React.FC<{ children: React.ReactNode }> = ({
 	return (
 		<Sidebar.Inset>
 			<Sidebar.InsetHeader>
-				<SidebarBreadcrumb />
+				<div className='inline-flex h-[inherit] items-center px-2'>
+					<Sidebar.SidebarTrigger />
+					<Sidebar.ScreenCropTrigger />
+					<Separator orientation='vertical' className='mx-2 h-4' />
+					<div className='ms-2'>
+						<SidebarBreadcrumb />
+					</div>
+				</div>
 			</Sidebar.InsetHeader>
 			{children}
 		</Sidebar.Inset>

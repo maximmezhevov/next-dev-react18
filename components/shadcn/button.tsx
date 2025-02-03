@@ -16,8 +16,8 @@ const buttonVariants = cva(
 					'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
 				secondary:
 					'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-				ghost_accent: 'hover:bg-accent hover:text-accent-foreground',
-				ghost_secondary: 'hover:bg-secondary hover:text-secondary-foreground',
+				'ghost-accent': 'hover:bg-accent hover:text-accent-foreground',
+				'ghost-secondary': 'hover:bg-secondary hover:text-secondary-foreground',
 				link: 'text-primary underline-offset-4 hover:underline',
 			},
 			size: {
@@ -26,10 +26,8 @@ const buttonVariants = cva(
 				lg: 'h-11 rounded-md px-8',
 				icon: 'h-10 w-10',
 
-				size_32: 'h-8 px-3',
-				icon_32: 'size-8',
-				'icon-32': 'size-8',
-				'size-32': 'h-8 px-3',
+				'32': 'h-8 px-3',
+				'32-i': 'size-8',
 			},
 		},
 		defaultVariants: {

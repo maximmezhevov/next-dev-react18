@@ -17,7 +17,7 @@ export default async function BlogWithAnPrisma() {
 	return (
 		<main>
 			<div className='sticky top-[6rem] flex h-[3rem] items-center'>
-				<Button asChild size='size_32' className='w-full'>
+				<Button asChild size='32' className='w-full'>
 					<Link href='/dev/blog/with-an-prisma/new'>Добавить новый пост</Link>
 				</Button>
 			</div>

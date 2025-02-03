@@ -1,23 +1,20 @@
 'use client'
 
+import type { Routes } from '@/types'
+import type { LinkActiveProps } from '@/components/ui'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import {
 	ChevronRight,
 	ChevronsLeftRight,
 	ChevronsRightLeft,
 	Menu,
 } from 'lucide-react'
-
+import { useIsMobile } from '@/hooks'
 import { cn } from '@/lib'
+import { LinkActive } from '@/components/ui'
+import { Button, Sheet } from '@/components/shadcn'
 
 import { useStore } from '../use-store'
-
-import { Button, Separator, Sheet } from '@/components/shadcn'
-import { useIsMobile } from '@/hooks'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import React from 'react'
-import { LinkActive } from '../..'
-import { Routes } from '@/types'
-import { LinkActiveProps } from '../../link-active'
 
 const SidebarRoot: React.FC<{
 	children: React.ReactNode
@@ -103,7 +100,7 @@ const SidebarTriggers: React.FC = () => {
 const SidebarMobileTrigger: React.FC = () => {
 	const setSheet = useStore((state) => state.setSheet)
 	return (
-		<Button onClick={setSheet} variant='ghost_secondary' size='icon-32'>
+		<Button onClick={setSheet} variant='ghost-secondary' size='32-i'>
 			<Menu />
 		</Button>
 	)
@@ -112,7 +109,7 @@ const SidebarMobileTrigger: React.FC = () => {
 const SidebarDesktopTrigger: React.FC = () => {
 	const setOpen = useStore((state) => state.setOpen)
 	return (
-		<Button onClick={setOpen} variant='ghost_secondary' size='icon-32'>
+		<Button onClick={setOpen} variant='ghost-secondary' size='32-i'>
 			<ChevronRight className='group-data-[sidebar-open=true]/sidebar-root:rotate-[180deg]' />
 		</Button>
 	)
@@ -149,7 +146,7 @@ const SidebarLinkActive: React.FC<SidebarLinkActiveProps> = ({ path }) => {
 	return (
 		<LinkActive
 			variant='secondary'
-			size='sm_32'
+			size='32-sm'
 			path={path}
 			className='w-full'
 			onClick={handlerSetSheet}
@@ -172,14 +169,7 @@ const SidebarInsetHeader: React.FC<{
 }> = ({ children }) => {
 	return (
 		<aside className='sticky top-[3rem] h-[3rem] border-b'>
-			<div className='mx-auto h-[inherit] max-w-screen-xl'>
-				<div className='inline-flex h-[inherit] items-center px-2'>
-					<SidebarTriggers />
-					<SidebarScreenCropTrigger />
-					<Separator orientation='vertical' className='mx-2 h-4' />
-					<div className='ms-2'>{children}</div>
-				</div>
-			</div>
+			<div className='mx-auto h-[inherit] max-w-screen-xl'>{children}</div>
 		</aside>
 	)
 }
@@ -191,8 +181,8 @@ const SidebarScreenCropTrigger: React.FC = () => {
 	return (
 		<Button
 			onClick={setCrop}
-			variant='ghost_secondary'
-			size='icon-32'
+			variant='ghost-secondary'
+			size='32-i'
 			className='hidden xl:inline-flex'
 		>
 			{crop ? <ChevronsLeftRight /> : <ChevronsRightLeft />}
@@ -227,3 +217,7 @@ export { Sidebars, SidebarTriggers }
 export { SidebarNavList }
 // SIDEBAR INSET
 export { SidebarInset, SidebarInsetHeader }
+// SIDEBAR SETTINGS
+export { SidebarScreenCropTrigger }
+// SIDEBAR COMPONENTS
+export {}

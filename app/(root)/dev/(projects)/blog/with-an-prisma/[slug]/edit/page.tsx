@@ -40,7 +40,7 @@ export default async function BlogWithAnPrismaLayoutEdit({ params }: Props) {
 					<Button
 						type='button'
 						variant='secondary'
-						size='size_32'
+						size='32'
 						className='h-full w-full whitespace-normal py-2'
 					>
 						Отменить изменения
@@ -48,7 +48,7 @@ export default async function BlogWithAnPrismaLayoutEdit({ params }: Props) {
 					{/* <input type='submit' value='Add post' /> */}
 					<Button
 						type='submit'
-						size='size_32'
+						size='32'
 						className='h-full w-full whitespace-normal py-2'
 					>
 						Применить изменения

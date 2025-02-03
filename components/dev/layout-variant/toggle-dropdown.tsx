@@ -38,8 +38,8 @@ const Trigger: React.FC<{
 	return (
 		<Dropdown.Trigger asChild>
 			<Button
-				variant={triggerVariant == 'value' ? 'outline' : 'ghost_secondary'}
-				size={triggerVariant == 'value' ? 'default' : 'icon_32'}
+				variant={triggerVariant == 'value' ? 'outline' : 'ghost-secondary'}
+				size={triggerVariant == 'value' ? 'default' : '32-i'}
 				className='group data-[state=open]:bg-secondary/80 data-[state=open]:text-foreground'
 			>
 				{triggerVariant == 'value' ? (

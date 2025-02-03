@@ -22,7 +22,7 @@ export default function BlogWithAnPrismaLayoutNew() {
 					name='body'
 					className='shrink grow rounded-md border px-2 py-1'
 				/>
-				<Button type='submit' size='size_32' className='w-full'>
+				<Button type='submit' size='32' className='w-full'>
 					Добавить новый пост
 				</Button>
 			</form>
