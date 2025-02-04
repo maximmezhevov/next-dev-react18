@@ -3,6 +3,10 @@ import { DevLayoutVariant } from '@/components/dev'
 
 const ROUTES: Routes[] = [
 	{
+		label: 'try',
+		href: '/try',
+	},
+	{
 		label: 'next',
 		href: '/dev/next',
 	},

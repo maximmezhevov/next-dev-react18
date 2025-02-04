@@ -13,7 +13,7 @@ import {
 import { useIsMobile } from '@/hooks'
 import { cn } from '@/lib'
 import { LinkActive } from '@/components/ui'
-import { Button, Sheet } from '@/components/shadcn'
+import { Button, Separator, Sheet } from '@/components/shadcn'
 
 import { useStore } from '../use-store'
 
@@ -169,8 +169,13 @@ const SidebarInsetHeader: React.FC<{
 	children: React.ReactNode
 }> = ({ children }) => {
 	return (
-		<aside className='sticky top-[3rem] h-[3rem] border-b bg-background/50 backdrop-blur-sm'>
-			<div className='mx-auto h-[inherit] max-w-screen-xl'>{children}</div>
+		<aside className='sticky top-[3rem] h-[3rem] bg-background/50 backdrop-blur-sm'>
+			<div className='flex h-full flex-col'>
+				<div className='mx-auto h-full w-full max-w-screen-xl'>
+					<div className='h-full shrink-0 grow px-2'>{children}</div>
+				</div>
+				<Separator orientation='horizontal' className='shrink-0' />
+			</div>
 		</aside>
 	)
 }

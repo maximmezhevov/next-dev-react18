@@ -25,13 +25,15 @@ export const SidebarBreadcrumb: React.FC<{ className?: string }> = ({
 
 	return (
 		<Breadcrumb.Root className={className}>
-			<Breadcrumb.List className='w-[100px] flex-nowrap overflow-y-scroll text-sm'>
+			<Breadcrumb.List className='flex-nowrap text-sm'>
 				<Breadcrumb.Item>
 					<Breadcrumb.Link
 						asChild
 						className={cn('py-2', !paths.length && 'text-foreground')}
 					>
-						<Link href='/dev'>dev</Link>
+						<Link href='/dev' className=''>
+							dev
+						</Link>
 					</Breadcrumb.Link>
 				</Breadcrumb.Item>
 

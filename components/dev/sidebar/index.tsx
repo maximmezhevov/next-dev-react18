@@ -32,13 +32,21 @@ const SidebarInset: React.FC<{ children: React.ReactNode }> = ({
 	return (
 		<Sidebar.Inset>
 			<Sidebar.InsetHeader>
-				<div className='inline-flex h-[inherit] w-full items-center px-2'>
-					<Sidebar.SidebarTrigger />
-					<Sidebar.ScreenCropTrigger />
-					<Separator orientation='vertical' className='mx-2 h-4' />
-					<SidebarBreadcrumb className='mx-2 flex-1' />
-					<Separator orientation='vertical' className='mx-2 h-4' />
-					<DevLayoutVariantToggleDropdown triggerVariant='icon' />
+				<div className='grid h-full grid-cols-[auto_1fr_auto] content-center'>
+					<div className='inline-flex items-center'>
+						<Sidebar.SidebarTrigger />
+						<Sidebar.ScreenCropTrigger />
+						<Separator orientation='vertical' className='mx-2 h-4' />
+					</div>
+					<div className='overflow-hidden'>
+						<div className='overflow-x-scroll'>
+							<SidebarBreadcrumb className='mx-2 h-full' />
+						</div>
+					</div>
+					<div className='inline-flex items-center'>
+						<Separator orientation='vertical' className='mx-2 h-4' />
+						<DevLayoutVariantToggleDropdown triggerVariant='icon' />
+					</div>
 				</div>
 			</Sidebar.InsetHeader>
 			{children}

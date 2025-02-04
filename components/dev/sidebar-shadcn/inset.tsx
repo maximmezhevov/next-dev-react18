@@ -23,15 +23,30 @@ const SidebarShadcnInset: React.FC<{ children: React.ReactNode }> = ({
 
 const SidebarShadcnInsetHeader: React.FC = () => {
 	return (
-		<header className='sticky top-[3rem] h-[3rem] shrink-0 border-b bg-background/50 backdrop-blur-sm'>
-			<div className='inline-flex h-[inherit] w-full items-center px-2'>
-				<Sidebar.Trigger variant='ghost-secondary' size='32-i' />
-				<Separator orientation='vertical' className='mx-2 h-4' />
-				<SidebarBreadcrumb className='mx-2 flex-1' />
-				<Separator orientation='vertical' className='mx-2 h-4' />
-				<DevLayoutVariantToggleDropdown triggerVariant='icon' />
+		<aside className='sticky top-[3rem] h-[3rem] bg-background/50 backdrop-blur-sm'>
+			<div className='flex h-full flex-col'>
+				<div className='mx-auto h-full w-full max-w-screen-xl'>
+					<div className='h-full shrink-0 grow px-2'>
+						<div className='grid h-full grid-cols-[auto_1fr_auto] content-center'>
+							<div className='inline-flex items-center'>
+								<Sidebar.Trigger />
+								<Separator orientation='vertical' className='mx-2 h-4' />
+							</div>
+							<div className='overflow-hidden'>
+								<div className='overflow-x-scroll'>
+									<SidebarBreadcrumb className='mx-2 h-full' />
+								</div>
+							</div>
+							<div className='inline-flex items-center'>
+								<Separator orientation='vertical' className='mx-2 h-4' />
+								<DevLayoutVariantToggleDropdown triggerVariant='icon' />
+							</div>
+						</div>
+					</div>
+				</div>
+				<Separator orientation='horizontal' className='shrink-0' />
 			</div>
-		</header>
+		</aside>
 	)
 }
 
