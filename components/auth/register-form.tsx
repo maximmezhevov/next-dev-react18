@@ -4,31 +4,32 @@ import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { login } from '@/actions/auth'
-import { LoginSchema } from '@/schemas/auth'
+import { register } from '@/actions/auth'
+import { RegisterSchema } from '@/schemas/auth'
 import { AuthCard } from './card'
 import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { Button, Form, Input } from '@/components/shadcn'
 
-export const LoginForm: React.FC = () => {
+export const RegisterForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 
-	const form = useForm<z.infer<typeof LoginSchema>>({
-		resolver: zodResolver(LoginSchema),
+	const form = useForm<z.infer<typeof RegisterSchema>>({
+		resolver: zodResolver(RegisterSchema),
 		defaultValues: {
+			name: 'name',
 			email: 'example@email.com',
 			password: '123',
 		},
 	})
 
-	const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+	const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			login(values).then((data) => {
+			register(values).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
@@ -39,15 +40,28 @@ export const LoginForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Login'
-			headerDescription='Welcome back'
-			backButtonHref='/auth/register'
-			backButtonLabel='Dont have an account?'
+			headerLabel='Register'
+			headerDescription='Create an accout'
+			backButtonHref='/auth/login'
+			backButtonLabel='Already have an account?'
 			showSocial
 		>
 			<Form.Root {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
 					<div className='space-y-4'>
+						<Form.Field
+							control={form.control}
+							name='name'
+							render={({ field }) => (
+								<Form.Item>
+									<Form.Label>name</Form.Label>
+									<Form.Control>
+										<Input {...field} disabled={isPending} placeholder='name' />
+									</Form.Control>
+									<Form.Message />
+								</Form.Item>
+							)}
+						/>
 						<Form.Field
 							control={form.control}
 							name='email'
@@ -88,7 +102,7 @@ export const LoginForm: React.FC = () => {
 					<FormError message={error} />
 					<FormSuccess message={success} />
 					<Button disabled={isPending} type='submit' className='w-full'>
-						Login
+						Create an account
 					</Button>
 				</form>
 			</Form.Root>

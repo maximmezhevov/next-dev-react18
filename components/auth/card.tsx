@@ -24,7 +24,10 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 				</Card.Footer>
 			)}
 			<Card.Footer>
-				<BackButton backButtonHref={backButtonHref} backButtonLabel={backButtonLabel} />
+				<BackButton
+					backButtonHref={backButtonHref}
+					backButtonLabel={backButtonLabel}
+				/>
 			</Card.Footer>
 		</Card.Root>
 	)

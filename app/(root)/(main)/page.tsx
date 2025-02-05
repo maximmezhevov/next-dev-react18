@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FaGithub } from 'react-icons/fa6'
+import { Header } from '@/components/shared'
 import { Container } from '@/components/ui'
 import { Button } from '@/components/shadcn'
 
@@ -8,12 +9,10 @@ export default async function Main() {
 		<Container variant='root'>
 			<main className='min-h-[inherit]'>
 				<section className='flex min-h-[inherit] flex-col items-center justify-between py-[3rem]'>
-					<header className='*:text-center'>
-						<h1 className='text-5xl font-black uppercase tracking-tight'>
-							ndr18
-						</h1>
-						<p className='font-bold tracking-tight'>next-dev-react18</p>
-					</header>
+					<Header.Root>
+						<Header.Title>ndr18</Header.Title>
+						<Header.Description>next-dev-react18</Header.Description>
+					</Header.Root>
 					<section className='inline-flex flex-1 items-center gap-1'>
 						<Button asChild size='lg'>
 							<Link href='/dev'>dev</Link>
