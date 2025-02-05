@@ -1,6 +1,5 @@
 import { DevLayoutVariantToggleDropdown } from '@/components/dev'
-import { Header } from '@/components/shared'
-import { Container } from '@/components/ui'
+import { Container, Header } from '@/components/ui'
 
 export default async function Dev() {
 	return (

@@ -1,8 +1,7 @@
-// import { LoginButton } from '@/components/auth'
-import { Header } from '@/components/shared'
-import { Container } from '@/components/ui'
-import { Button } from '@/components/shadcn'
 import Link from 'next/link'
+// import { LoginButton } from '@/components/auth'
+import { Container, Header } from '@/components/ui'
+import { Button } from '@/components/shadcn'
 
 export default function NextAuth() {
 	return (

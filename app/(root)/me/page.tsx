@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { FaTelegram } from 'react-icons/fa6'
-import { Header } from '@/components/shared'
-import { Container } from '@/components/ui'
+import { Container, Header } from '@/components/ui'
 import { Button } from '@/components/shadcn'
 
 export default function Me() {
