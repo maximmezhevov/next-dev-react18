@@ -11,7 +11,7 @@ const ROUTES: Routes[] = [
 	// 	href: '/dev/next',
 	// },
 	{
-		label: 'next-auth',
+		label: 'auth (next-auth)',
 		href: '/dev/next-auth',
 	},
 	{
