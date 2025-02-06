@@ -8,7 +8,7 @@ export const BackButton: React.FC<BackButtonProps> = ({
 	backButtonLabel,
 }) => {
 	return (
-		<Button asChild variant='link' size='sm' className='w-full font-normal'>
+		<Button asChild variant='link' size='32' className='w-full font-normal'>
 			<Link href={backButtonHref}>{backButtonLabel}</Link>
 		</Button>
 	)

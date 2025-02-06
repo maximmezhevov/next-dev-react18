@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -39,7 +40,7 @@ export const LoginForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Login'
+			headerLabel='Sign-in'
 			headerDescription='Welcome back'
 			backButtonHref='/auth/register'
 			backButtonLabel='Dont have an account?'
@@ -53,7 +54,7 @@ export const LoginForm: React.FC = () => {
 							name='email'
 							render={({ field }) => (
 								<Form.Item>
-									<Form.Label>email</Form.Label>
+									<Form.Label>Email address</Form.Label>
 									<Form.Control>
 										<Input
 											{...field}
@@ -71,7 +72,15 @@ export const LoginForm: React.FC = () => {
 							name='password'
 							render={({ field }) => (
 								<Form.Item>
-									<Form.Label>password</Form.Label>
+									<div className='inline-flex w-full items-center justify-between'>
+										<Form.Label>Password</Form.Label>
+										<Link
+											href='#forgot-password'
+											className='text-xs text-muted-foreground hover:text-foreground'
+										>
+											Forgot password?
+										</Link>
+									</div>
 									<Form.Control>
 										<Input
 											{...field}
@@ -88,7 +97,7 @@ export const LoginForm: React.FC = () => {
 					<FormError message={error} />
 					<FormSuccess message={success} />
 					<Button disabled={isPending} type='submit' className='w-full'>
-						Login
+						Sign-in
 					</Button>
 				</form>
 			</Form.Root>

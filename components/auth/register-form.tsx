@@ -40,11 +40,11 @@ export const RegisterForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Register'
+			headerLabel='Registration'
 			headerDescription='Create an accout'
 			backButtonHref='/auth/login'
 			backButtonLabel='Already have an account?'
-			showSocial
+			showSocial={false}
 		>
 			<Form.Root {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -54,7 +54,7 @@ export const RegisterForm: React.FC = () => {
 							name='name'
 							render={({ field }) => (
 								<Form.Item>
-									<Form.Label>name</Form.Label>
+									<Form.Label>Name</Form.Label>
 									<Form.Control>
 										<Input {...field} disabled={isPending} placeholder='name' />
 									</Form.Control>
@@ -67,7 +67,7 @@ export const RegisterForm: React.FC = () => {
 							name='email'
 							render={({ field }) => (
 								<Form.Item>
-									<Form.Label>email</Form.Label>
+									<Form.Label>Email address</Form.Label>
 									<Form.Control>
 										<Input
 											{...field}
@@ -85,7 +85,7 @@ export const RegisterForm: React.FC = () => {
 							name='password'
 							render={({ field }) => (
 								<Form.Item>
-									<Form.Label>password</Form.Label>
+									<Form.Label>Password</Form.Label>
 									<Form.Control>
 										<Input
 											{...field}
