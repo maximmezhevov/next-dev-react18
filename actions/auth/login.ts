@@ -19,6 +19,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 			password,
 			redirectTo: '/dev/next-auth',
 		})
+		return { success: '...' }
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {
