@@ -2,7 +2,7 @@ import Link from 'next/link'
 // import { LoginButton } from '@/components/auth'
 import { Container, Header } from '@/components/ui'
 import { Button } from '@/components/shadcn'
-import { auth, signOut } from '@/lib/auth'
+import { auth, signOut } from '@/auth'
 
 export default async function NextAuth() {
 	const session = await auth()

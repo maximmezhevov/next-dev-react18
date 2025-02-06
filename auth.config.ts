@@ -1,10 +1,9 @@
+import type { NextAuthConfig } from 'next-auth'
 import bcryptjs from 'bcryptjs'
-import { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-// import GitHub from 'next-auth/providers/github'
-
+import GitHub from 'next-auth/providers/github'
 import { LoginSchema } from '@/schemas/auth'
-import { getUserByEmail } from './services/auth'
+import { getUserByEmail } from '@/services/auth'
 
 export default {
 	providers: [
@@ -24,6 +23,9 @@ export default {
 				return null
 			},
 		}),
-		// Github,
+		GitHub({
+			clientId: process.env.AUTH_GITHUB_ID,
+			clientSecret: process.env.AUTH_GITHUB_SECRET,
+		}),
 	],
 } satisfies NextAuthConfig

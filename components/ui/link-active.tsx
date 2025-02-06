@@ -1,6 +1,6 @@
 'use client'
 
-import type { Path } from '@/types'
+import type { Path } from '@/types/index'
 import Link from 'next/link'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { useActive } from '@/hooks'

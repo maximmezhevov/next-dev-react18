@@ -1,4 +1,4 @@
-import type { Path, User } from '@/types'
+import type { Path, User } from '@/types/index'
 import { ThemeModeToggleDropdown } from '@/components/theme'
 import { UserDropdown } from '@/components/auth'
 import { LinkActive } from '@/components/ui'

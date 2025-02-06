@@ -1,6 +1,6 @@
 'use client'
 
-import type { Routes } from '@/types'
+import type { Routes } from '@/types/index'
 import { useStore } from './use-store'
 import { DevSidebar } from '../sidebar'
 import { DevSidebarShadcn } from '../sidebar-shadcn'

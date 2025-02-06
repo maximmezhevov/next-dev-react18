@@ -1,6 +1,6 @@
 'use client'
 
-import type { Routes } from '@/types'
+import type { Routes } from '@/types/index'
 import type { LinkActiveProps } from '@/components/ui'
 import React from 'react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'

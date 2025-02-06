@@ -1,4 +1,5 @@
-import type { Routes } from '@/types'
+import { Routes } from '@/types/index'
+
 import { DevLayoutVariant } from '@/components/dev'
 
 const ROUTES: Routes[] = [

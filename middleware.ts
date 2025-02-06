@@ -1,7 +1,10 @@
-// import NextAuth from 'next-auth'
-// import authConfig from '@/auth.config'
-// const { auth } = NextAuth(authConfig)
-// export default auth((req) => console.log('...'))
-// ReferenceError: Cannot access '__WEBPACK_DEFAULT_EXPORT__' before initialization
+// import { NextRequest } from 'next/server'
+import NextAuth from 'next-auth'
+import authConfig from '@/auth.config'
 
-export { auth as middleware } from '@/lib/auth'
+export const { auth: middleware } = NextAuth(authConfig)
+
+// const { auth } = NextAuth(authConfig)
+// export default auth(async function middleware(req: NextRequest) {
+// 	// console.log('PATH: ', req.nextUrl.pathname)
+// })
