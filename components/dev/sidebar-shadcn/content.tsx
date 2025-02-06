@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Sidebar } from '@/components/shadcn'
-import { Routes } from '@/types'
+import { Routes } from '@/types/index'
 
 const SidebarShadcnContent: React.FC<
 	{ routes: Routes[] } & React.ComponentProps<typeof Sidebar.Root>

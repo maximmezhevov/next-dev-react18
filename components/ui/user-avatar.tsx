@@ -1,4 +1,4 @@
-import type { User } from '@/types'
+import type { User } from '@/types/index'
 import { User2 } from 'lucide-react'
 import { cn } from '@/lib'
 import { Button, Avatar } from '@/components/shadcn'

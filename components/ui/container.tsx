@@ -25,11 +25,6 @@ export const Container: React.FC<ContainerProps> = ({
 	className,
 }) => {
 	return (
-		<div
-			data-i='container'
-			className={containerVariants({ variant, className })}
-		>
-			{children}
-		</div>
+		<div className={containerVariants({ variant, className })}>{children}</div>
 	)
 }

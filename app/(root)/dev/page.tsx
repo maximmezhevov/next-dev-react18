@@ -1,16 +1,16 @@
 import { DevLayoutVariantToggleDropdown } from '@/components/dev'
-import { Container } from '@/components/ui'
+import { Container, Header } from '@/components/ui'
 
 export default async function Dev() {
 	return (
 		<Container variant='dev'>
 			<main className='flex min-h-[inherit] flex-col items-center gap-[3rem] pt-[3rem]'>
-				<header className='*:text-center'>
-					<h1 className='text-5xl font-black uppercase tracking-tight'>dev</h1>
-					<p className='font-bold tracking-tight line-through decoration-2'>
+				<Header.Root>
+					<Header.Title>dev</Header.Title>
+					<Header.Description className='line-through decoration-2'>
 						Портфолио, в кавычках
-					</p>
-				</header>
+					</Header.Description>
+				</Header.Root>
 				<section>
 					<DevLayoutVariantToggleDropdown triggerVariant='value' />
 				</section>

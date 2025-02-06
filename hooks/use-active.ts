@@ -1,6 +1,6 @@
 'use client'
 
-import type { Path } from '@/types'
+import type { Path } from '@/types/index'
 import { usePathname } from 'next/navigation'
 
 export const useActive = (href: Path['href'], inherit: boolean) => {

@@ -1,4 +1,4 @@
-import type { User } from '@/types'
+import type { User } from '@/types/index'
 import { UserAvatar } from '@/components/ui'
 import { Dropdown } from '@/components/shadcn'
 

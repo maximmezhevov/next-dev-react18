@@ -1,4 +1,4 @@
-import type { Routes } from '@/types'
+import type { Routes } from '@/types/index'
 import { Sidebar } from '@/components/ui'
 import { SidebarBreadcrumb } from '../sidebar-breadcrumb'
 import { Separator } from '@/components/shadcn'

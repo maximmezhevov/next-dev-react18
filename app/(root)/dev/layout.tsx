@@ -1,17 +1,18 @@
-import type { Routes } from '@/types'
+import { Routes } from '@/types/index'
+
 import { DevLayoutVariant } from '@/components/dev'
 
 const ROUTES: Routes[] = [
+	// {
+	// 	label: 'try',
+	// 	href: '/try',
+	// },
+	// {
+	// 	label: 'next',
+	// 	href: '/dev/next',
+	// },
 	{
-		label: 'try',
-		href: '/try',
-	},
-	{
-		label: 'next',
-		href: '/dev/next',
-	},
-	{
-		label: 'next-auth',
+		label: 'auth (next-auth)',
 		href: '/dev/next-auth',
 	},
 	{
