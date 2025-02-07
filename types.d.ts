@@ -12,6 +12,7 @@ export type ExistingUser = DefaultSession['user'] & {
 declare module 'next-auth' {
 	interface Session {
 		user: ExistingUser
+		emailVerified: Date
 	}
 }
 
@@ -21,5 +22,6 @@ import { JWT /* 'JWT' is defined but never used */ } from 'next-auth/jwt'
 declare module 'next-auth/jwt' {
 	interface JWT {
 		role?: Role
+		emailVerified: Date | null
 	}
 }

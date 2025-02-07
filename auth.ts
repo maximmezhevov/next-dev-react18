@@ -22,12 +22,17 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 		},
 	},
 	callbacks: {
-		async session({ token, session }) {
-			// console.log({
-			// 	sessionToken: token,
-			// 	session,
-			// })
+		async signIn({ user, account }) {
+			if (account?.provider !== 'credentials') return true
 
+			const existingUser = await getUserById(user.id as string) // TODO // user: User | AdapterUser; interface User { id?: string ... }; interface AdapterUser extends User { id: string ... }
+
+			// TODO // if (existingUser.2FA === false) return true
+			if (!existingUser?.emailVerified) return false
+
+			return true
+		},
+		async session({ token, session }) {
 			if (token.sub && session.user) {
 				session.user.id = token.sub
 			}
@@ -36,15 +41,20 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 				session.user.role = token.role
 			}
 
+			if (token.emailVerified && session.user) {
+				session.user.emailVerified = token.emailVerified
+			}
+
 			return session
 		},
 		async jwt({ token }) {
-			// console.log('token', token)
-
 			if (!token.sub) return token
+
 			const existingUser = await getUserById(token.sub)
 			if (!existingUser) return token
+
 			token.role = existingUser.role
+			token.emailVerified = existingUser.emailVerified
 
 			return token
 		},

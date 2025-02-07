@@ -2,16 +2,18 @@
 
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+
 import { login } from '@/actions/auth'
 import { LoginSchema } from '@/schemas/auth'
+import { Button, Form, Input } from '@/components/shadcn'
+
 import { AuthCard } from './card'
 import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
-import { Button, Form, Input } from '@/components/shadcn'
-import { useSearchParams } from 'next/navigation'
 
 export const LoginForm: React.FC = () => {
 	const searchParams = useSearchParams()
@@ -48,7 +50,7 @@ export const LoginForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Sign-in'
+			headerLabel='Sign in'
 			headerDescription='Welcome back'
 			backButtonHref='/auth/register'
 			backButtonLabel='Dont have an account?'
@@ -104,8 +106,13 @@ export const LoginForm: React.FC = () => {
 					</div>
 					<FormError message={error || urlError} />
 					<FormSuccess message={success} />
-					<Button disabled={isPending} type='submit' className='w-full'>
-						Sign-in
+					<Button
+						disabled={isPending}
+						type='submit'
+						variant='secondary'
+						className='w-full'
+					>
+						Sign in
 					</Button>
 				</form>
 			</Form.Root>

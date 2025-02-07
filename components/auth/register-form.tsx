@@ -44,7 +44,6 @@ export const RegisterForm: React.FC = () => {
 			headerDescription='Create an accout'
 			backButtonHref='/auth/login'
 			backButtonLabel='Already have an account?'
-			showSocial={false}
 		>
 			<Form.Root {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>

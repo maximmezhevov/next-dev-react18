@@ -17,22 +17,23 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 				<Card.Title>{headerLabel}</Card.Title>
 				<Card.Description>{headerDescription}</Card.Description>
 			</Card.Header>
-			<Card.Content className='space-y-4'>
-				{showSocial && (
-					<>
-						<Social />
-						<div className='flex items-center gap-1'>
-							<Separator className='w-full shrink' />
-							<div className='shrink-0 text-xs text-muted-foreground'>
-								or Credential
+			{children && (
+				<Card.Content className='space-y-4'>
+					{showSocial && (
+						<>
+							<Social />
+							<div className='flex items-center gap-1'>
+								<Separator className='w-full shrink' />
+								<div className='shrink-0 text-xs text-muted-foreground'>
+									or Credential
+								</div>
+								<Separator className='w-full shrink' />
 							</div>
-							<Separator className='w-full shrink' />
-						</div>
-					</>
-				)}
-				{children}
-			</Card.Content>
-
+						</>
+					)}
+					{children}
+				</Card.Content>
+			)}
 			<Card.Footer>
 				<BackButton
 					backButtonHref={backButtonHref}

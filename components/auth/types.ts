@@ -1,8 +1,8 @@
 export type AuthCardProps = {
-	children: React.ReactNode
+	children?: React.ReactNode
 	headerLabel: string
-	headerDescription: string
+	headerDescription?: string
 	backButtonHref: string
 	backButtonLabel: string
-	showSocial: boolean
+	showSocial?: boolean
 }

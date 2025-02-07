@@ -1,15 +1,28 @@
-import type { User } from '@prisma/client'
+import type { User, VerificationToken } from '@prisma/client'
 import { prisma } from '@/lib'
 
-type Email = User['email']
-type Id = User['id']
-
-export const getUserByEmail = async (email: Email) => {
+export const getUserByEmail = async (email: User['email']) => {
 	const user = await prisma.user.findUnique({ where: { email } })
 	return user
 }
 
-export const getUserById = async (id: Id) => {
+export const getUserById = async (id: User['id']) => {
 	const user = await prisma.user.findUnique({ where: { id } })
 	return user
+}
+
+export const getVerificationTokenByToken = async (
+	token: VerificationToken['token']
+) => {
+	const verificationToken = prisma.verificationToken.findUnique({
+		where: { token },
+	})
+	return verificationToken
+}
+
+export const getVerificationTokenByEmail = async (email: User['email']) => {
+	const verificationToken = prisma.verificationToken.findFirst({
+		where: { email },
+	})
+	return verificationToken
 }
