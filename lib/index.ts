@@ -1,3 +1,4 @@
 export { cn } from './utils'
 export { prisma } from './prisma'
-export { generateVerificationToken } from './tokens'
+export { generateVerificationToken, generatePasswordResetToken } from './tokens'
+// TODO // export { ... } from './mails' - Error: Missing API key. Pass it to the constructor `new Resend("re_123")` // экспорт напрямую из @/lib/mails

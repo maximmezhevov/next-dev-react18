@@ -55,7 +55,12 @@ export const RegisterForm: React.FC = () => {
 								<Form.Item>
 									<Form.Label>Name</Form.Label>
 									<Form.Control>
-										<Input {...field} disabled={isPending} placeholder='name' />
+										<Input
+											{...field}
+											disabled={isPending}
+											type='text'
+											placeholder='name'
+										/>
 									</Form.Control>
 									<Form.Message />
 								</Form.Item>
@@ -71,7 +76,7 @@ export const RegisterForm: React.FC = () => {
 										<Input
 											{...field}
 											disabled={isPending}
-											type='Email'
+											type='email'
 											placeholder='example@email.com'
 										/>
 									</Form.Control>

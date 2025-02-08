@@ -1,7 +1,10 @@
 import type { User } from '@prisma/client'
 import { v4 as uuid } from 'uuid'
-import { getVerificationTokenByEmail } from '@/services/auth'
-import { prisma } from './prisma'
+import { prisma } from '@/lib'
+import {
+	getVerificationTokenByEmail,
+	getPasswordResetTokenByEmail,
+} from '@/services/auth'
 
 export const generateVerificationToken = async (email: User['email']) => {
 	const token = uuid()
@@ -21,4 +24,24 @@ export const generateVerificationToken = async (email: User['email']) => {
 	})
 
 	return verificationToken
+}
+
+export const generatePasswordResetToken = async (email: User['email']) => {
+	const token = uuid()
+	const expires = new Date(new Date().getTime() + 3600 * 1000)
+
+	const existingToken = await getPasswordResetTokenByEmail(email)
+	if (existingToken) {
+		await prisma.passwordResetToken.delete({ where: { id: existingToken.id } })
+	}
+
+	const passwordResetToken = prisma.passwordResetToken.create({
+		data: {
+			email,
+			token,
+			expires,
+		},
+	})
+
+	return passwordResetToken
 }

@@ -69,7 +69,7 @@ export const LoginForm: React.FC = () => {
 										<Input
 											{...field}
 											disabled={isPending}
-											type='Email'
+											type='email'
 											placeholder='example@email.com'
 										/>
 									</Form.Control>
@@ -85,7 +85,7 @@ export const LoginForm: React.FC = () => {
 									<div className='inline-flex w-full items-center justify-between'>
 										<Form.Label>Password</Form.Label>
 										<Link
-											href='#forgot-password'
+											href='/auth/reset'
 											className='text-xs text-muted-foreground hover:text-foreground'
 										>
 											Forgot password?

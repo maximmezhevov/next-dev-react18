@@ -7,7 +7,7 @@ import { newVerification } from '@/actions/auth'
 import { FormSuccess } from './form-success'
 import { FormError } from './form-error'
 
-export const NewVerificationForm = () => {
+export const NewVerificationForm: React.FC = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 

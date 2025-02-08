@@ -20,3 +20,15 @@ export const RegisterSchema = z.object({
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
 })
+
+export const ResetSchema = z.object({
+	email: z.string().email({
+		message: 'Invalid email',
+	}),
+})
+
+export const newPasswordSchema = z.object({
+	password: z
+		.string()
+		.min(1, { message: 'String must contain at least 1 character(s)' }),
+})

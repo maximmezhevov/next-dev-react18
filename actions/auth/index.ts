@@ -1,3 +1,5 @@
 export { login } from './login'
 export { register } from './register'
 export { newVerification } from './new-verification'
+export { resetAction } from './reset'
+export { newPasswordAction } from './new-password'

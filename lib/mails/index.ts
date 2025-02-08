@@ -20,3 +20,21 @@ export const sendVerificationEmail = async (
       </p>`, // TODO
 	})
 }
+
+export const sendPasswordResetEmail = async (
+	email: User['email'],
+	token: VerificationToken['token']
+) => {
+	const passwordResetLink = `${process.env.APP_URL}/auth/new-password?token=${token}`
+
+	await resend.emails.send({
+		from: 'onboarding@resend.dev',
+		to: email,
+		subject: 'Сброс пороля',
+		html: `
+      <p>Нажмите
+        <a href='${passwordResetLink}'>здесь</a>
+        чтобы сбросить пароль
+      </p>`, // TODO
+	})
+}
