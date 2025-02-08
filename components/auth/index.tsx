@@ -1,8 +1,11 @@
-export { UserDropdown } from './user-dropdown'
 export { LoginButton } from './login-button'
+
 export { LoginForm } from './login-form'
 export { RegisterForm } from './register-form'
-export { ErrorCard } from './error-card'
-export { NewVerificationForm } from './new-verification-form'
+export { VerificationForm } from './verification-form'
 export { ResetForm } from './reset-form'
-export { NewPasswordForm } from './new-password-form'
+export { PasswordResetForm } from './password-reset-form'
+
+export { ErrorCard } from './error-card'
+
+export { UserDropdown } from './user-dropdown'

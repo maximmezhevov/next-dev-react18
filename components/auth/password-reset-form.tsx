@@ -5,22 +5,22 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { newPasswordAction } from '@/actions/auth'
+import { passwordResetAction } from '@/actions/auth'
 import { newPasswordSchema } from '@/schemas/auth'
-import { Button, Form, Input } from '@/components/shadcn'
+import { Form, Input } from '@/components/shadcn'
 
 import { AuthCard } from './card'
 import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { useSearchParams } from 'next/navigation'
+import { SubmitButton } from './submit-button'
 
-export const NewPasswordForm: React.FC = () => {
+export const PasswordResetForm: React.FC = () => {
 	const searchParams = useSearchParams()
 	const token = searchParams.get('token')
 
 	const [isPending, startTransition] = useTransition()
 	const [success, setSuccess] = useState<string | undefined>(undefined)
-
 	const [error, setError] = useState<string | undefined>(undefined)
 
 	const form = useForm<z.infer<typeof newPasswordSchema>>({
@@ -31,11 +31,10 @@ export const NewPasswordForm: React.FC = () => {
 	})
 
 	const onSubmit = (values: z.infer<typeof newPasswordSchema>) => {
-		console.log(values)
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			newPasswordAction(values, token).then((data) => {
+			passwordResetAction(values, token).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
@@ -45,7 +44,7 @@ export const NewPasswordForm: React.FC = () => {
 	return (
 		<AuthCard
 			headerLabel='Новый пароль'
-			headerDescription='Забыли пароль?'
+			// headerDescription='Забыли пароль?'
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		>
@@ -63,7 +62,7 @@ export const NewPasswordForm: React.FC = () => {
 											{...field}
 											disabled={isPending}
 											type='password'
-											placeholder='******'
+											placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
 										/>
 									</Form.Control>
 									<Form.Message />
@@ -72,15 +71,14 @@ export const NewPasswordForm: React.FC = () => {
 						/>
 					</div>
 					<FormError message={error} />
-					<FormSuccess message={success} />
-					<Button
-						disabled={isPending}
-						type='submit'
-						variant='secondary'
-						className='w-full'
-					>
-						Сохранить новый пароль
-					</Button>
+					{success ? (
+						<FormSuccess message={success} />
+					) : (
+						<SubmitButton
+							isPending={isPending}
+							label='Сохранить новый пароль'
+						/>
+					)}
 				</form>
 			</Form.Root>
 		</AuthCard>

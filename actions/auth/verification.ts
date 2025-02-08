@@ -4,20 +4,20 @@ import type { VerificationToken } from '@prisma/client'
 import { prisma } from '@/lib'
 import { getUserByEmail, getVerificationTokenByToken } from '@/services/auth'
 
-export const newVerification = async (token: VerificationToken['token']) => {
+export const verificationAction = async (token: VerificationToken['token']) => {
 	const existingToken = await getVerificationTokenByToken(token)
 	if (!existingToken) {
-		return { error: 'Токена не существует или он устраел' }
+		return { error: 'Токена не существует или срок действия токена истек' }
 	}
 
 	const hasExpired = new Date(existingToken.expires) < new Date()
 	if (hasExpired) {
-		return { error: 'срок действия токена истек' }
+		return { error: 'Срок действия токена истек' }
 	}
 
 	const existingUser = await getUserByEmail(existingToken.email)
 	if (!existingUser) {
-		return { error: 'пользователь не существует' }
+		return { error: 'Пользователя не существует' }
 	}
 
 	await prisma.user.update({

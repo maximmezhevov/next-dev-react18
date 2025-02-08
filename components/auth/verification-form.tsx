@@ -1,13 +1,14 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
+import { Loader2 } from 'lucide-react'
 import { AuthCard } from './card'
 import { useCallback, useEffect, useState } from 'react'
-import { newVerification } from '@/actions/auth'
+import { verificationAction } from '@/actions/auth'
 import { FormSuccess } from './form-success'
 import { FormError } from './form-error'
 
-export const NewVerificationForm: React.FC = () => {
+export const VerificationForm: React.FC = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 
@@ -21,13 +22,13 @@ export const NewVerificationForm: React.FC = () => {
 			setError('missing token')
 			return
 		}
-		newVerification(token)
+		verificationAction(token)
 			.then((data) => {
 				setSuccess(data.success)
 				setError(data.error)
 			})
 			.catch(() => {
-				setError('something weng wrong')
+				setError('Что то пошло не так')
 			})
 	}, [error, success, token])
 
@@ -37,13 +38,16 @@ export const NewVerificationForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Верификация' // confirm you verification
-			backButtonLabel='вернуться к авторизации ' // back to logins
+			headerLabel='Верификация'
+			backButtonLabel='Вернуться к авторизации'
 			backButtonHref='/auth/login'
 		>
-			<div className='flex flex-col items-center justify-center gap-4'>
-				<div className='font-mono text-xs leading-8'>{token}</div>
-				{!error && !success && <div>сделать спинер</div>}
+			<div className='flex w-full flex-col items-center justify-center gap-4'>
+				{!error && !success && (
+					<div>
+						<Loader2 className='size-8 animate-spin' />
+					</div>
+				)}
 				<FormSuccess message={success} />
 				{!success && <FormError message={error} />}
 			</div>

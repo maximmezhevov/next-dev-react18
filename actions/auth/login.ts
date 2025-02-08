@@ -3,22 +3,22 @@
 import * as z from 'zod'
 import { AuthError } from 'next-auth'
 import { signIn } from '@/auth'
-import { LoginSchema } from '@/schemas/auth'
+import { loginSchema } from '@/schemas/auth'
 import { generateVerificationToken } from '@/lib'
-import { getUserByEmail } from '@/services/auth'
 import { sendVerificationEmail } from '@/lib/mails'
+import { getUserByEmail } from '@/services/auth'
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
-	const validatedFields = LoginSchema.safeParse(values)
+export const loginAction = async (values: z.infer<typeof loginSchema>) => {
+	const validatedFields = loginSchema.safeParse(values)
 	if (!validatedFields.success) {
-		return { error: 'Недопустимые поля' }
+		return { error: 'invalid fields' }
 	}
 
 	const { email, password } = validatedFields.data
 	const existingUser = await getUserByEmail(email)
 
 	if (!existingUser || !existingUser.email || !existingUser.password) {
-		return { error: 'Неверные учетные данные' } // Электронная почта не существует
+		return { error: 'Неверные учетные данные' }
 	}
 
 	if (!existingUser.emailVerified) {
@@ -31,7 +31,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 			verificationToken.token
 		)
 
-		return { success: 'Подтверждение по электронной почте' }
+		return { success: 'Требуется подтверждения по электронной почте' }
 	}
 
 	try {
@@ -40,7 +40,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 			password,
 			redirectTo: '/dev/next-auth',
 		})
-		return { success: 'success' } // Успешно
+		return { success: 'Авторизация прошла успешно' }
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {

@@ -4,44 +4,45 @@ import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { register } from '@/actions/auth'
-import { RegisterSchema } from '@/schemas/auth'
+
+import { registerAction } from '@/actions/auth'
+import { registerSchema } from '@/schemas/auth'
+import { Form, Input } from '@/components/shadcn'
+
 import { AuthCard } from './card'
 import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
-import { Button, Form, Input } from '@/components/shadcn'
+import { SubmitButton } from './submit-button'
 
 export const RegisterForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 
-	const form = useForm<z.infer<typeof RegisterSchema>>({
-		resolver: zodResolver(RegisterSchema),
+	const form = useForm<z.infer<typeof registerSchema>>({
+		resolver: zodResolver(registerSchema),
 		defaultValues: {
-			name: 'name',
-			email: 'example@email.com',
-			password: '123',
+			name: '',
+			email: '',
+			password: '',
 		},
 	})
 
-	const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+	const onSubmit = (values: z.infer<typeof registerSchema>) => {
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			register(values).then((data) => {
+			registerAction(values).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
 		)
-
-		/* axios.post('.../api/...', values).then{}... */
 	}
 
 	return (
 		<AuthCard
 			headerLabel='Registration'
-			headerDescription='Create an accout'
+			// headerDescription='Create an accout'
 			backButtonHref='/auth/login'
 			backButtonLabel='Already have an account?'
 		>
@@ -77,7 +78,7 @@ export const RegisterForm: React.FC = () => {
 											{...field}
 											disabled={isPending}
 											type='email'
-											placeholder='example@email.com'
+											placeholder='example@email.io'
 										/>
 									</Form.Control>
 									<Form.Message />
@@ -95,7 +96,7 @@ export const RegisterForm: React.FC = () => {
 											{...field}
 											disabled={isPending}
 											type='password'
-											placeholder='******'
+											placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
 										/>
 									</Form.Control>
 									<Form.Message />
@@ -104,10 +105,11 @@ export const RegisterForm: React.FC = () => {
 						/>
 					</div>
 					<FormError message={error} />
-					<FormSuccess message={success} />
-					<Button disabled={isPending} type='submit' className='w-full'>
-						Create an account
-					</Button>
+					{success ? (
+						<FormSuccess message={success} />
+					) : (
+						<SubmitButton isPending={isPending} label='Create an account' />
+					)}
 				</form>
 			</Form.Root>
 		</AuthCard>

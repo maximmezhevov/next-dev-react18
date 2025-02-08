@@ -7,12 +7,12 @@ export const sendVerificationEmail = async (
 	email: User['email'],
 	token: VerificationToken['token']
 ) => {
-	const confirmLink = `${process.env.APP_URL}/auth/new-verification?token=${token}`
+	const confirmLink = `${process.env.APP_URL}/auth/verification?token=${token}`
 
 	await resend.emails.send({
 		from: 'onboarding@resend.dev',
 		to: email,
-		subject: 'Подтвердите свой адрес электронной почты',
+		subject: 'Подтвердите адрес электронной почты',
 		html: `
       <p>Нажмите 
         <a href='${confirmLink}'>здесь</a> 
@@ -25,7 +25,7 @@ export const sendPasswordResetEmail = async (
 	email: User['email'],
 	token: VerificationToken['token']
 ) => {
-	const passwordResetLink = `${process.env.APP_URL}/auth/new-password?token=${token}`
+	const passwordResetLink = `${process.env.APP_URL}/auth/password-reset?token=${token}`
 
 	await resend.emails.send({
 		from: 'onboarding@resend.dev',

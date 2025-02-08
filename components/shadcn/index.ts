@@ -2,7 +2,7 @@ export * as Sidebar from './sidebar'
 
 export * as Avatar from './avatar'
 export * as Breadcrumb from './breadcrumb'
-export { Button } from './button'
+export { Button, buttonVariants } from './button'
 export * as Card from './card'
 export * as Dropdown from './dropdown-menu'
 export * as Form from './form'

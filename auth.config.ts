@@ -2,14 +2,14 @@ import type { NextAuthConfig } from 'next-auth'
 import bcryptjs from 'bcryptjs'
 import Credentials from 'next-auth/providers/credentials'
 import GitHub from 'next-auth/providers/github'
-import { LoginSchema } from '@/schemas/auth'
+import { loginSchema } from '@/schemas/auth'
 import { getUserByEmail } from '@/services/auth'
 
 export default {
 	providers: [
 		Credentials({
 			async authorize(credentials) {
-				const validateFields = LoginSchema.safeParse(credentials)
+				const validateFields = loginSchema.safeParse(credentials)
 				if (validateFields.success) {
 					const { email, password } = validateFields.data
 

@@ -2,29 +2,30 @@
 
 import * as z from 'zod'
 import bcryptjs from 'bcryptjs'
-import { RegisterSchema } from '@/schemas/auth'
+import { registerSchema } from '@/schemas/auth'
 import { generateVerificationToken, prisma } from '@/lib'
-import { getUserByEmail } from '@/services/auth'
 import { sendVerificationEmail } from '@/lib/mails'
+import { getUserByEmail } from '@/services/auth'
 
-export const register = async (values: z.infer<typeof RegisterSchema>) => {
-	const validatedFields = RegisterSchema.safeParse(values)
-
+export const registerAction = async (
+	values: z.infer<typeof registerSchema>
+) => {
+	const validatedFields = registerSchema.safeParse(values)
 	if (!validatedFields.success) {
-		return { error: 'invali fields' }
+		return { error: 'invalid fields' }
 	}
 
 	const { name, email, password } = validatedFields.data
+
 	const existingUser = await getUserByEmail(email)
-
-	const hashedPassword = await bcryptjs.hash(password, 10)
-
 	if (existingUser) {
 		return {
 			error:
-				'Такая электронная почта уже ранее зарегистрирована или возможно используется другим провайдером',
+				'Электронная почта уже зарегистрирована или используется другим провайдером',
 		}
 	}
+
+	const hashedPassword = await bcryptjs.hash(password, 10)
 
 	await prisma.user.create({
 		data: {
@@ -38,5 +39,5 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
 	await sendVerificationEmail(verificationToken.email, verificationToken.token)
 
-	return { success: 'Подтверждение по электронной почте' }
+	return { success: 'Требуется подтверждения по электронной почте' }
 }

@@ -3,20 +3,26 @@
 import { FaGithub } from 'react-icons/fa6'
 // import { FcGoogle } from 'react-icons/fc'
 import { signIn } from 'next-auth/react'
-import { Button } from '@/components/shadcn'
+import { SubmitButton } from './submit-button'
+import { useTransition } from 'react'
 
 export const Social: React.FC = () => {
+	const [isPending, startTransition] = useTransition()
+
 	const onClick = () => {
-		signIn('github', { redirectTo: '/dev/next-auth' })
+		startTransition(async () => {
+			await signIn('github', { redirectTo: '/dev/next-auth' })
+		})
 	}
+
 	return (
 		<div className='flex w-full items-center gap-x-2'>
 			{/* <Button variant='outline' size='lg' className='w-full' onClick={() => {}}>
 				<FcGoogle />
 			</Button> */}
-			<Button onClick={onClick} className='w-full'>
+			<SubmitButton isPending={isPending} onClick={onClick}>
 				<FaGithub /> Continue with GitHub
-			</Button>
+			</SubmitButton>
 		</div>
 	)
 }

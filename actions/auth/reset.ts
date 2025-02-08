@@ -1,21 +1,21 @@
 'use server'
 
 import * as z from 'zod'
-import { ResetSchema } from '@/schemas/auth'
-import { getUserByEmail } from '@/services/auth'
+import { resetSchema } from '@/schemas/auth'
 import { generatePasswordResetToken } from '@/lib'
 import { sendPasswordResetEmail } from '@/lib/mails'
+import { getUserByEmail } from '@/services/auth'
 
-export const resetAction = async (values: z.infer<typeof ResetSchema>) => {
-	const validatedFields = ResetSchema.safeParse(values)
+export const resetAction = async (values: z.infer<typeof resetSchema>) => {
+	const validatedFields = resetSchema.safeParse(values)
 	if (!validatedFields.success) {
-		return { error: 'invalid email' }
+		return { error: 'invalid fields' }
 	}
 
 	const { email } = validatedFields.data
 	const existingUser = await getUserByEmail(email)
 	if (!existingUser) {
-		return { error: 'email not faund' }
+		return { error: 'Неверные учетные данные' }
 	}
 
 	const resetPasswordToken = await generatePasswordResetToken(email)
@@ -25,5 +25,5 @@ export const resetAction = async (values: z.infer<typeof ResetSchema>) => {
 		resetPasswordToken.token
 	)
 
-	return { success: 'проверьте электроную почту' }
+	return { success: 'Проверьте электроную почту' }
 }

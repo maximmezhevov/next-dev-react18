@@ -1,7 +1,16 @@
-import type { AuthCardProps } from './types'
-import { Social } from './social'
-import { BackButton } from './back-button'
+import Link from 'next/link'
 import { Card, Separator } from '@/components/shadcn'
+
+import { Social } from './social'
+
+type AuthCardProps = {
+	children?: React.ReactNode
+	headerLabel: string
+	headerDescription?: string
+	backButtonHref: string
+	backButtonLabel: string
+	showSocial?: boolean
+}
 
 export const AuthCard: React.FC<AuthCardProps> = ({
 	children,
@@ -22,7 +31,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 					{showSocial && (
 						<>
 							<Social />
-							<div className='flex items-center gap-1'>
+							<div className='flex items-center gap-2'>
 								<Separator className='w-full shrink' />
 								<div className='shrink-0 text-xs text-muted-foreground'>
 									or Credential
@@ -35,10 +44,12 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 				</Card.Content>
 			)}
 			<Card.Footer>
-				<BackButton
-					backButtonHref={backButtonHref}
-					backButtonLabel={backButtonLabel}
-				/>
+				<Link
+					href={backButtonHref}
+					className='w-full text-center text-sm text-muted-foreground hover:text-foreground'
+				>
+					{backButtonLabel}
+				</Link>
 			</Card.Footer>
 		</Card.Root>
 	)

@@ -6,27 +6,27 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { resetAction } from '@/actions/auth/reset'
-import { ResetSchema } from '@/schemas/auth'
-import { Button, Form, Input } from '@/components/shadcn'
+import { resetSchema } from '@/schemas/auth'
+import { Form, Input } from '@/components/shadcn'
 
 import { AuthCard } from './card'
 import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
+import { SubmitButton } from './submit-button'
 
 export const ResetForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [success, setSuccess] = useState<string | undefined>(undefined)
-
 	const [error, setError] = useState<string | undefined>(undefined)
 
-	const form = useForm<z.infer<typeof ResetSchema>>({
-		resolver: zodResolver(ResetSchema),
+	const form = useForm<z.infer<typeof resetSchema>>({
+		resolver: zodResolver(resetSchema),
 		defaultValues: {
 			email: '',
 		},
 	})
 
-	const onSubmit = (values: z.infer<typeof ResetSchema>) => {
+	const onSubmit = (values: z.infer<typeof resetSchema>) => {
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
@@ -39,8 +39,8 @@ export const ResetForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Сброс пароля'
-			headerDescription='Забыли пароль?'
+			headerLabel='Забыли пароль?'
+			// headerDescription='Забыли пароль?'
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		>
@@ -67,15 +67,14 @@ export const ResetForm: React.FC = () => {
 						/>
 					</div>
 					<FormError message={error} />
-					<FormSuccess message={success} />
-					<Button
-						disabled={isPending}
-						type='submit'
-						variant='secondary'
-						className='w-full'
-					>
-						Отправить электронное письмо
-					</Button>
+					{success ? (
+						<FormSuccess message={success} />
+					) : (
+						<SubmitButton
+							isPending={isPending}
+							label='Отправить ссылку для сброса пароля'
+						/>
+					)}
 				</form>
 			</Form.Root>
 		</AuthCard>
