@@ -40,7 +40,6 @@ export const ResetForm: React.FC = () => {
 	return (
 		<AuthCard
 			headerLabel='Забыли пароль?'
-			// headerDescription='Забыли пароль?'
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		>

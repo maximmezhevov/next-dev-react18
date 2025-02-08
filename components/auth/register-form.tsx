@@ -42,7 +42,6 @@ export const RegisterForm: React.FC = () => {
 	return (
 		<AuthCard
 			headerLabel='Registration'
-			// headerDescription='Create an accout'
 			backButtonHref='/auth/login'
 			backButtonLabel='Already have an account?'
 		>
