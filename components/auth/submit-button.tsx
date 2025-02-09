@@ -6,6 +6,7 @@ import { Loader2 } from 'lucide-react'
 interface SubmitButtonProps extends VariantProps<typeof buttonVariants> {
 	isPending: boolean
 	onClick?: () => void
+	disabled?: boolean
 	children?: React.ReactNode
 	label?: string
 	className?: string

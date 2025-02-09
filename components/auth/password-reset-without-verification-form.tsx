@@ -1,14 +1,12 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { loginAction } from '@/actions/auth'
-import { loginSchema } from '@/schemas/auth'
+import { passwordResetWithoutVerificationAction } from '@/actions/auth'
+import { newPasswordWithoutVerificationSchema } from '@/schemas/auth'
 import { Form, Input } from '@/components/shadcn'
 
 import { AuthCard } from './card'
@@ -16,45 +14,38 @@ import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { SubmitButton } from './submit-button'
 
-export const LoginForm: React.FC = () => {
+export const PassworResetWithoutVerificationForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
-	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
+	const [error, setError] = useState<string | undefined>(undefined)
 
-	const searchParams = useSearchParams()
-	const urlError =
-		searchParams.get('error') === 'OAuthAccountNotLinked'
-			? 'Электронная почта, уже используемая другим провайдером'
-			: undefined
-
-	const form = useForm<z.infer<typeof loginSchema>>({
-		resolver: zodResolver(loginSchema),
+	const form = useForm<z.infer<typeof newPasswordWithoutVerificationSchema>>({
+		resolver: zodResolver(newPasswordWithoutVerificationSchema),
 		defaultValues: {
 			email: '',
 			password: '',
 		},
 	})
 
-	const onSubmit = (values: z.infer<typeof loginSchema>) => {
+	const onSubmit = (
+		values: z.infer<typeof newPasswordWithoutVerificationSchema>
+	) => {
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			loginAction(values).then((data) => {
+			passwordResetWithoutVerificationAction(values).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
 		)
-
-		/* axios.post('.../api/...', values).then{}... */
 	}
 
 	return (
 		<AuthCard
-			headerLabel='Sign in'
-			// headerDescription='Welcome back'
-			backButtonHref='/auth/register'
-			backButtonLabel='Dont have an account?'
-			showSocial
+			headerLabel='Новый пароль'
+			headerDescription='without verification'
+			backButtonHref='/auth/login'
+			backButtonLabel='Вернуться к авторизации'
 		>
 			<Form.Root {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -64,7 +55,7 @@ export const LoginForm: React.FC = () => {
 							name='email'
 							render={({ field }) => (
 								<Form.Item>
-									<Form.Label>Email address</Form.Label>
+									<Form.Label>Адрес электронной почты</Form.Label>
 									<Form.Control>
 										<Input
 											{...field}
@@ -82,15 +73,7 @@ export const LoginForm: React.FC = () => {
 							name='password'
 							render={({ field }) => (
 								<Form.Item>
-									<div className='inline-flex w-full items-center justify-between'>
-										<Form.Label>Password</Form.Label>
-										<Link
-											href='/auth/reset'
-											className='text-xs text-muted-foreground hover:text-foreground'
-										>
-											Forgot password?
-										</Link>
-									</div>
+									<Form.Label>Новый пароль</Form.Label>
 									<Form.Control>
 										<Input
 											{...field}
@@ -104,9 +87,15 @@ export const LoginForm: React.FC = () => {
 							)}
 						/>
 					</div>
-					<FormError message={error || urlError} />
-					<FormSuccess message={success} />
-					<SubmitButton isPending={isPending} label='Sing in' />
+					<FormError message={error} />
+					{success ? (
+						<FormSuccess message={success} />
+					) : (
+						<SubmitButton
+							isPending={isPending}
+							label='Сохранить новый пароль'
+						/>
+					)}
 				</form>
 			</Form.Root>
 		</AuthCard>

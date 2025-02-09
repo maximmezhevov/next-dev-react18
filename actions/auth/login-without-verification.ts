@@ -4,11 +4,11 @@ import * as z from 'zod'
 import { AuthError } from 'next-auth'
 import { signIn } from '@/auth'
 import { loginSchema } from '@/schemas/auth'
-import { generateVerificationToken } from '@/lib'
-import { sendVerificationEmail } from '@/lib/mails'
 import { getUserByEmail } from '@/services/auth'
 
-export const loginAction = async (values: z.infer<typeof loginSchema>) => {
+export const loginWithoutVerificationAction = async (
+	values: z.infer<typeof loginSchema>
+) => {
 	const validatedFields = loginSchema.safeParse(values)
 	if (!validatedFields.success) {
 		return { error: 'invalid fields' }
@@ -19,19 +19,6 @@ export const loginAction = async (values: z.infer<typeof loginSchema>) => {
 
 	if (!existingUser || !existingUser.email || !existingUser.password) {
 		return { error: 'Неверные учетные данные' }
-	}
-
-	if (!existingUser.emailVerified) {
-		const verificationToken = await generateVerificationToken(
-			existingUser.email
-		)
-
-		await sendVerificationEmail(
-			verificationToken.email,
-			verificationToken.token
-		)
-
-		return { success: 'Требуется подтверждения по электронной почте' }
 	}
 
 	try {

@@ -17,7 +17,7 @@ export const sendVerificationEmail = async (
       <p>Нажмите 
         <a href='${confirmLink}'>здесь</a> 
         чтобы подтвердить адрес электронной почты
-      </p>`, // TODO
+      </p>`,
 	})
 }
 
@@ -35,6 +35,6 @@ export const sendPasswordResetEmail = async (
       <p>Нажмите
         <a href='${passwordResetLink}'>здесь</a>
         чтобы сбросить пароль
-      </p>`, // TODO
+      </p>`,
 	})
 }

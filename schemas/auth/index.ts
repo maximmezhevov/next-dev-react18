@@ -32,3 +32,12 @@ export const newPasswordSchema = z.object({
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
 })
+
+export const newPasswordWithoutVerificationSchema = z.object({
+	email: z.string().email({
+		message: 'Invalid email',
+	}),
+	password: z
+		.string()
+		.min(1, { message: 'String must contain at least 1 character(s)' }),
+})

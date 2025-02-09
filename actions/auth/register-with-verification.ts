@@ -7,7 +7,7 @@ import { generateVerificationToken, prisma } from '@/lib'
 import { sendVerificationEmail } from '@/lib/mails'
 import { getUserByEmail } from '@/services/auth'
 
-export const registerAction = async (
+export const registerWithVerificationAction = async (
 	values: z.infer<typeof registerSchema>
 ) => {
 	const validatedFields = registerSchema.safeParse(values)

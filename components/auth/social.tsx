@@ -17,7 +17,7 @@ export const Social: React.FC = () => {
 	return (
 		<div className='flex w-full items-center gap-x-2'>
 			<SubmitButton isPending={isPending} onClick={onClick}>
-				<FaGithub /> Continue with GitHub
+				<FaGithub /> Продолжить с GitHub
 			</SubmitButton>
 		</div>
 	)
