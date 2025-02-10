@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { registerWithoutVerificationAction } from '@/actions/auth'
+import { registerNoVerifAction } from '@/actions/auth'
 import { registerSchema } from '@/schemas/auth'
 import { Form, Input } from '@/components/shadcn'
 
@@ -13,7 +13,7 @@ import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { SubmitButton } from './submit-button'
 
-export const RegisterWithoutVerificationForm: React.FC = () => {
+export const RegisterNoVerifForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
@@ -31,7 +31,7 @@ export const RegisterWithoutVerificationForm: React.FC = () => {
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			registerWithoutVerificationAction(values).then((data) => {
+			registerNoVerifAction(values).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
@@ -47,13 +47,14 @@ export const RegisterWithoutVerificationForm: React.FC = () => {
 						name='name'
 						render={({ field }) => (
 							<Form.Item>
-								<Form.Label>имя</Form.Label>
+								<Form.Label>Полное имя</Form.Label>
 								<Form.Control>
 									<Input
 										{...field}
 										disabled={isPending}
 										type='text'
-										placeholder='Имя'
+										placeholder='Максим М'
+										className='placeholder:text-muted-foreground/50'
 									/>
 								</Form.Control>
 								<Form.Message />
@@ -71,7 +72,8 @@ export const RegisterWithoutVerificationForm: React.FC = () => {
 										{...field}
 										disabled={isPending}
 										type='email'
-										placeholder='example@email.io'
+										placeholder='example@email.com'
+										className='placeholder:text-muted-foreground/50'
 									/>
 								</Form.Control>
 								<Form.Message />
@@ -90,6 +92,7 @@ export const RegisterWithoutVerificationForm: React.FC = () => {
 										disabled={isPending}
 										type='password'
 										placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+										className='placeholder:text-muted-foreground/50'
 									/>
 								</Form.Control>
 								<Form.Message />

@@ -45,7 +45,7 @@ export const VerificationForm: React.FC = () => {
 			<div className='flex w-full flex-col items-center justify-center gap-4'>
 				{!error && !success && (
 					<div>
-						<Loader2 className='size-8 animate-spin' />
+						<Loader2 className='size-10 animate-spin' />
 					</div>
 				)}
 				<FormSuccess message={success} />

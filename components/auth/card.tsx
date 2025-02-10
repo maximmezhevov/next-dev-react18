@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import { Card } from '@/components/shadcn'
+import { Button, Card } from '@/components/shadcn'
+import { cn } from '@/lib'
 
 type AuthCardProps = {
 	children?: React.ReactNode
-	headerLabel: string
+	headerBigLabel?: string
+	headerLabel?: string
 	headerDescription?: string
 	classNameContent?: string
 	backButtonHref: string
@@ -13,6 +15,7 @@ type AuthCardProps = {
 export const AuthCard: React.FC<AuthCardProps> = ({
 	children,
 	headerLabel,
+	headerBigLabel,
 	headerDescription,
 	backButtonHref,
 	backButtonLabel,
@@ -20,8 +23,15 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 }) => {
 	return (
 		<Card.Root className='w-[400px] border-0 shadow-none sm:border sm:shadow-md'>
-			<Card.Header className='text-center'>
-				<Card.Title>{headerLabel}</Card.Title>
+			<Card.Header className={cn('text-center', headerBigLabel && 'space-y-0')}>
+				<Card.Title
+					className={cn(
+						'',
+						headerBigLabel && 'text-5xl font-black uppercase tracking-tight'
+					)}
+				>
+					{headerLabel || headerBigLabel}
+				</Card.Title>
 				{headerDescription && (
 					<Card.Description>{headerDescription}</Card.Description>
 				)}
@@ -30,12 +40,13 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 				<Card.Content className={classNameContent}>{children}</Card.Content>
 			)}
 			<Card.Footer>
-				<Link
-					href={backButtonHref}
-					className='w-full text-center text-sm text-muted-foreground hover:text-foreground'
+				<Button
+					asChild
+					variant='link'
+					className='h-auto w-full p-0 text-sm text-muted-foreground underline-offset-2 transition-none hover:text-foreground hover:underline'
 				>
-					{backButtonLabel}
-				</Link>
+					<Link href={backButtonHref}>{backButtonLabel}</Link>
+				</Button>
 			</Card.Footer>
 		</Card.Root>
 	)

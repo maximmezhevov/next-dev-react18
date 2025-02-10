@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { passwordResetWithoutVerificationAction } from '@/actions/auth'
-import { newPasswordWithoutVerificationSchema } from '@/schemas/auth'
+import { passwordResetNoVerifAction } from '@/actions/auth'
+import { newPasswordNoVerifSchema } from '@/schemas/auth'
 import { Form, Input } from '@/components/shadcn'
 
 import { AuthCard } from './card'
@@ -14,26 +14,25 @@ import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { SubmitButton } from './submit-button'
 
-export const PassworResetWithoutVerificationForm: React.FC = () => {
+export const PasswordResetNoVerifForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 	const [error, setError] = useState<string | undefined>(undefined)
 
-	const form = useForm<z.infer<typeof newPasswordWithoutVerificationSchema>>({
-		resolver: zodResolver(newPasswordWithoutVerificationSchema),
+	const form = useForm<z.infer<typeof newPasswordNoVerifSchema>>({
+		resolver: zodResolver(newPasswordNoVerifSchema),
 		defaultValues: {
 			email: '',
 			password: '',
+			passwordDuplicate: '',
 		},
 	})
 
-	const onSubmit = (
-		values: z.infer<typeof newPasswordWithoutVerificationSchema>
-	) => {
+	const onSubmit = (values: z.infer<typeof newPasswordNoVerifSchema>) => {
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			passwordResetWithoutVerificationAction(values).then((data) => {
+			passwordResetNoVerifAction(values).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
@@ -42,8 +41,8 @@ export const PassworResetWithoutVerificationForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Новый пароль'
-			headerDescription='without verification'
+			headerLabel='Сброс пароля'
+			headerDescription='no-verif'
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		>
@@ -86,10 +85,28 @@ export const PassworResetWithoutVerificationForm: React.FC = () => {
 								</Form.Item>
 							)}
 						/>
+						<Form.Field
+							control={form.control}
+							name='passwordDuplicate'
+							render={({ field }) => (
+								<Form.Item>
+									<Form.Label>Новый пароль (еще раз)</Form.Label>
+									<Form.Control>
+										<Input
+											{...field}
+											disabled={isPending}
+											type='password'
+											placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+										/>
+									</Form.Control>
+									<Form.Message />
+								</Form.Item>
+							)}
+						/>
 					</div>
 					<FormError message={error} />
 					{success ? (
-						<FormSuccess message={success} />
+						<FormSuccess spiner message={success} />
 					) : (
 						<SubmitButton
 							isPending={isPending}

@@ -39,7 +39,7 @@ export const ResetForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Забыли пароль?'
+			headerLabel='Сбросить пароль?'
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		>
@@ -51,7 +51,7 @@ export const ResetForm: React.FC = () => {
 							name='email'
 							render={({ field }) => (
 								<Form.Item>
-									<Form.Label>Электронная почта для сброса пароля</Form.Label>
+									<Form.Label>Адрес электронной почты</Form.Label>
 									<Form.Control>
 										<Input
 											{...field}

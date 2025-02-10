@@ -20,7 +20,11 @@ export const passwordResetAction = async (
 		return { error: 'invalid fields' }
 	}
 
-	const { password } = validatedFields.data
+	const { password, passwordDuplicate } = validatedFields.data
+
+	if (password !== passwordDuplicate) {
+		return { error: 'Пароли не совпадают' }
+	}
 
 	const existingToken = await getPasswordResetTokenByToken(token)
 	if (!existingToken) {

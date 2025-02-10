@@ -27,6 +27,7 @@ export const PasswordResetForm: React.FC = () => {
 		resolver: zodResolver(newPasswordSchema),
 		defaultValues: {
 			password: '',
+			passwordDuplicate: '',
 		},
 	})
 
@@ -43,7 +44,7 @@ export const PasswordResetForm: React.FC = () => {
 
 	return (
 		<AuthCard
-			headerLabel='Новый пароль'
+			headerLabel='Сброс пароля'
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		>
@@ -56,6 +57,24 @@ export const PasswordResetForm: React.FC = () => {
 							render={({ field }) => (
 								<Form.Item>
 									<Form.Label>Новый пароль</Form.Label>
+									<Form.Control>
+										<Input
+											{...field}
+											disabled={isPending}
+											type='password'
+											placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+										/>
+									</Form.Control>
+									<Form.Message />
+								</Form.Item>
+							)}
+						/>
+						<Form.Field
+							control={form.control}
+							name='passwordDuplicate'
+							render={({ field }) => (
+								<Form.Item>
+									<Form.Label>Новый пароль (еще раз)</Form.Label>
 									<Form.Control>
 										<Input
 											{...field}

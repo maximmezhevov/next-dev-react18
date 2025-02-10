@@ -7,18 +7,15 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { loginWithVerificationAction } from '@/actions/auth'
+import { loginAction } from '@/actions/auth'
 import { loginSchema } from '@/schemas/auth'
-import { cn } from '@/lib'
-import { Form, Input } from '@/components/shadcn'
+import { Button, Form, Input } from '@/components/shadcn'
 
 import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { SubmitButton } from './submit-button'
 
-export const LoginWithVerificationForm: React.FC<{ disabled?: boolean }> = ({
-	disabled,
-}) => {
+export const LoginForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
@@ -26,7 +23,7 @@ export const LoginWithVerificationForm: React.FC<{ disabled?: boolean }> = ({
 	const searchParams = useSearchParams()
 	const urlError =
 		searchParams.get('error') === 'OAuthAccountNotLinked'
-			? 'Электронная почта, уже используемая другим провайдером'
+			? 'Электронная почта уже используемая другим провайдером'
 			: undefined
 
 	const form = useForm<z.infer<typeof loginSchema>>({
@@ -41,7 +38,7 @@ export const LoginWithVerificationForm: React.FC<{ disabled?: boolean }> = ({
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			loginWithVerificationAction(values).then((data) => {
+			loginAction(values).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
@@ -59,18 +56,14 @@ export const LoginWithVerificationForm: React.FC<{ disabled?: boolean }> = ({
 						name='email'
 						render={({ field }) => (
 							<Form.Item>
-								<Form.Label
-									className={cn(disabled && 'pointer-events-none opacity-50')}
-								>
-									Адрес электронной почты
-								</Form.Label>
+								<Form.Label>Адрес электронной почты</Form.Label>
 								<Form.Control>
 									<Input
 										{...field}
-										disabled={isPending || disabled}
+										disabled={isPending}
 										type='email'
-										placeholder='example@email.io'
-										className='disabled:cursor-default'
+										placeholder='example@email.com'
+										className='placeholder:text-muted-foreground/50'
 									/>
 								</Form.Control>
 								<Form.Message />
@@ -83,29 +76,22 @@ export const LoginWithVerificationForm: React.FC<{ disabled?: boolean }> = ({
 						render={({ field }) => (
 							<Form.Item>
 								<div className='inline-flex w-full items-center justify-between'>
-									<Form.Label
-										className={cn(disabled && 'pointer-events-none opacity-50')}
+									<Form.Label>Пароль</Form.Label>
+									<Button
+										asChild
+										variant='link'
+										className='h-auto p-0 text-xs text-muted-foreground underline-offset-2 transition-none hover:text-foreground hover:underline'
 									>
-										Пароль
-									</Form.Label>
-									<Link
-										href='/auth/reset'
-										tabIndex={disabled ? -1 : 0}
-										className={cn(
-											'text-xs text-muted-foreground hover:text-foreground',
-											disabled && 'pointer-events-none opacity-50'
-										)}
-									>
-										Забыли пароль?
-									</Link>
+										<Link href='/auth/reset'>Сбросить пароль?</Link>
+									</Button>
 								</div>
 								<Form.Control>
 									<Input
 										{...field}
-										disabled={isPending || disabled}
+										disabled={isPending}
 										type='password'
 										placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
-										className='disabled:cursor-default'
+										className='placeholder:text-muted-foreground/50'
 									/>
 								</Form.Control>
 								<Form.Message />
@@ -115,12 +101,7 @@ export const LoginWithVerificationForm: React.FC<{ disabled?: boolean }> = ({
 				</div>
 				<FormError message={error || urlError} />
 				<FormSuccess message={success} />
-				<SubmitButton
-					isPending={isPending}
-					disabled={disabled}
-					label='Войти'
-					variant='secondary'
-				/>
+				<SubmitButton isPending={isPending} label='Войти' variant='secondary' />
 			</form>
 		</Form.Root>
 	)

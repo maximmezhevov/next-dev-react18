@@ -7,7 +7,7 @@ export default function AuthLayout({
 }) {
 	return (
 		<>
-			<div className='absolute right-2 top-2'>
+			<div className='absolute right-6 top-6 sm:right-2 sm:top-2'>
 				<ThemeModeToggleDropdown />
 			</div>
 			<div

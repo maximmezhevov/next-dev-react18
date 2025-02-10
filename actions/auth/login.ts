@@ -8,9 +8,7 @@ import { generateVerificationToken } from '@/lib'
 import { sendVerificationEmail } from '@/lib/mails'
 import { getUserByEmail } from '@/services/auth'
 
-export const loginWithVerificationAction = async (
-	values: z.infer<typeof loginSchema>
-) => {
+export const loginAction = async (values: z.infer<typeof loginSchema>) => {
 	const validatedFields = loginSchema.safeParse(values)
 	if (!validatedFields.success) {
 		return { error: 'invalid fields' }

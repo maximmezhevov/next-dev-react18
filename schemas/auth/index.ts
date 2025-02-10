@@ -31,13 +31,19 @@ export const newPasswordSchema = z.object({
 	password: z
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
+	passwordDuplicate: z
+		.string()
+		.min(1, { message: 'String must contain at least 1 character(s)' }),
 })
 
-export const newPasswordWithoutVerificationSchema = z.object({
+export const newPasswordNoVerifSchema = z.object({
 	email: z.string().email({
 		message: 'Invalid email',
 	}),
 	password: z
+		.string()
+		.min(1, { message: 'String must contain at least 1 character(s)' }),
+	passwordDuplicate: z
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
 })

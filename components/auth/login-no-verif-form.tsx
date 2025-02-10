@@ -7,15 +7,15 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { loginWithoutVerificationAction } from '@/actions/auth'
+import { loginNoVerifAction } from '@/actions/auth'
 import { loginSchema } from '@/schemas/auth'
-import { Form, Input } from '@/components/shadcn'
+import { Button, Form, Input } from '@/components/shadcn'
 
 import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { SubmitButton } from './submit-button'
 
-export const LoginWithoutVerificationForm: React.FC = () => {
+export const LoginNoVerifForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
@@ -38,7 +38,7 @@ export const LoginWithoutVerificationForm: React.FC = () => {
 		setError(undefined)
 		setSuccess(undefined)
 		startTransition(() =>
-			loginWithoutVerificationAction(values).then((data) => {
+			loginNoVerifAction(values).then((data) => {
 				setError(data.error)
 				setSuccess(data.success)
 			})
@@ -60,7 +60,8 @@ export const LoginWithoutVerificationForm: React.FC = () => {
 										{...field}
 										disabled={isPending}
 										type='email'
-										placeholder='example@email.io'
+										placeholder='example@email.com'
+										className='placeholder:text-muted-foreground/50'
 									/>
 								</Form.Control>
 								<Form.Message />
@@ -74,12 +75,15 @@ export const LoginWithoutVerificationForm: React.FC = () => {
 							<Form.Item>
 								<div className='inline-flex w-full items-center justify-between'>
 									<Form.Label>Пароль</Form.Label>
-									<Link
-										href='/auth/password-reset-without-verification'
-										className='text-xs text-muted-foreground hover:text-foreground'
+									<Button
+										asChild
+										variant='link'
+										className='h-auto p-0 text-xs text-muted-foreground underline-offset-2 transition-none hover:text-foreground hover:underline'
 									>
-										Забыли пароль?
-									</Link>
+										<Link href='/auth/password-reset-no-verif'>
+											Сбросить пароль?
+										</Link>
+									</Button>
 								</div>
 								<Form.Control>
 									<Input
@@ -87,6 +91,7 @@ export const LoginWithoutVerificationForm: React.FC = () => {
 										disabled={isPending}
 										type='password'
 										placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+										className='placeholder:text-muted-foreground/50'
 									/>
 								</Form.Control>
 								<Form.Message />

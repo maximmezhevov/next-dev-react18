@@ -3,18 +3,22 @@
 import * as z from 'zod'
 import bcryptjs from 'bcryptjs'
 import { prisma } from '@/lib'
-import { newPasswordWithoutVerificationSchema } from '@/schemas/auth'
+import { newPasswordNoVerifSchema } from '@/schemas/auth'
 import { getUserByEmail } from '@/services/auth'
 
-export const passwordResetWithoutVerificationAction = async (
-	values: z.infer<typeof newPasswordWithoutVerificationSchema>
+export const passwordResetNoVerifAction = async (
+	values: z.infer<typeof newPasswordNoVerifSchema>
 ) => {
-	const validatedFields = newPasswordWithoutVerificationSchema.safeParse(values)
+	const validatedFields = newPasswordNoVerifSchema.safeParse(values)
 	if (!validatedFields.success) {
 		return { error: 'invalid fields' }
 	}
 
-	const { email, password } = validatedFields.data
+	const { email, password, passwordDuplicate } = validatedFields.data
+
+	if (password !== passwordDuplicate) {
+		return { error: 'Пароли не совпадают' }
+	}
 
 	const existingUser = await getUserByEmail(email)
 	if (!existingUser || !existingUser.email || !existingUser.password) {
