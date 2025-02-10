@@ -4,8 +4,10 @@ import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import toast from 'react-hot-toast'
+// import { signIn } from 'next-auth/react'
 
-import { registerAction } from '@/actions/auth'
+import { expRegisterNoVerifAction } from '@/actions/auth'
 import { registerSchema } from '@/schemas/auth'
 import { Form, Input } from '@/components/shadcn'
 
@@ -13,7 +15,7 @@ import { FormError } from './form-error'
 import { FormSuccess } from './form-success'
 import { SubmitButton } from './submit-button'
 
-export const RegisterForm: React.FC = () => {
+export const ExpRegisterNoVerifForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
@@ -30,12 +32,33 @@ export const RegisterForm: React.FC = () => {
 	const onSubmit = (values: z.infer<typeof registerSchema>) => {
 		setError(undefined)
 		setSuccess(undefined)
+
 		startTransition(() =>
-			registerAction(values).then((data) => {
-				setError(data.error)
-				setSuccess(data.success)
-			})
+			expRegisterNoVerifAction(values)
+				// // return { success: '...' } return { error: '...'}
+				// .then((data) => {
+				// 	setSuccess(data.success)
+				// 	setError(data.error)
+				// })
+
+				// return { success: '...' } throw new Error('...')
+				.then((data) => {
+					setSuccess(data.success)
+					// toast.success(data.success)
+					toast.success('success')
+				})
+				.catch((error) => {
+					setError(error.message)
+					// toast.error(error.message)
+					toast.error('error')
+				})
 		)
+
+		// signIn('credentials', {
+		// 	email: values.email,
+		// 	password: values.password,
+		// 	redirectTo: '/dev/next-auth',
+		// })
 	}
 
 	return (

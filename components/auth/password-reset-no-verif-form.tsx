@@ -106,7 +106,7 @@ export const PasswordResetNoVerifForm: React.FC = () => {
 					</div>
 					<FormError message={error} />
 					{success ? (
-						<FormSuccess spiner message={success} />
+						<FormSuccess message={success} />
 					) : (
 						<SubmitButton
 							isPending={isPending}

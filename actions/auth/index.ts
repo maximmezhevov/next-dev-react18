@@ -1,8 +1,13 @@
-export { loginAction } from './login'
-export { loginNoVerifAction } from './login-no-verif'
 export { registerAction } from './register'
 export { registerNoVerifAction } from './register-no-verif'
+export { loginAction } from './login'
+export { loginNoVerifAction } from './login-no-verif'
 export { verificationAction } from './verification'
 export { resetAction } from './reset'
 export { passwordResetAction } from './password-reset'
 export { passwordResetNoVerifAction } from './password-reset-no-verif'
+
+// EXP
+
+export { expRegisterNoVerifAction } from './exp-register-no-verif'
+export { expLoginNoVerifAction } from './exp-login-no-verif'
