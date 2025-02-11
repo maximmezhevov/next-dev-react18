@@ -7,13 +7,14 @@ import { X } from 'lucide-react'
 import { Button, Tabs } from '..'
 
 const Store = create<{
-	infoBoard: boolean
-	setInfoBoard: () => void
-	setInfoBoard2: (value: boolean) => void
+	withAWarningBoard: boolean
+	setWithAWarningBoard: () => void
+	setWithAWarningBoard2: (value: boolean) => void
 }>((set) => ({
-	infoBoard: true,
-	setInfoBoard: () => set((state) => ({ infoBoard: !state.infoBoard })),
-	setInfoBoard2: (value: boolean) => set({ infoBoard: value }),
+	withAWarningBoard: true,
+	setWithAWarningBoard: () =>
+		set((state) => ({ withAWarningBoard: !state.withAWarningBoard })),
+	setWithAWarningBoard2: (value: boolean) => set({ withAWarningBoard: value }),
 }))
 
 export const TabsContentWithAWarningBoard: React.FC<{
@@ -21,13 +22,13 @@ export const TabsContentWithAWarningBoard: React.FC<{
 	value: string
 	activeTab: string
 }> = ({ children, value, activeTab }) => {
-	const { infoBoard, setInfoBoard2 } = Store((state) => state)
+	const { withAWarningBoard, setWithAWarningBoard2 } = Store((state) => state)
 
 	useEffect(() => {
 		if (activeTab !== value) return
 		if (activeTab === value) {
-			if (infoBoard) return
-			return setInfoBoard2(true)
+			if (withAWarningBoard) return
+			return setWithAWarningBoard2(true)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab])
@@ -42,22 +43,22 @@ export const TabsContentWithAWarningBoard: React.FC<{
 export const TabsWithAWarningBoard: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
-	const infoBoard = Store((state) => state.infoBoard)
-	return infoBoard && children
+	const withAWarningBoard = Store((state) => state.withAWarningBoard)
+	return withAWarningBoard && children
 }
 
 export const TabsWithAWarningContent: React.FC<{
 	children: React.ReactNode
 	title?: string
 }> = ({ children, title = 'Временно не доступно!' }) => {
-	const setInfoBoard = Store((state) => state.setInfoBoard)
+	const setWithAWarningBoard = Store((state) => state.setWithAWarningBoard)
 	return (
 		<div className='item-center absolute inset-1 z-[1] flex flex-col gap-y-1.5 rounded-md border border-destructive/30 bg-destructive/15 p-4 text-sm shadow-sm backdrop-blur'>
 			<div className='inline-flex items-center justify-between'>
 				<p className='font-medium'>* {title}</p>
 				<Button
 					variant='ghost-secondary'
-					onClick={setInfoBoard}
+					onClick={setWithAWarningBoard}
 					className='size-4 rounded-full px-0 hover:bg-destructive focus:bg-destructive [&_svg]:size-3'
 				>
 					<X />

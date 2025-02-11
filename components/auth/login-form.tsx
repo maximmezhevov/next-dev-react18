@@ -16,9 +16,11 @@ import { FormSuccess } from './form-success'
 import { SubmitButton } from './submit-button'
 
 export const LoginForm: React.FC = () => {
-	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
+	const [showTwoFactor, setShowTwoFactor] = useState(false)
+
+	const [isPending, startTransition] = useTransition()
 
 	const searchParams = useSearchParams()
 	const urlError =
@@ -31,77 +33,114 @@ export const LoginForm: React.FC = () => {
 		defaultValues: {
 			email: '',
 			password: '',
+			code: '',
 		},
 	})
 
 	const onSubmit = (values: z.infer<typeof loginSchema>) => {
 		setError(undefined)
 		setSuccess(undefined)
+
 		startTransition(() =>
 			loginAction(values).then((data) => {
-				setError(data.error)
-				setSuccess(data.success)
+				if (data.error) {
+					form.reset()
+					setError(data.error)
+				}
+				if (data.success) {
+					form.reset()
+					setSuccess(data.success)
+				}
+				if (data.twoFactor) {
+					setShowTwoFactor(true)
+				}
 			})
 		)
-
-		/* axios.post('.../api/...', values).then{}... */
 	}
 
 	return (
 		<Form.Root {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
 				<div className='space-y-4'>
-					<Form.Field
-						control={form.control}
-						name='email'
-						render={({ field }) => (
-							<Form.Item>
-								<Form.Label>Адрес электронной почты</Form.Label>
-								<Form.Control>
-									<Input
-										{...field}
-										disabled={isPending}
-										type='email'
-										placeholder='example@email.com'
-										className='placeholder:text-muted-foreground/50'
-									/>
-								</Form.Control>
-								<Form.Message />
-							</Form.Item>
-						)}
-					/>
-					<Form.Field
-						control={form.control}
-						name='password'
-						render={({ field }) => (
-							<Form.Item>
-								<div className='inline-flex w-full items-center justify-between'>
-									<Form.Label>Пароль</Form.Label>
-									<Button
-										asChild
-										variant='link'
-										className='h-auto p-0 text-xs text-muted-foreground underline-offset-2 transition-none hover:text-foreground hover:underline'
-									>
-										<Link href='/auth/reset'>Сбросить пароль?</Link>
-									</Button>
-								</div>
-								<Form.Control>
-									<Input
-										{...field}
-										disabled={isPending}
-										type='password'
-										placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
-										className='placeholder:text-muted-foreground/50'
-									/>
-								</Form.Control>
-								<Form.Message />
-							</Form.Item>
-						)}
-					/>
+					{!showTwoFactor ? (
+						<>
+							<Form.Field
+								control={form.control}
+								name='email'
+								render={({ field }) => (
+									<Form.Item>
+										<Form.Label>Адрес электронной почты</Form.Label>
+										<Form.Control>
+											<Input
+												{...field}
+												disabled={isPending}
+												type='email'
+												placeholder='example@email.com'
+												className='placeholder:text-muted-foreground/50'
+											/>
+										</Form.Control>
+										<Form.Message />
+									</Form.Item>
+								)}
+							/>
+							<Form.Field
+								control={form.control}
+								name='password'
+								render={({ field }) => (
+									<Form.Item>
+										<div className='inline-flex w-full items-center justify-between'>
+											<Form.Label>Пароль</Form.Label>
+											<Button
+												asChild
+												variant='link'
+												className='h-auto p-0 text-xs text-muted-foreground underline-offset-2 transition-none hover:text-foreground hover:underline'
+											>
+												<Link href='/auth/reset'>Сбросить пароль?</Link>
+											</Button>
+										</div>
+										<Form.Control>
+											<Input
+												{...field}
+												disabled={isPending}
+												type='password'
+												placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+												className='placeholder:text-muted-foreground/50'
+											/>
+										</Form.Control>
+										<Form.Message />
+									</Form.Item>
+								)}
+							/>
+						</>
+					) : (
+						<Form.Field
+							control={form.control}
+							name='code'
+							render={({ field }) => (
+								<Form.Item>
+									<Form.Label>2FA код</Form.Label>
+									<Form.Control>
+										<Input
+											{...field}
+											disabled={isPending}
+											type='text'
+											placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+											className='placeholder:text-muted-foreground/50'
+										/>
+									</Form.Control>
+									<Form.Message />
+								</Form.Item>
+							)}
+						/>
+					)}
 				</div>
 				<FormError message={error || urlError} />
 				<FormSuccess message={success} />
-				<SubmitButton isPending={isPending} label='Войти' variant='secondary' />
+				<SubmitButton
+					isPending={isPending}
+					label={showTwoFactor ? 'Подтвердить' : 'Войти'}
+					variant='secondary'
+				/>
 			</form>
 		</Form.Root>
 	)

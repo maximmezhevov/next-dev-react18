@@ -7,6 +7,7 @@ export const loginSchema = z.object({
 	password: z
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
+	code: z.optional(z.string()),
 })
 
 export const registerSchema = z.object({

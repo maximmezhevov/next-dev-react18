@@ -31,7 +31,7 @@ export const registerNoVerifAction = async (
 			name,
 			email,
 			password: hashedPassword,
-			emailVerified: new Date(),
+			fakeEmailVerified: new Date(),
 		},
 	})
 

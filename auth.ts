@@ -4,14 +4,14 @@ import NextAuth from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 import authConfig from '@/auth.config'
-import { getUserById } from '@/services/auth'
+import { getTwoFactorConfirmationByUserId, getUserById } from '@/services/auth'
 
 const prisma = new PrismaClient()
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
 	pages: {
 		signIn: '/auth/login',
-		// error: '/auth/error',
+		error: '/auth/error',
 	},
 	events: {
 		async linkAccount({ user }) {
@@ -25,10 +25,23 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 		async signIn({ user, account }) {
 			if (account?.provider !== 'credentials') return true
 
-			const existingUser = await getUserById(user.id as string) // TODO // user: User | AdapterUser; interface User { id?: string ... }; interface AdapterUser extends User { id: string ... }
+			const existingUser = await getUserById(user.id as string)
 
-			// TODO // if (existingUser.2FA === false) return true
+			if (existingUser?.fakeEmailVerified) return true
+
 			if (!existingUser?.emailVerified) return false
+
+			if (existingUser?.twoFactor) {
+				const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+					existingUser.id
+				)
+
+				if (!twoFactorConfirmation) return false
+
+				await prisma.twoFactorConfirmation.delete({
+					where: { id: twoFactorConfirmation.id },
+				})
+			}
 
 			return true
 		},
@@ -41,9 +54,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 				session.user.role = token.role
 			}
 
-			if (token.emailVerified && session.user) {
-				session.user.emailVerified = token.emailVerified
-			}
+			// if ((token.emailVerified || token.fakeEmailVerified) && session.user) {
+			// 	session.user.emailVerified = token.emailVerified
+			// 	session.user.fakeEmailVerified = token.fakeEmailVerified
+			// }
 
 			return session
 		},
@@ -54,7 +68,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 			if (!existingUser) return token
 
 			token.role = existingUser.role
-			token.emailVerified = existingUser.emailVerified
+
+			// token.emailVerified = existingUser.emailVerified
+			// token.fakeEmailVerified = existingUser.fakeEmailVerified
 
 			return token
 		},
