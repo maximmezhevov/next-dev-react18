@@ -9,11 +9,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { loginNoVerifAction } from '@/actions/auth'
 import { loginSchema } from '@/schemas/auth'
-import { Button, Form, Input } from '@/components/shadcn'
 
-import { FormError } from './form-error'
-import { FormSuccess } from './form-success'
-import { SubmitButton } from './submit-button'
+import { Button, Form, Input } from '@/components/shadcn'
 
 export const LoginNoVerifForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
@@ -99,9 +96,13 @@ export const LoginNoVerifForm: React.FC = () => {
 						)}
 					/>
 				</div>
-				<FormError message={error || urlError} />
-				<FormSuccess message={success} />
-				<SubmitButton isPending={isPending} label='Войти' variant='secondary' />
+				<Form.Alert variant='error' message={error || urlError} />
+				<Form.Alert variant='success' message={success} />
+				<Form.SubmitButton
+					isPending={isPending}
+					label='Войти'
+					variant='secondary'
+				/>
 			</form>
 		</Form.Root>
 	)

@@ -2,8 +2,8 @@
 
 import { FaGithub } from 'react-icons/fa6'
 import { signIn } from 'next-auth/react'
-import { SubmitButton } from './submit-button'
 import { useTransition } from 'react'
+import { SubmitButton } from '@/components/ui'
 
 export const Social: React.FC = () => {
 	const [isPending, startTransition] = useTransition()

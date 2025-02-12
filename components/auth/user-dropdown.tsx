@@ -1,8 +1,19 @@
-import type { User } from '@/types/index'
-import { UserAvatar } from '@/components/ui'
+import type { User } from '@prisma/client'
+
 import { Dropdown } from '@/components/shadcn'
+import { UserAvatar } from '@/components/ui'
+
+import { LoginButton } from './login-button'
 
 export const UserDropdown: React.FC<{ user: User }> = ({ user }) => {
+	if (!user) {
+		return (
+			<LoginButton>
+				<UserAvatar user={user} />
+			</LoginButton>
+		)
+	}
+
 	return (
 		<Dropdown.Root>
 			<Dropdown.Trigger asChild>

@@ -1,4 +1,4 @@
-import type { Routes } from '@/types/index'
+import type { Routes } from '@/@types'
 import { Content } from './content'
 import { Inset } from './inset'
 import { Sidebar } from '@/components/shadcn'

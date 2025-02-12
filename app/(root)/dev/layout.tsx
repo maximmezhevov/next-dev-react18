@@ -1,4 +1,4 @@
-import { Routes } from '@/types/index'
+import { Routes } from '@/@types'
 
 import { DevLayoutVariant } from '@/components/dev'
 

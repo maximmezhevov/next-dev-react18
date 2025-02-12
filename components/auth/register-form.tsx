@@ -7,11 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { registerAction } from '@/actions/auth'
 import { registerSchema } from '@/schemas/auth'
-import { Form, Input } from '@/components/shadcn'
 
-import { FormError } from './form-error'
-import { FormSuccess } from './form-success'
-import { SubmitButton } from './submit-button'
+import { Form, Input } from '@/components/shadcn'
 
 export const RegisterForm: React.FC = () => {
 	const [isPending, startTransition] = useTransition()
@@ -100,11 +97,14 @@ export const RegisterForm: React.FC = () => {
 						)}
 					/>
 				</div>
-				<FormError message={error} />
+				<Form.Alert variant='error' message={error} />
 				{success ? (
-					<FormSuccess message={success} />
+					<Form.Alert variant='success' message={success} />
 				) : (
-					<SubmitButton isPending={isPending} label='Создать учетную запись' />
+					<Form.SubmitButton
+						isPending={isPending}
+						label='Создать учетную запись'
+					/>
 				)}
 			</form>
 		</Form.Root>

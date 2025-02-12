@@ -1,15 +1,23 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
-import { PasswordResetForm } from '@/components/auth'
+import { AuthCard, PasswordResetForm } from '@/components/auth'
 
 export const metadata: Metadata = {
-	title: 'NDR18 | Сброс пароля',
+	title: 'Сброс пароля',
 }
 
-export default function PassworReset() {
+const PasswordReset = () => {
 	return (
-		<Suspense fallback={null}>
-			<PasswordResetForm />
-		</Suspense>
+		<AuthCard
+			headerLabel='Сброс пароля'
+			backButtonHref='/auth/login'
+			backButtonLabel='Вернуться к авторизации'
+		>
+			<Suspense fallback={null}>
+				<PasswordResetForm />
+			</Suspense>
+		</AuthCard>
 	)
 }
+
+export default PasswordReset

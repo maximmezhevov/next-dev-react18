@@ -7,11 +7,11 @@ export default function AuthLayout({
 }) {
 	return (
 		<>
-			<div className='absolute right-6 top-6 sm:right-2 sm:top-2'>
+			<div className='absolute right-[22px] top-[22px] sm:right-2 sm:top-2'>
 				<ThemeModeToggleDropdown />
 			</div>
 			<div
-				className='flex h-full items-center justify-center'
+				className='flex min-h-svh items-center justify-center'
 				/* bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800 dark:from-sky-800 dark:to-blue-950' */
 			>
 				{children}

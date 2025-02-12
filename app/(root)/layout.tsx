@@ -1,4 +1,6 @@
-import type { Path, User } from '@/types/index'
+import type { User } from '@prisma/client'
+import type { Path } from '@/@types'
+
 import { ThemeModeToggleDropdown } from '@/components/theme'
 import { UserDropdown } from '@/components/auth'
 import { LinkActive } from '@/components/ui'
@@ -9,7 +11,19 @@ const ROUTES: Path[] = [
 	{ href: '/me', label: 'me' },
 ]
 
-const USER: User = { name: 'name', email: 'example@email.io', avatar: '' }
+const USER: User = {
+	name: 'name',
+	email: 'example@email.com',
+	image: '',
+	id: '1',
+	password: null,
+	role: 'USER',
+	emailVerified: null,
+	fakeEmailVerified: null,
+	twoFactor: false,
+	createdAt: new Date(),
+	updatedAt: new Date(),
+}
 
 export default function RootLayout({
 	children,

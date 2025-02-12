@@ -1,10 +1,18 @@
 import { Metadata } from 'next'
-import { ErrorCard } from '@/components/auth'
+import { AuthCard } from '@/components/auth'
 
 export const metadata: Metadata = {
-	title: 'NDR18 | Что-то пошло не так',
+	title: 'Что-то пошло не так',
 }
 
-export default function AuthError() {
-	return <ErrorCard />
+const Error = () => {
+	return (
+		<AuthCard
+			headerLabel='Что-то пошло не так'
+			backButtonHref='/auth/login'
+			backButtonLabel='Вернуться к авторизации'
+		/>
+	)
 }
+
+export default Error

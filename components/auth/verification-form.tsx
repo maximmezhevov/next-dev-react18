@@ -1,12 +1,11 @@
 'use client'
 
+import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
-import { AuthCard } from './card'
-import { useCallback, useEffect, useState } from 'react'
+
 import { verificationAction } from '@/actions/auth'
-import { FormSuccess } from './form-success'
-import { FormError } from './form-error'
+import { Alert } from '@/components/ui'
 
 export const VerificationForm: React.FC = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
@@ -37,20 +36,14 @@ export const VerificationForm: React.FC = () => {
 	}, [onSubmit])
 
 	return (
-		<AuthCard
-			headerLabel='Верификация'
-			backButtonLabel='Вернуться к авторизации'
-			backButtonHref='/auth/login'
-		>
-			<div className='flex w-full flex-col items-center justify-center gap-4'>
-				{!error && !success && (
-					<div>
-						<Loader2 className='size-10 animate-spin' />
-					</div>
-				)}
-				<FormSuccess message={success} />
-				{!success && <FormError message={error} />}
-			</div>
-		</AuthCard>
+		<div className='flex w-full flex-col items-center justify-center gap-4'>
+			{!error && !success && (
+				<div>
+					<Loader2 className='size-10 animate-spin' />
+				</div>
+			)}
+			{!success && <Alert variant='error' message={error} />}
+			<Alert variant='success' message={success} />
+		</div>
 	)
 }

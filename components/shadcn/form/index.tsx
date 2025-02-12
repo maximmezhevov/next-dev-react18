@@ -15,6 +15,8 @@ import {
 import { cn } from '@/lib/utils'
 import { Label } from '@/components/shadcn/label'
 
+import { SubmitButton, Alert } from '@/components/ui'
+
 const Form = FormProvider
 
 type FormFieldContextValue<
@@ -179,4 +181,8 @@ export {
 	FormDescription as Description,
 	FormMessage as Message,
 	FormField as Field,
+
+	// extensions @/components/ui
+	Alert,
+	SubmitButton,
 }

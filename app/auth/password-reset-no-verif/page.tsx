@@ -1,10 +1,20 @@
 import { Metadata } from 'next'
-import { PasswordResetNoVerifForm } from '@/components/auth'
+import { AuthCard, PasswordResetNoVerifForm } from '@/components/auth'
 
 export const metadata: Metadata = {
-	title: 'NDR18 | Сброс пароля',
+	title: 'Сброс пароля',
 }
 
-export default function PassworResetWithoutVerification() {
-	return <PasswordResetNoVerifForm />
+const PassworResetNoVerif = () => {
+	return (
+		<AuthCard
+			headerLabel='Сброс пароля'
+			backButtonHref='/auth/login'
+			backButtonLabel='Вернуться к авторизации'
+		>
+			<PasswordResetNoVerifForm />
+		</AuthCard>
+	)
 }
+
+export default PassworResetNoVerif

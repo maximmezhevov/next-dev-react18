@@ -1,15 +1,23 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
-import { VerificationForm } from '@/components/auth'
+import { AuthCard, VerificationForm } from '@/components/auth'
 
 export const metadata: Metadata = {
-	title: 'NDR18 | Верификация',
+	title: 'Верификация',
 }
 
-export default function Verification() {
+const Verification = () => {
 	return (
-		<Suspense fallback={null}>
-			<VerificationForm />
-		</Suspense>
+		<AuthCard
+			headerLabel='Верификация'
+			backButtonLabel='Вернуться к авторизации'
+			backButtonHref='/auth/login'
+		>
+			<Suspense fallback={null}>
+				<VerificationForm />
+			</Suspense>
+		</AuthCard>
 	)
 }
+
+export default Verification

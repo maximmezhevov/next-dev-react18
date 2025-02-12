@@ -5,12 +5,12 @@ import * as TabsPrimitive from '@radix-ui/react-tabs'
 
 import { cn } from '@/lib/utils'
 
-import {
-	TabsContentWithAWarningBoard,
-	TabsWithAWarningBoard,
-	TabsWithAWarningContent,
-	TabsWithAWarningContentDefault,
-} from './expansion'
+// import {
+// 	TabsContentWithAWarningBoard,
+// 	TabsWithAWarningBoard,
+// 	TabsWithAWarningContent,
+// 	TabsWithAWarningContentDefault,
+// } from './expansion'
 
 const Tabs = TabsPrimitive.Root
 
@@ -65,8 +65,8 @@ export {
 	TabsTrigger as Trigger,
 	TabsContent as Content,
 	// expansion
-	TabsContentWithAWarningBoard as ContentWithAWarningBoard,
-	TabsWithAWarningBoard as WithAWarningBoard,
-	TabsWithAWarningContent as WithAWarningContent,
-	TabsWithAWarningContentDefault as WithAWarningContentDefault,
+	// TabsContentWithAWarningBoard as ContentWithAWarningBoard,
+	// TabsWithAWarningBoard as WithAWarningBoard,
+	// TabsWithAWarningContent as WithAWarningContent,
+	// TabsWithAWarningContentDefault as WithAWarningContentDefault,
 }

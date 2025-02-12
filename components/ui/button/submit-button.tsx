@@ -1,22 +1,22 @@
-import { Button, buttonVariants } from '@/components/shadcn'
-import { cn } from '@/lib'
 import { VariantProps } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
+import { cn } from '@/lib'
+import { Button, buttonVariants } from '@/components/shadcn'
 
 interface SubmitButtonProps extends VariantProps<typeof buttonVariants> {
 	isPending: boolean
-	onClick?: () => void
-	disabled?: boolean
 	children?: React.ReactNode
 	label?: string
+	onClick?: () => void
+	disabled?: boolean
 	className?: string
 }
 
 export const SubmitButton: React.FC<SubmitButtonProps> = ({
 	isPending,
-	className,
 	children,
 	label,
+	className,
 	...props
 }) => {
 	return (

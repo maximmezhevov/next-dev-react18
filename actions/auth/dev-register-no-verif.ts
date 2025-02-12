@@ -6,7 +6,7 @@ import { registerSchema } from '@/schemas/auth'
 import { prisma } from '@/lib'
 import { getUserByEmail } from '@/services/auth'
 
-export const expRegisterNoVerifAction = async (
+export const devRegisterNoVerifAction = async (
 	values: z.infer<typeof registerSchema>
 ) => {
 	const validatedFields = registerSchema.safeParse(values)

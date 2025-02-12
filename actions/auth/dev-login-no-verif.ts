@@ -6,7 +6,7 @@ import { signIn } from '@/auth'
 import { loginSchema } from '@/schemas/auth'
 import { getUserByEmail } from '@/services/auth'
 
-export const expLoginNoVerifAction = async (
+export const devLoginNoVerifAction = async (
 	values: z.infer<typeof loginSchema>
 ) => {
 	const validatedFields = loginSchema.safeParse(values)

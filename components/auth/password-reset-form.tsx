@@ -1,19 +1,15 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { passwordResetAction } from '@/actions/auth'
 import { newPasswordSchema } from '@/schemas/auth'
-import { Form, Input } from '@/components/shadcn'
 
-import { AuthCard } from './card'
-import { FormError } from './form-error'
-import { FormSuccess } from './form-success'
-import { useSearchParams } from 'next/navigation'
-import { SubmitButton } from './submit-button'
+import { Form, Input } from '@/components/shadcn'
 
 export const PasswordResetForm: React.FC = () => {
 	const searchParams = useSearchParams()
@@ -43,62 +39,56 @@ export const PasswordResetForm: React.FC = () => {
 	}
 
 	return (
-		<AuthCard
-			headerLabel='Сброс пароля'
-			backButtonHref='/auth/login'
-			backButtonLabel='Вернуться к авторизации'
-		>
-			<Form.Root {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-					<div className='space-y-4'>
-						<Form.Field
-							control={form.control}
-							name='password'
-							render={({ field }) => (
-								<Form.Item>
-									<Form.Label>Новый пароль</Form.Label>
-									<Form.Control>
-										<Input
-											{...field}
-											disabled={isPending}
-											type='password'
-											placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
-										/>
-									</Form.Control>
-									<Form.Message />
-								</Form.Item>
-							)}
-						/>
-						<Form.Field
-							control={form.control}
-							name='passwordDuplicate'
-							render={({ field }) => (
-								<Form.Item>
-									<Form.Label>Новый пароль (еще раз)</Form.Label>
-									<Form.Control>
-										<Input
-											{...field}
-											disabled={isPending}
-											type='password'
-											placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
-										/>
-									</Form.Control>
-									<Form.Message />
-								</Form.Item>
-							)}
-						/>
-					</div>
-					<FormError message={error} />
-					{success ? (
-						<FormSuccess message={success} />
-					) : (
-						<SubmitButton
-							isPending={isPending}
-							label='Сохранить новый пароль'
-						/>
-					)}
-				</form>
-			</Form.Root>
-		</AuthCard>
+		<Form.Root {...form}>
+			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+				<div className='space-y-4'>
+					<Form.Field
+						control={form.control}
+						name='password'
+						render={({ field }) => (
+							<Form.Item>
+								<Form.Label>Новый пароль</Form.Label>
+								<Form.Control>
+									<Input
+										{...field}
+										disabled={isPending}
+										type='password'
+										placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+									/>
+								</Form.Control>
+								<Form.Message />
+							</Form.Item>
+						)}
+					/>
+					<Form.Field
+						control={form.control}
+						name='passwordDuplicate'
+						render={({ field }) => (
+							<Form.Item>
+								<Form.Label>Новый пароль (еще раз)</Form.Label>
+								<Form.Control>
+									<Input
+										{...field}
+										disabled={isPending}
+										type='password'
+										placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+									/>
+								</Form.Control>
+								<Form.Message />
+							</Form.Item>
+						)}
+					/>
+				</div>
+				<Form.Alert variant='error' message={error} />
+				{success ? (
+					<Form.Alert variant='success' message={success} />
+				) : (
+					<Form.SubmitButton
+						isPending={isPending}
+						label='Сохранить новый пароль'
+					/>
+				)}
+			</form>
+		</Form.Root>
 	)
 }

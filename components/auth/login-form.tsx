@@ -9,11 +9,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { loginAction } from '@/actions/auth'
 import { loginSchema } from '@/schemas/auth'
-import { Button, Form, Input } from '@/components/shadcn'
 
-import { FormError } from './form-error'
-import { FormSuccess } from './form-success'
-import { SubmitButton } from './submit-button'
+import { Button, Form, Input } from '@/components/shadcn'
 
 export const LoginForm: React.FC = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
@@ -134,9 +131,9 @@ export const LoginForm: React.FC = () => {
 						/>
 					)}
 				</div>
-				<FormError message={error || urlError} />
-				<FormSuccess message={success} />
-				<SubmitButton
+				<Form.Alert variant='error' message={error || urlError} />
+				<Form.Alert variant='success' message={success} />
+				<Form.SubmitButton
 					isPending={isPending}
 					label={showTwoFactor ? 'Подтвердить' : 'Войти'}
 					variant='secondary'
