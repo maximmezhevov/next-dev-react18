@@ -27,7 +27,7 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
 			{...props}
 		>
 			{isPending && <Loader2 className='animate-spin' />}
-			{children || label}
+			{isPending ? '...' : children || label}
 		</Button>
 	)
 }

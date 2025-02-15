@@ -5,14 +5,12 @@ export const metadata: Metadata = {
 	title: 'Что-то пошло не так',
 }
 
-const Error = () => {
+export default function ErrorPage() {
 	return (
 		<AuthCard
-			headerLabel='Что-то пошло не так'
+			headerTitle='Что-то пошло не так'
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		/>
 	)
 }
-
-export default Error

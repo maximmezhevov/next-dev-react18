@@ -1,3 +1,3 @@
-export default function TRY() {
+export default function TryPage() {
 	return <div>try</div>
 }

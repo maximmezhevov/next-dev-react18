@@ -24,7 +24,9 @@ export default async function NextAuth() {
 									<Button>Sing in</Button>
 								</LoginButton> */}
 								<Button asChild>
-									<Link href='/auth/login'>Sing-in</Link>
+									<Link href='/auth/login?callbackUrl=/dev/next-auth'>
+										Sing-in
+									</Link>
 								</Button>
 								<Button asChild variant='secondary'>
 									<Link href='/auth/register'>Registration</Link>

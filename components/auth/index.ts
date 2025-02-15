@@ -1,16 +1,19 @@
-export { RegisterForm } from './register-form'
-export { RegisterNoVerifForm } from './register-no-verif-form'
-export { DevRegisterNoVerifForm } from './dev-register-no-verif-form'
-export { LoginForm } from './login-form'
-export { LoginNoVerifForm } from './login-no-verif-form'
-export { DevLoginNoVerifForm } from './dev-login-no-verif-form'
-export { Social } from './social'
-export { VerificationForm } from './verification-form'
-export { ResetForm } from './reset-form'
-export { PasswordResetForm } from './password-reset-form'
-export { PasswordResetNoVerifForm } from './password-reset-no-verif-form'
+export {
+	RegisterFormNoVerif,
+	LoginFormNoVerif,
+	PasswordResetFormNoVerif,
+} from './no-verif'
+export {
+	RegisterForm,
+	LoginForm,
+	Verification,
+	ResetForm,
+	PasswordResetForm,
+} from './verif'
+export { OAuthServer, OAuthClient, OAuth } from './oauth'
+
+export { LoginButton } from './login-button'
 
 export { AuthCard } from './card'
 
-export { LoginButton } from './login-button'
 export { UserDropdown } from './user-dropdown'

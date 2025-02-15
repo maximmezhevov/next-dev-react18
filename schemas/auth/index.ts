@@ -7,7 +7,16 @@ export const loginSchema = z.object({
 	password: z
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
-	code: z.optional(z.string()),
+	twoFactorCode: z.optional(z.string()),
+})
+
+export const loginSchemaNoVerif = z.object({
+	email: z.string().email({
+		message: 'Invalid email',
+	}),
+	password: z
+		.string()
+		.min(1, { message: 'String must contain at least 1 character(s)' }),
 })
 
 export const registerSchema = z.object({
@@ -37,7 +46,7 @@ export const newPasswordSchema = z.object({
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
 })
 
-export const newPasswordNoVerifSchema = z.object({
+export const newPasswordSchemaNoVerif = z.object({
 	email: z.string().email({
 		message: 'Invalid email',
 	}),
