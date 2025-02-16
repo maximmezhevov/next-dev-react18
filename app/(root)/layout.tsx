@@ -2,7 +2,7 @@ import type { User } from '@prisma/client'
 import type { Path } from '@/@types'
 
 import { ThemeModeToggleDropdown } from '@/components/theme'
-import { UserDropdown } from '@/components/auth'
+// import { UserDropdown } from '@/components/auth'
 import { LinkActive } from '@/components/ui'
 
 const ROUTES: Path[] = [
@@ -53,7 +53,7 @@ const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const RootHeader: React.FC<{ routes: Path[]; user: User }> = ({
 	routes,
-	user,
+	// user,
 }) => {
 	return (
 		<Header>
@@ -63,7 +63,7 @@ const RootHeader: React.FC<{ routes: Path[]; user: User }> = ({
 				</nav>
 				<div className='inline-flex items-center'>
 					<ThemeModeToggleDropdown />
-					<UserDropdown user={user} />
+					{/* <UserDropdown user={user} /> */}
 				</div>
 			</div>
 		</Header>

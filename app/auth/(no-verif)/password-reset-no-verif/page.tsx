@@ -13,7 +13,7 @@ export default function PassworResetNoVerifPage() {
 			backButtonHref='/auth/login'
 			backButtonLabel='Вернуться к авторизации'
 		>
-			<SuspenseSkeleton className='h-[300px] w-full'>
+			<SuspenseSkeleton className='h-[280px]'>
 				<PasswordResetFormNoVerif />
 			</SuspenseSkeleton>
 		</AuthCard>

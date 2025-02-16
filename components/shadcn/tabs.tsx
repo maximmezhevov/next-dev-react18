@@ -5,13 +5,6 @@ import * as TabsPrimitive from '@radix-ui/react-tabs'
 
 import { cn } from '@/lib/utils'
 
-// import {
-// 	TabsContentWithAWarningBoard,
-// 	TabsWithAWarningBoard,
-// 	TabsWithAWarningContent,
-// 	TabsWithAWarningContentDefault,
-// } from './expansion'
-
 const Tabs = TabsPrimitive.Root
 
 const TabsList = React.forwardRef<
@@ -64,9 +57,4 @@ export {
 	TabsList as List,
 	TabsTrigger as Trigger,
 	TabsContent as Content,
-	// expansion
-	// TabsContentWithAWarningBoard as ContentWithAWarningBoard,
-	// TabsWithAWarningBoard as WithAWarningBoard,
-	// TabsWithAWarningContent as WithAWarningContent,
-	// TabsWithAWarningContentDefault as WithAWarningContentDefault,
 }

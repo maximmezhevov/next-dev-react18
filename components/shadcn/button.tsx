@@ -19,6 +19,12 @@ export const buttonVariants = cva(
 				'ghost-accent': 'hover:bg-accent hover:text-accent-foreground',
 				'ghost-secondary': 'hover:bg-secondary hover:text-secondary-foreground',
 				link: 'text-primary underline-offset-4 hover:underline',
+
+				//
+
+				link2:
+					'text-primary underline-offset-4 hover:underline font-normal text-muted-foreground hover:text-foreground transition-none',
+				clear: '',
 			},
 			size: {
 				default: 'h-10 px-4 py-2',
@@ -28,6 +34,12 @@ export const buttonVariants = cva(
 
 				'32': 'h-8 px-3',
 				'32-i': 'size-8',
+
+				//
+
+				'20': 'h-5 px-2 text-sm',
+				'16': 'h-4 text-xs',
+				cleat: '',
 			},
 		},
 		defaultVariants: {

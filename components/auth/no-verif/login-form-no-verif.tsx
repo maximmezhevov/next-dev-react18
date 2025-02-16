@@ -1,10 +1,15 @@
 'use client'
 
 import type { Control } from 'react-hook-form'
-import Link from 'next/link'
 import * as z from 'zod'
 import { loginSchemaNoVerif } from '@/schemas/auth'
-import { Button, Form, Input } from '@/components/shadcn'
+import {
+	Alert,
+	SubmitButton,
+	SuspenseSkeleton,
+	WatchCallbackUrlButton,
+} from '@/components/ui'
+import { Form, Input } from '@/components/shadcn'
 
 import { useLoginFormNoVerif } from './use-login-form-no-verif'
 
@@ -24,13 +29,9 @@ export const LoginFormNoVerif: React.FC = () => {
 					<EmailField control={form.control} isPending={isPending} />
 					<PasswordField control={form.control} isPending={isPending} />
 				</div>
-				<Form.Alert variant='error' message={error || urlError} />
-				<Form.Alert variant='success' message={success} />
-				<Form.SubmitButton
-					isPending={isPending}
-					label='Войти'
-					variant='secondary'
-				/>
+				<Alert variant='error' message={error || urlError} />
+				<Alert variant='success' message={success} />
+				<SubmitButton label='Войти' isPending={isPending} variant='secondary' />
 			</form>
 		</Form.Root>
 	)
@@ -69,13 +70,14 @@ const PasswordField: React.FC<FieldProps> = ({ control, isPending }) => {
 				<Form.Item>
 					<div className='inline-flex w-full items-center justify-between'>
 						<Form.Label>Пароль</Form.Label>
-						<Button
-							asChild
-							variant='link'
-							className='h-auto p-0 text-xs text-muted-foreground underline-offset-2 transition-none hover:text-foreground hover:underline'
-						>
-							<Link href='/auth/password-reset-no-verif'>Сбросить пароль?</Link>
-						</Button>
+						<SuspenseSkeleton className='h-5 w-full'>
+							<WatchCallbackUrlButton
+								href='/auth/password-reset-no-verif'
+								label='Сбросить пароль?'
+								variant='link2'
+								size='16'
+							/>
+						</SuspenseSkeleton>
 					</div>
 					<Form.Control>
 						<Input

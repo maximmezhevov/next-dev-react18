@@ -4,30 +4,40 @@ import { cn } from '@/lib'
 import { Button, buttonVariants } from '@/components/shadcn'
 
 interface SubmitButtonProps extends VariantProps<typeof buttonVariants> {
-	isPending: boolean
 	children?: React.ReactNode
 	label?: string
+	isPending: boolean
+	isPendingLabel?: string
 	onClick?: () => void
-	disabled?: boolean
 	className?: string
 }
 
 export const SubmitButton: React.FC<SubmitButtonProps> = ({
-	isPending,
 	children,
 	label,
+	isPending,
+	isPendingLabel = null,
 	className,
 	...props
 }) => {
 	return (
 		<Button
 			disabled={isPending}
-			type='submit'
 			className={cn('w-full', className)}
+			type='submit'
 			{...props}
 		>
+			{/* {isPending ? (
+				<>
+					<Loader2 className='animate-spin' />
+					{isPendingLabel || label ||children}
+				</>
+			) : (
+				children || label
+			)} */}
+
 			{isPending && <Loader2 className='animate-spin' />}
-			{isPending ? '...' : children || label}
+			{isPending ? isPendingLabel || label || children : children || label}
 		</Button>
 	)
 }

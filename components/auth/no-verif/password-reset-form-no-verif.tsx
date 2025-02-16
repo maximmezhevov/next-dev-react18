@@ -2,8 +2,9 @@
 
 import type { Control } from 'react-hook-form'
 import * as z from 'zod'
-import { Form, Input } from '@/components/shadcn'
 import { newPasswordSchemaNoVerif } from '@/schemas/auth'
+import { Alert, SubmitButton } from '@/components/ui'
+import { Form, Input } from '@/components/shadcn'
 
 import { usePasswordResetFormNoVerif } from './use-password-reset-form-no-verif'
 
@@ -27,14 +28,11 @@ export const PasswordResetFormNoVerif: React.FC = () => {
 						isPending={isPending}
 					/>
 				</div>
-				<Form.Alert variant='error' message={error} />
+				<Alert variant='error' message={error} />
 				{success ? (
-					<Form.Alert variant='success' message={success} />
+					<Alert variant='success' message={success} />
 				) : (
-					<Form.SubmitButton
-						isPending={isPending}
-						label='Сохранить новый пароль'
-					/>
+					<SubmitButton label='Сохранить новый пароль' isPending={isPending} />
 				)}
 			</form>
 		</Form.Root>

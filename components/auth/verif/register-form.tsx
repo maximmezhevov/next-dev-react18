@@ -3,6 +3,7 @@
 import type { Control } from 'react-hook-form'
 import * as z from 'zod'
 import { registerSchema } from '@/schemas/auth'
+import { Alert, SubmitButton } from '@/components/ui'
 import { Form, Input } from '@/components/shadcn'
 
 import { useRegisterForm } from './use-register-form'
@@ -22,14 +23,11 @@ export const RegisterForm: React.FC = () => {
 					<EmailField control={form.control} isPending={isPending} />
 					<PasswordField control={form.control} isPending={isPending} />
 				</div>
-				<Form.Alert variant='error' message={error} />
+				<Alert variant='error' message={error} />
 				{success ? (
-					<Form.Alert variant='success' message={success} />
+					<Alert variant='success' message={success} />
 				) : (
-					<Form.SubmitButton
-						isPending={isPending}
-						label='Создать учетную запись'
-					/>
+					<SubmitButton isPending={isPending} label='Создать учетную запись' />
 				)}
 			</form>
 		</Form.Root>

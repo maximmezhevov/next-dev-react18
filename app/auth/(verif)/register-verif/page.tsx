@@ -10,7 +10,7 @@ export default function RegisterVerifPage() {
 		<AuthCard
 			headerTitle='Регистрация'
 			backButtonHref='/auth/login'
-			callbackButtonLabel='Eсть учетная запись?'
+			backButtonLabel='Eсть учетная запись?'
 		>
 			<RegisterForm />
 		</AuthCard>

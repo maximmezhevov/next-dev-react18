@@ -12,8 +12,7 @@ export {
 } from './verif'
 export { OAuthServer, OAuthClient, OAuth } from './oauth'
 
-export { LoginButton } from './login-button'
-
 export { AuthCard } from './card'
 
-export { UserDropdown } from './user-dropdown'
+// export { UserDropdown } from './user-dropdown'
+// export { LoginButton } from './login-button'

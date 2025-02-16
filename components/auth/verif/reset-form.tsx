@@ -3,6 +3,7 @@
 import type { Control } from 'react-hook-form'
 import * as z from 'zod'
 import { resetSchema } from '@/schemas/auth'
+import { Alert, SubmitButton } from '@/components/ui'
 import { Form, Input } from '@/components/shadcn'
 
 import { useResetForm } from './use-reser-form'
@@ -19,13 +20,13 @@ export const ResetForm: React.FC = () => {
 		<Form.Root {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
 				<EmailField control={form.control} isPending={isPending} />
-				<Form.Alert variant='error' message={error} />
+				<Alert variant='error' message={error} />
 				{success ? (
-					<Form.Alert variant='success' message={success} />
+					<Alert variant='success' message={success} />
 				) : (
-					<Form.SubmitButton
-						isPending={isPending}
+					<SubmitButton
 						label='Отправить ссылку для сброса пароля'
+						isPending={isPending}
 					/>
 				)}
 			</form>

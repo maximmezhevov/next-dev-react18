@@ -8,12 +8,8 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
 	return (
-		<AuthCard
-			headerTitle='Регистрация'
-			backButtonHref='/auth/login'
-			callbackButtonLabel='Eсть учетная запись?'
-		>
-			<SuspenseSkeleton className='h-[300px] w-full'>
+		<AuthCard headerTitle='Регистрация' backButtonLabel='Eсть учетная запись?'>
+			<SuspenseSkeleton className='h-[280px]'>
 				<RegisterFormNoVerif />
 			</SuspenseSkeleton>
 		</AuthCard>
