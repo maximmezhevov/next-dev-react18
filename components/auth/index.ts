@@ -13,6 +13,3 @@ export {
 export { OAuthServer, OAuthClient, OAuth } from './oauth'
 
 export { AuthCard } from './card'
-
-// export { UserDropdown } from './user-dropdown'
-// export { LoginButton } from './login-button'

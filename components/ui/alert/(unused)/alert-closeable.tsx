@@ -5,8 +5,8 @@ import { X } from 'lucide-react'
 import { cn } from '@/lib'
 import { Button } from '@/components/shadcn'
 
-import type { AlertProps, CloseButtonColor } from './cva'
-import { alertVariants, CloseButtonColortMap } from './cva'
+import type { AlertProps, CloseButtonColor } from '../cva'
+import { alertVariants, CloseButtonColortMap } from '../cva'
 
 export const AlertCloseable: React.FC<
 	AlertProps & { children: React.ReactNode }

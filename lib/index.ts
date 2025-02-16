@@ -1,4 +1,4 @@
-export { cn } from './utils'
+export { cn } from './shadcn/utils'
 export { prisma } from './prisma'
 export {
 	generateVerificationToken,

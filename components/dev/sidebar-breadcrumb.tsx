@@ -3,7 +3,7 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/shadcn/utils'
 import { Breadcrumb } from '@/components/shadcn'
 
 export const SidebarBreadcrumb: React.FC<{ className?: string }> = ({

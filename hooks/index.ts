@@ -1,4 +1,3 @@
-export { useActive } from './use-active'
+export { useIsMobile } from './shadcn/use-mobile'
 
-// shadcn
-export { useIsMobile } from './use-mobile'
+export { useActive } from './use-active'
