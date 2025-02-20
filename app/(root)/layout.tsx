@@ -19,7 +19,6 @@ const USER: User = {
 	password: null,
 	role: 'USER',
 	emailVerified: null,
-	fakeEmailVerified: null,
 	twoFactor: false,
 	createdAt: new Date(),
 	updatedAt: new Date(),

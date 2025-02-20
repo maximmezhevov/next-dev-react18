@@ -7,7 +7,6 @@ type Role = User['role']
 
 export type ExistingUser = DefaultSession['user'] & {
 	role: Role
-	fakeEmailVerified: User['fakeEmailVerified']
 }
 
 declare module 'next-auth' {
@@ -23,6 +22,5 @@ declare module 'next-auth/jwt' {
 	interface JWT {
 		role?: Role
 		emailVerified: User['emailVerified']
-		fakeEmailVerified: User['fakeEmailVerified']
 	}
 }
