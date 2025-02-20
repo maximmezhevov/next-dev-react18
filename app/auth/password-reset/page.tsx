@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function PasswordResetPage() {
 	return (
 		<AuthCard headerTitle='Сброс пароля'>
-			<SuspenseSkeleton>
+			<SuspenseSkeleton className='h-[216px]'>
 				<PasswordResetForm />
 			</SuspenseSkeleton>
 		</AuthCard>

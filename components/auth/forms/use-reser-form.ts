@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { resetSchema } from '@/schemas/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { resetAction } from '@/actions/auth'
+import { resetAction, resetImitAction } from '@/actions/auth'
 import { useRouter, useSearchParams } from 'next/navigation'
 import toast from 'react-hot-toast'
 
@@ -19,6 +19,11 @@ export const useResetForm = () => {
 	const searchParams = useSearchParams()
 	const router = useRouter()
 
+	// urlWarning
+
+	const urlWarningEmailSend = `warning=${'ResetLinkSent' as UrlWarning}`
+	const urlWarningImitEmailSend = `warning=${'ImitResetLinkSent' as UrlWarning}`
+
 	// callbackUrl
 
 	const getCallbackUrl: string | undefined =
@@ -27,11 +32,10 @@ export const useResetForm = () => {
 		? `&callbackUrl=${getCallbackUrl}` // <- &
 		: ''
 
-	// url
+	// redirect
 
-	const urlWarn = `warning=${'ResetLinkSent' as UrlWarning}`
-
-	const redirectToUrl: string = `/auth/login?${urlWarn}${callbackUrl}`
+	const emailSendRedirectToUrl = `/auth/login?${urlWarningEmailSend}${callbackUrl}`
+	const imitEmailSendRectToUrl = `/auth/login?${urlWarningImitEmailSend}${callbackUrl}`
 
 	// form
 
@@ -53,12 +57,6 @@ export const useResetForm = () => {
 			.submitter as HTMLButtonElement
 		const submitValue = submitter.value as 'email' as SubmitValue
 
-		if (submitValue === ('imit' as SubmitValue)) {
-			// TODO
-			setIsPending(false)
-			return alert('TODO!')
-		}
-
 		if (submitValue === ('email' as SubmitValue)) {
 			try {
 				const data = await resetAction(values)
@@ -71,7 +69,30 @@ export const useResetForm = () => {
 				setIsWarning(data.warning)
 				toast(data.warning)
 
-				router.push(redirectToUrl)
+				router.push(emailSendRedirectToUrl)
+			} finally {
+				setIsPending(false)
+			}
+		}
+
+		if (submitValue === ('imit' as SubmitValue)) {
+			try {
+				const data = await resetImitAction(values)
+				if (data.error) {
+					setIsError(data.error)
+					toast.error(data.error)
+					return
+				}
+
+				// setIsWarning(data.warning)
+				// toast(data.warning)
+
+				if (data.token) {
+					window.open(
+						`/auth/password-reset?token=${data.token}&${urlWarningImitEmailSend}`
+					)
+					router.push(imitEmailSendRectToUrl)
+				}
 			} finally {
 				setIsPending(false)
 			}

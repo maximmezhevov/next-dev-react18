@@ -8,7 +8,7 @@ import { loginSchema } from '@/schemas/auth'
 import { loginAction } from '@/actions/auth'
 import toast from 'react-hot-toast'
 
-export type UrlWarning = 'ResetLinkSent'
+export type UrlWarning = 'ResetLinkSent' | 'ImitResetLinkSent'
 
 export const useLoginForm = (redirectToUrlProps: string) => {
 	const [isPending, setIsPending] = useState(false)
@@ -19,18 +19,26 @@ export const useLoginForm = (redirectToUrlProps: string) => {
 	const searchParams = useSearchParams()
 	const router = useRouter()
 
-	// urlError usrWarn
+	// urlError urlWarning
 
 	// TODO // при ошибке теряется callbackUrl
-	const urlError =
+	const urlErrorOAuthAccountNotLinked =
 		searchParams.get('error') === ('OAuthAccountNotLinked' as AuthError['type'])
 			? 'Электронная почта уже используемая другим провайдером'
 			: undefined
 
-	const urlWarning =
+	const urlWarningResetLinkSent =
 		searchParams.get('warning') === ('ResetLinkSent' as UrlWarning)
 			? 'Ссылка для смены пароля была отправлена на электронную почту. Если вы уже изменили пароль, авторизуйтесь повторно'
 			: undefined
+
+	const urlWarningImitResetLinkSent =
+		searchParams.get('warning') === ('ImitResetLinkSent' as UrlWarning)
+			? 'Если вы уже изменили пароль, авторизуйтесь повторно'
+			: undefined
+
+	const urlError = urlErrorOAuthAccountNotLinked
+	const urlWarning = urlWarningResetLinkSent || urlWarningImitResetLinkSent
 
 	// callbackUrl
 

@@ -15,7 +15,8 @@ interface FieldProps {
 }
 
 export const PasswordResetForm: React.FC = () => {
-	const { success, error, isPending, form, onSubmit } = usePasswordResetForm()
+	const { isPending, isError, urlWarning, isSuccess, form, onSubmit } =
+		usePasswordResetForm()
 
 	return (
 		<Form.Root {...form}>
@@ -27,14 +28,19 @@ export const PasswordResetForm: React.FC = () => {
 						isPending={isPending}
 					/>
 				</div>
-				<Alert variant='error' message={error} />
-				{success ? (
-					<>
-						<Alert variant='success' message={success} />
-						<ButtonWindowClose />
-					</>
+
+				{isError ? (
+					<Alert variant='error' message={isError} />
+				) : isSuccess ? (
+					<Alert variant='success' message={isSuccess} />
 				) : (
+					<Alert variant='warning' message={urlWarning} />
+				)}
+
+				{!isSuccess ? (
 					<SubmitButton label='Сохранить новый пароль' isPending={isPending} />
+				) : (
+					<ButtonWindowClose />
 				)}
 			</form>
 		</Form.Root>

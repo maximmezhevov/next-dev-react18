@@ -50,13 +50,6 @@ export const LoginForm: React.FC<{ redirectToUrl: string }> = ({
 					)}
 				</div>
 
-				{/* <Alert variant='error' message={isError || urlError} />
-				{isSuccess ? (
-					<Alert variant='success' message={isSuccess} />
-				) : (
-					<Alert variant='warning' message={urlWarning} />
-				)} */}
-
 				{isError ? (
 					<Alert variant='error' message={isError || urlError} />
 				) : isSuccess ? (

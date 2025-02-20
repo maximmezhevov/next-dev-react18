@@ -14,7 +14,7 @@ interface FieldProps {
 }
 
 export const ResetForm: React.FC = () => {
-	const { isPending, isError, isWarning, form, onSubmit } = useResetForm()
+	const { isPending, isError, form, onSubmit } = useResetForm()
 
 	return (
 		<Form.Root {...form}>
@@ -22,15 +22,13 @@ export const ResetForm: React.FC = () => {
 				<EmailField control={form.control} isPending={isPending} />
 
 				<Alert variant='error' message={isError} />
-				{isWarning ? (
-					<Alert variant='warning' message={isWarning} />
-				) : (
+				<div className='space-y-3'>
+					<SubmitButton
+						value={'imit' as SubmitValue}
+						label='Имитация'
+						isPending={isPending}
+					/>
 					<div className='space-y-1.5'>
-						<SubmitButton
-							value={'imit' as SubmitValue}
-							label='Имитация'
-							isPending={isPending}
-						/>
 						<SubmitButton
 							value={'email' as SubmitValue}
 							label='Отправить ссылку на электронную почту *'
@@ -41,7 +39,7 @@ export const ResetForm: React.FC = () => {
 							* Временно недоступно
 						</p>
 					</div>
-				)}
+				</div>
 			</form>
 		</Form.Root>
 	)
