@@ -37,6 +37,7 @@ export const buttonVariants = cva(
 
 				//
 
+				'24': 'h-6 px-2',
 				'20': 'h-5 px-2 text-sm',
 				'16': 'h-4 text-xs',
 				cleat: '',

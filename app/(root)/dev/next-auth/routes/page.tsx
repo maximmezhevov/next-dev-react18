@@ -1,53 +1,57 @@
-import type { Path } from '@/@types'
-import { AddCallbackUrlButton } from '@/components/ui'
+import React from 'react'
+import Link from 'next/link'
+import { Button } from '@/components/shadcn'
 
-type RouteGroup = {
-	group: string
-	paths: Path[]
-}
+type Route = { id: string; title?: string; paths: string[] }
 
-// prettier-ignore
-const ROUTE: RouteGroup[] = [
-	{ group: 'no-verif', paths: [
-		{ href: '/auth/login', label: 'login' },
-		{ href: '/auth/register', label: 'register' },
-		{ href: '/auth/password-reset-no-verif', label: 'password-reset-no-verif' }
-	]},
-	{ group: 'verif', paths: [
-		{ href: '/auth/login-verif', label: 'login-verif' },
-		{ href: '/auth/register-verif', label: 'register-verif' },
-		{ href: '/auth/verification', label: 'verification' },
-		{ href: '/auth/reset', label: 'reset' },
-		{ href: '/auth/password-reset', label: 'password-reset' }
-	]},
-	{ group: 'other', paths: [
-		{ href: '/auth/error', label: 'error' }
-	]},
+const ROUTES: Route[] = [
+	{
+		id: 'no-verif',
+		title: '(no-verif) Aвторизация без email верификацией',
+		paths: [
+			'/auth/login-no-verif',
+			'/auth/register-no-verif',
+			'/auth/verification',
+			'/auth/reset',
+			'/auth/password-reset-no-verif',
+		],
+	},
+	{
+		id: 'verif',
+		title: '(verif) Aвторизация с email верификацией',
+		paths: ['/auth/login-verif', '/auth/register-verif', '/auth/reset-verif'],
+	},
+	{
+		id: 'other-auth-routes',
+		paths: ['/auth/error'],
+	},
 ]
 
 export default function NextAuthRoutesPage() {
 	return (
-		<main className='space-y-4'>
-			{ROUTE.map((group) => (
-				<nav key={group.group} className='space-y-2'>
-					<h2>{group.group}</h2>
-					<div className='flex items-center gap-1'>
-						<span>/auth/</span>
-						<ul className='flex gap-1'>
-							{group.paths.map((path) => (
-								<li key={path.href}>
-									<AddCallbackUrlButton
-										href={path.href}
-										label={path.label}
-										variant='secondary'
-										size='32'
-									/>
-								</li>
-							))}
-						</ul>
-					</div>
-				</nav>
-			))}
+		<main className='space-y-6'>
+			<nav className='space-y-4'>
+				<Routes routes={ROUTES.slice(0, 2)} />
+				<Routes routes={ROUTES.slice(2, 3)} />
+				<Routes routes={ROUTES.slice(3, ROUTES.length)} />
+			</nav>
 		</main>
 	)
+}
+
+const Routes: React.FC<{ routes: Route[] }> = ({ routes }) => {
+	return routes.map((group) => (
+		<div key={group.id} className='space-y-2'>
+			<h2>{group.title || group.id}</h2>
+			<ul className='flex flex-wrap gap-1'>
+				{group.paths.map((path) => (
+					<li key={path}>
+						<Button asChild variant='secondary' size='32'>
+							<Link href={path}>{path}</Link>
+						</Button>
+					</li>
+				))}
+			</ul>
+		</div>
+	))
 }

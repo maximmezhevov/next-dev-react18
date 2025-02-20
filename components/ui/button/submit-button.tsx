@@ -4,6 +4,7 @@ import { cn } from '@/lib'
 import { Button, buttonVariants } from '@/components/shadcn'
 
 interface SubmitButtonProps extends VariantProps<typeof buttonVariants> {
+	value?: string // submitValue
 	children?: React.ReactNode
 	label?: string
 	isPending: boolean

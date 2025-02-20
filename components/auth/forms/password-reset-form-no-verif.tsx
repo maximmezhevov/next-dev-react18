@@ -1,0 +1,114 @@
+'use client'
+
+import type { Control } from 'react-hook-form'
+import * as z from 'zod'
+import { newPasswordSchemaNoVerif } from '@/schemas/auth'
+import { Alert, SubmitButton } from '@/components/ui'
+import { Form, Input } from '@/components/shadcn'
+
+import { usePasswordResetFormNoVerif } from './use-password-reset-form-no-verif'
+
+interface FieldProps {
+	control: Control<z.infer<typeof newPasswordSchemaNoVerif>>
+	isPending: boolean
+}
+
+export const PasswordResetFormNoVerif: React.FC<{
+	redirectToUrl: string
+}> = ({ redirectToUrl }) => {
+	const { isPending, isError, isSuccess, form, onSubmit } =
+		usePasswordResetFormNoVerif(redirectToUrl)
+
+	return (
+		<Form.Root {...form}>
+			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+				<div className='space-y-4'>
+					<EmailField control={form.control} isPending={isPending} />
+					<PasswordField control={form.control} isPending={isPending} />
+					<PasswordDuplicateField
+						control={form.control}
+						isPending={isPending}
+					/>
+				</div>
+				<Alert variant='error' message={isError} />
+				{isSuccess ? (
+					<Alert variant='success' message={isSuccess} />
+				) : (
+					<SubmitButton label='Сохранить новый пароль' isPending={isPending} />
+				)}
+			</form>
+		</Form.Root>
+	)
+}
+
+const EmailField: React.FC<FieldProps> = ({ control, isPending }) => {
+	return (
+		<Form.Field
+			control={control}
+			name='email'
+			render={({ field }) => (
+				<Form.Item>
+					<Form.Label>Адрес электронной почты</Form.Label>
+					<Form.Control>
+						<Input
+							{...field}
+							disabled={isPending}
+							type='email'
+							placeholder='example@email.io'
+						/>
+					</Form.Control>
+					<Form.Message />
+				</Form.Item>
+			)}
+		/>
+	)
+}
+
+const PasswordField: React.FC<FieldProps> = ({ control, isPending }) => {
+	return (
+		<Form.Field
+			control={control}
+			name='password'
+			render={({ field }) => (
+				<Form.Item>
+					<Form.Label>Новый пароль</Form.Label>
+					<Form.Control>
+						<Input
+							{...field}
+							disabled={isPending}
+							type='password'
+							placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+						/>
+					</Form.Control>
+					<Form.Message />
+				</Form.Item>
+			)}
+		/>
+	)
+}
+
+const PasswordDuplicateField: React.FC<FieldProps> = ({
+	control,
+	isPending,
+}) => {
+	return (
+		<Form.Field
+			control={control}
+			name='passwordDuplicate'
+			render={({ field }) => (
+				<Form.Item>
+					<Form.Label>Новый пароль (еще раз)</Form.Label>
+					<Form.Control>
+						<Input
+							{...field}
+							disabled={isPending}
+							type='password'
+							placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
+						/>
+					</Form.Control>
+					<Form.Message />
+				</Form.Item>
+			)}
+		/>
+	)
+}

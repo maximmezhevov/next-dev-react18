@@ -6,9 +6,6 @@ import { signIn } from 'next-auth/react'
 import { SubmitButton } from '@/components/ui'
 import { IconMap, LabelMap } from './constants'
 
-/**
- * default redirectTo = '/dev/next-auth'
- */
 export const OAuthClient: React.FC<{
 	provider: AvailableProviders
 	redirectTo?: string

@@ -1,16 +1,15 @@
 import type { Path } from '@/@types'
 
-import { Button, Separator } from '@/components/shadcn'
 import Link from 'next/link'
+import { Button } from '@/components/shadcn'
 
-// prettier-ignore
-const ROUTES: Path[]= [
-	{ href: '/dev/next-auth', label: 'next-auth' },
+const ROUTES: Path[] = [
 	{ href: '/dev/next-auth/routes', label: 'routes' },
-	{ href: '/dev/next-auth/dev-log', label: 'dev-log' },
-	{ href: '/dev/next-auth/client', label: 'client' },
-	{ href: '/dev/next-auth/server', label: 'server' },
-	{ href: '/dev/next-auth/admin', label: 'admin' }
+
+	{ href: '/dev/next-auth', label: 'next-auth (server)' },
+	// { href: '/dev/next-auth/client', label: 'client' },
+	// { href: '/dev/next-auth/server', label: 'server' },
+	// { href: '/dev/next-auth/admin', label: 'admin' },
 ]
 
 export default function NextAuthLayout({
@@ -19,20 +18,15 @@ export default function NextAuthLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<div className='space-y-[1rem] p-[1rem]'>
+		<div className='space-y-12 p-6'>
 			<header>
-				<nav className='flex items-center gap-1'>
-					{ROUTES.slice(0, 1).map((path) => (
-						<PathItem key={path.href} path={path} />
-					))}
-					<Separator orientation='vertical' className='h-8' />
-					{ROUTES.slice(1, 3).map((path) => (
-						<PathItem key={path.href} path={path} />
-					))}
-					<Separator orientation='vertical' className='h-8' />
-					{ROUTES.slice(3, ROUTES.length).map((path) => (
-						<PathItem key={path.href} path={path} disabled={true} />
-					))}
+				<nav className='space-y-6 *:flex *:gap-1'>
+					<ul>
+						<Routes route={ROUTES.slice(0, 1)} />
+					</ul>
+					<ul>
+						<Routes route={ROUTES.slice(1, ROUTES.length)} />
+					</ul>
 				</nav>
 			</header>
 			{children}
@@ -40,13 +34,12 @@ export default function NextAuthLayout({
 	)
 }
 
-const PathItem: React.FC<{
-	path: Path
-	disabled?: boolean
-}> = ({ path, disabled, ...props }) => {
-	return (
-		<Button variant='secondary' size='32' disabled={disabled} {...props}>
-			<Link href={path.href}>{path.label}</Link>
-		</Button>
-	)
+const Routes: React.FC<{ route: Path[] }> = ({ route }) => {
+	return route.map((path) => (
+		<li key={path.href}>
+			<Button variant='secondary' size='32'>
+				<Link href={path.href}>{path.label}</Link>
+			</Button>
+		</li>
+	))
 }

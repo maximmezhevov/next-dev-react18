@@ -1,4 +1,3 @@
-export { OAuth } from './oauth'
-
-export { OAuthServer } from './server'
-export { OAuthClient } from './client'
+export { OAuth } from './oauth' // client action
+// export { OAuthServer } from './server' // server
+export { OAuthClient } from './client' // clent

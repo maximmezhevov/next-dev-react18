@@ -1,24 +1,5 @@
 import * as z from 'zod'
 
-export const loginSchema = z.object({
-	email: z.string().email({
-		message: 'Invalid email',
-	}),
-	password: z
-		.string()
-		.min(1, { message: 'String must contain at least 1 character(s)' }),
-	twoFactorCode: z.optional(z.string()),
-})
-
-export const loginSchemaNoVerif = z.object({
-	email: z.string().email({
-		message: 'Invalid email',
-	}),
-	password: z
-		.string()
-		.min(1, { message: 'String must contain at least 1 character(s)' }),
-})
-
 export const registerSchema = z.object({
 	email: z.string().email({
 		message: 'Invalid email',
@@ -29,6 +10,16 @@ export const registerSchema = z.object({
 	name: z
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
+})
+
+export const loginSchema = z.object({
+	email: z.string().email({
+		message: 'Invalid email',
+	}),
+	password: z
+		.string()
+		.min(1, { message: 'String must contain at least 1 character(s)' }),
+	twoFactorCode: z.optional(z.string()),
 })
 
 export const resetSchema = z.object({
@@ -57,3 +48,7 @@ export const newPasswordSchemaNoVerif = z.object({
 		.string()
 		.min(1, { message: 'String must contain at least 1 character(s)' }),
 })
+
+// delete
+
+export { registerSchemaNoVerif, loginSchemaNoVerif } from './delete/no-verif'

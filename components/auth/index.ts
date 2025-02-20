@@ -1,15 +1,21 @@
 export {
-	RegisterFormNoVerif,
-	LoginFormNoVerif,
-	PasswordResetFormNoVerif,
-} from './no-verif'
-export {
 	RegisterForm,
 	LoginForm,
 	Verification,
 	ResetForm,
 	PasswordResetForm,
-} from './verif'
-export { OAuthServer, OAuthClient, OAuth } from './oauth'
+	PasswordResetFormNoVerif,
+} from './forms'
+export {
+	// OAuthServer,
+	OAuthClient,
+	OAuth,
+} from './oauth'
 
 export { AuthCard } from './card'
+
+// delete
+
+export { RegisterFormNoVerif, LoginFormNoVerif } from './delete/no-verif-forms'
+
+export { ButtonWindowClose } from './button-window-close'

@@ -15,8 +15,8 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 	headerTitle = null,
 	headerDescription = null,
 	children = null,
-	backButtonHref = '/auth/login',
-	backButtonLabel = 'Вернуться к авторизации',
+	backButtonHref = null,
+	backButtonLabel = null,
 
 	classNameContent,
 }) => {
@@ -33,17 +33,19 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 			{children && (
 				<Card.Content className={classNameContent}>{children}</Card.Content>
 			)}
-			<Card.Footer>
-				<SuspenseSkeleton className='h-10 w-full'>
-					<WatchCallbackUrlButton
-						href={backButtonHref as string}
-						label={backButtonLabel}
-						variant='link2'
-						size='20'
-						className='w-full'
-					/>
-				</SuspenseSkeleton>
-			</Card.Footer>
+			{backButtonHref && backButtonLabel && (
+				<Card.Footer>
+					<SuspenseSkeleton className='h-6 w-full'>
+						<WatchCallbackUrlButton
+							href={backButtonHref as string}
+							label={backButtonLabel}
+							variant='link2'
+							size='24'
+							className='w-full'
+						/>
+					</SuspenseSkeleton>
+				</Card.Footer>
+			)}
 		</Card.Root>
 	)
 }

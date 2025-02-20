@@ -27,9 +27,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
 			const existingUser = await getUserById(user.id as string)
 
-			if (existingUser?.fakeEmailVerified) return true
-
-			if (!existingUser?.emailVerified) return false
+			if (!existingUser?.emailVerified) return true
 
 			if (existingUser?.twoFactor) {
 				const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
@@ -54,9 +52,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 				session.user.role = token.role
 			}
 
-			// if ((token.emailVerified || token.fakeEmailVerified) && session.user) {
+			// if (token.emailVerified  && session.user) {
 			// 	session.user.emailVerified = token.emailVerified
-			// 	session.user.fakeEmailVerified = token.fakeEmailVerified
 			// }
 
 			return session
@@ -70,7 +67,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 			token.role = existingUser.role
 
 			// token.emailVerified = existingUser.emailVerified
-			// token.fakeEmailVerified = existingUser.fakeEmailVerified
 
 			return token
 		},

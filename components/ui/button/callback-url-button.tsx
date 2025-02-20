@@ -9,12 +9,14 @@ interface CallbackUrlButtonProps extends VariantProps<typeof buttonVariants> {
 	children?: React.ReactNode
 	label?: string
 	href: string
+	disabled?: boolean
 	className?: string
 }
 
 export const WatchCallbackUrlButton: React.FC<CallbackUrlButtonProps> = ({
 	children = null,
 	label = null,
+	disabled,
 	href,
 	...props
 }) => {
@@ -29,7 +31,18 @@ export const WatchCallbackUrlButton: React.FC<CallbackUrlButtonProps> = ({
 
 	return (
 		<Button asChild {...props}>
-			<Link href={`${href}${callbackUrl}`}>{label || children}</Link>
+			<Link
+				href={`${href}${callbackUrl}`}
+				aria-disabled={disabled}
+				className={disabled ? 'pointer-events-none opacity-50' : ''}
+				onClick={(e) => {
+					if (disabled) {
+						e.preventDefault()
+					}
+				}}
+			>
+				{label || children}
+			</Link>
 		</Button>
 	)
 }
