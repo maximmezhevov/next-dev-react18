@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui'
 
-export default function RootPage() {
+export default function MainPage() {
 	return (
 		<main>
 			<Button asChild variant='secondary'>
