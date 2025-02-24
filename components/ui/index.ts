@@ -1,7 +1,18 @@
-export { Button, buttonVariants, type ButtonProps } from './button'
+// types
 
-export * as DropdownMenu from './dropdown-menu'
-export * as Card from './card'
+export type { ButtonVariantProps } from './button'
 
+// components in folders
+
+export { Button, ButtonAddCallback } from './button'
 export { Separator, NamedSeparator } from './separator'
+
+// namespaces
+
+export * as Card from './card'
+export * as DropdownMenu from './dropdown-menu'
+
+// components
+
+export { Avatar, AvatarFallback, AvatarImage } from './avatar'
 export { Skeleton } from './skeleton'

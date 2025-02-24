@@ -1,12 +1,13 @@
 'use client'
 
+import type { ButtonVariantProps } from '@/components/ui'
+
 import { useState } from 'react'
 import { signOut } from 'next-auth/react'
-import { VariantProps } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
-import { Button, type buttonVariants } from '@/components/ui'
+import { Button } from '@/components/ui'
 
-interface Props extends VariantProps<typeof buttonVariants> {
+interface Props extends ButtonVariantProps {
 	className?: string
 }
 

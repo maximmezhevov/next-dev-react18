@@ -1,13 +1,14 @@
 'use client'
 
+import type { ButtonVariantProps } from '@/components/ui'
+
 import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { VariantProps } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
 import { OAuthAction } from '@/action/auth'
-import { Button, type buttonVariants } from '@/components/ui'
+import { Button } from '@/components/ui'
 
-interface Props extends VariantProps<typeof buttonVariants> {
+interface Props extends ButtonVariantProps {
 	provider: 'github'
 	className?: string
 }

@@ -1,16 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { VariantProps } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
 import { signOutAction } from '@/action/auth'
-import { Button, type buttonVariants } from '@/components/ui'
+import { Button, type ButtonVariantProps } from '@/components/ui'
 
-interface Props extends VariantProps<typeof buttonVariants> {
+interface Props extends ButtonVariantProps {
 	className?: string
 }
 
-export const SignOutSrverActionButton: React.FC<Props> = ({ ...props }) => {
+export const SignOutSrverActionButton: React.FC<Props> = ({ variant, ...props }) => {
 	const [isPending, setIsPending] = useState(false)
 
 	const handleSignOutSrverAction = async () => {
@@ -26,7 +25,12 @@ export const SignOutSrverActionButton: React.FC<Props> = ({ ...props }) => {
 	}
 
 	return (
-		<Button onClick={handleSignOutSrverAction} disabled={isPending} {...props}>
+		<Button
+			onClick={handleSignOutSrverAction}
+			variant={isPending && variant === 'ghost' ? 'secondary' : variant}
+			disabled={isPending}
+			{...props}
+		>
 			{isPending && <Loader2 className='animate-spin' />}
 			Sign-out (server action)
 		</Button>
