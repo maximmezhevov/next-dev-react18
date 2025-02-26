@@ -1,33 +1,24 @@
 'use client'
 
-import Link from 'next/link'
-import { signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
+
 import { SignOutClientButton } from '@/components/auth'
-import { Button } from '@/components/ui'
+import { ButtonAddCallback } from '@/components/ui'
 
 export default function NextAuthServerPage() {
 	const { data: session } = useSession()
 
-	const handleSignOutClient = async () => {
-		await signOut()
-	}
-
 	return (
 		<main className='space-y-6 text-center'>
-			<h1>next-auth/client</h1>
+			<h1>next-auth/client (useSession)</h1>
 
-			<div className='flex items-center justify-center gap-1'>
+			<div className='flex flex-wrap items-center justify-center gap-1'>
 				{!session ? (
-					<Button asChild size='lg'>
-						<Link href={`/sign-in?callbackUrl=/next-auth/client`}>Sign-in</Link>
-					</Button>
+					<ButtonAddCallback href='/sign-in' size='lg'>
+						Войти
+					</ButtonAddCallback>
 				) : (
-					<>
-						<Button onClick={handleSignOutClient} variant='secondary'>
-							Sign-out (client)
-						</Button>
-						<SignOutClientButton variant='secondary' />
-					</>
+					<SignOutClientButton variant='secondary' wrap />
 				)}
 			</div>
 

@@ -1,11 +1,13 @@
 'use client'
 
 import type { User } from 'next-auth'
-
-import { SignOutSrverActionButton, UserAvatar } from '@/components/auth'
+import { SignOutServerRefreshButton } from '@/components/auth'
 import { DropdownMenu } from '@/components/ui'
 
-export const UserDropdown: React.FC<{ user: User | undefined }> = ({ user }) => {
+import { UserAvatar } from './avarat'
+import React from 'react'
+
+const UserDropdown: React.FC<{ user: User | undefined }> = ({ user }) => {
 	if (!user) return null
 
 	return (
@@ -26,7 +28,7 @@ const Trigger: React.FC<{ image: User['image'] }> = ({ image }) => {
 
 const Content: React.FC<{ user: User }> = ({ user }) => {
 	return (
-		<DropdownMenu.Content align='end' className='space-y-1'>
+		<DropdownMenu.Content className='space-y-1'>
 			<Profile user={user} />
 			<DropdownMenu.Separator />
 			<Links />
@@ -50,7 +52,7 @@ const Profile: React.FC<{ user: User }> = ({ user }) => {
 
 const Links: React.FC = () => {
 	return (
-		<DropdownMenu.Group>
+		<DropdownMenu.Group className='space-y-0.5'>
 			<DropdownMenu.Item>...</DropdownMenu.Item>
 		</DropdownMenu.Group>
 	)
@@ -58,9 +60,20 @@ const Links: React.FC = () => {
 
 const SignOut: React.FC = () => {
 	return (
-		<SignOutSrverActionButton
-			variant='ghost'
-			className='h-8 w-full justify-start rounded-sm px-2 py-1.5 text-sm'
-		/>
+		<DropdownMenuGroupSignOut>
+			<SignOutServerRefreshButton variant='ghost'>Выход</SignOutServerRefreshButton>
+		</DropdownMenuGroupSignOut>
 	)
 }
+
+// TODO
+
+const DropdownMenuGroupSignOut: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+	return (
+		<DropdownMenu.Group className='space-y-0.5 *:flex *:min-h-8 *:w-full *:justify-start *:rounded-sm *:px-2 *:py-1.5 *:text-sm'>
+			{children}
+		</DropdownMenu.Group>
+	)
+}
+
+export { UserDropdown, Trigger, DropdownMenuGroupSignOut }

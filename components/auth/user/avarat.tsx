@@ -1,8 +1,7 @@
 import type { User } from 'next-auth'
-
 import { User2 } from 'lucide-react'
-import { Avatar, AvatarImage, AvatarFallback, Skeleton } from '@/components/ui'
 import { cn } from '@/lib/shadcn'
+import { Avatar, AvatarFallback, AvatarImage, Skeleton } from '@/components/ui'
 
 export const UserAvatar: React.FC<{ image: User['image']; className?: string }> = ({
 	image,

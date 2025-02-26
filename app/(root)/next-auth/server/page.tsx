@@ -1,33 +1,23 @@
-import Link from 'next/link'
-import { auth, signOut } from '@/lib/auth'
-import { Button } from '@/components/ui'
-import { SignOutSrverActionButton } from '@/components/auth'
+import { auth } from '@/lib/auth'
+import { SignOutServerRefreshButton, SignOutServerReloadButton } from '@/components/auth'
+import { ButtonAddCallback } from '@/components/ui'
 
 export default async function NextAuthServerPage() {
 	const session = await auth()
-
-	const handleSignOutServer = async () => {
-		'use server'
-		await signOut()
-	}
 
 	return (
 		<main className='space-y-6 text-center'>
 			<h1>next-auth/server</h1>
 
-			<div className='flex items-center justify-center gap-1'>
+			<div className='flex flex-wrap items-center justify-center gap-1'>
 				{!session ? (
-					<Button asChild size='lg'>
-						<Link href={`/sign-in?callbackUrl=/next-auth/server`}>Sign-in</Link>
-					</Button>
+					<ButtonAddCallback href='/sign-in' size='lg'>
+						Войти
+					</ButtonAddCallback>
 				) : (
 					<>
-						<form action={handleSignOutServer}>
-							<Button type='submit' variant='secondary'>
-								Sign-out (server)
-							</Button>
-						</form>
-						<SignOutSrverActionButton variant='secondary' />
+						<SignOutServerRefreshButton variant='secondary' wrap />
+						<SignOutServerReloadButton variant='secondary' wrap />
 					</>
 				)}
 			</div>

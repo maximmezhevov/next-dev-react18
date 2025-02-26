@@ -1,11 +1,9 @@
 'use client'
 
-import Link from 'next/link'
+import type { ButtonVariantProps } from './button-variants'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '@/components/ui'
-
-import { type ButtonVariantProps } from './button-variants'
-import React from 'react'
 
 interface Props extends ButtonVariantProps {
 	children: React.ReactNode

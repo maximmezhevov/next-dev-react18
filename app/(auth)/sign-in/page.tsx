@@ -1,18 +1,17 @@
-import { Suspense } from 'react'
 import { SignInForm, OAuthServerActionButton } from '@/components/auth'
-import { Card, NamedSeparator, Skeleton } from '@/components/ui'
+import { Card, NamedSeparator, SuspenseSkeleton } from '@/components/ui'
 
 export default function SignIsPage() {
 	return (
 		<Card.Card className='w-[400px]'>
 			<Card.CardHeader className='text-center'>
-				<Card.CardTitle>Sign-in</Card.CardTitle>
+				<Card.CardTitle>Войти</Card.CardTitle>
 			</Card.CardHeader>
 			<Card.CardContent className='space-y-6'>
 				<div className='space-y-1'>
-					<Suspense fallback={<Skeleton className='h-9' />}>
+					<SuspenseSkeleton className='h-9'>
 						<OAuthServerActionButton provider='github' className='w-full' />
-					</Suspense>
+					</SuspenseSkeleton>
 				</div>
 
 				<NamedSeparator text='or Сredentials' />

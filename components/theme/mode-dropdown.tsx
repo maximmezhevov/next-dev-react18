@@ -47,16 +47,18 @@ const Content: React.FC<{
 	handleTheme: (value: string) => void
 }> = ({ themes, theme, handleTheme }) => {
 	return (
-		<DropdownMenu.Content collisionPadding={{ right: 24 }} className='space-y-0.5'>
-			{themes.map((item) => (
-				<DropdownMenu.Item
-					key={item}
-					onClick={() => handleTheme(item)}
-					className={cn(theme == item && 'bg-secondary')}
-				>
-					{themeMap[item as Theme]}
-				</DropdownMenu.Item>
-			))}
+		<DropdownMenu.Content collisionPadding={{ right: 24 }}>
+			<DropdownMenu.Group className='space-y-0.5'>
+				{themes.map((item) => (
+					<DropdownMenu.Item
+						key={item}
+						onClick={() => handleTheme(item)}
+						className={cn(theme == item && 'bg-secondary')}
+					>
+						{themeMap[item as Theme]}
+					</DropdownMenu.Item>
+				))}
+			</DropdownMenu.Group>
 		</DropdownMenu.Content>
 	)
 }
