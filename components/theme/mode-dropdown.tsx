@@ -19,29 +19,46 @@ export const ThemeToggle: React.FC = () => {
 		setTheme(value)
 	}
 	return (
-		<DropdownMenu.DropdownMenu>
-			<DropdownMenu.DropdownMenuTrigger asChild>
-				<Button variant='outline' size='icon'>
-					<Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-					<Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-					<span className='sr-only'>Toggle theme</span>
-				</Button>
-			</DropdownMenu.DropdownMenuTrigger>
-			<DropdownMenu.DropdownMenuContent
-				onCloseAutoFocus={(e) => e.preventDefault()}
-				align='end'
-				className='space-y-0.5'
+		<DropdownMenu.Root>
+			<Trigger />
+			<Content themes={themes} theme={theme} handleTheme={handleTheme} />
+		</DropdownMenu.Root>
+	)
+}
+
+const Trigger: React.FC = () => {
+	return (
+		<DropdownMenu.Trigger asChild>
+			<Button
+				variant='ghost'
+				size='icon'
+				className='rounded-full data-[state=open]:bg-secondary/80 data-[state=open]:text-foreground'
 			>
+				<Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+				<Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+			</Button>
+		</DropdownMenu.Trigger>
+	)
+}
+
+const Content: React.FC<{
+	themes: string[]
+	theme: string | undefined
+	handleTheme: (value: string) => void
+}> = ({ themes, theme, handleTheme }) => {
+	return (
+		<DropdownMenu.Content collisionPadding={{ right: 24 }}>
+			<DropdownMenu.Group className='space-y-0.5'>
 				{themes.map((item) => (
-					<DropdownMenu.DropdownMenuItem
+					<DropdownMenu.Item
 						key={item}
 						onClick={() => handleTheme(item)}
-						className={cn('cursor-pointer', theme == item && 'bg-secondary')}
+						className={cn(theme == item && 'bg-secondary')}
 					>
 						{themeMap[item as Theme]}
-					</DropdownMenu.DropdownMenuItem>
+					</DropdownMenu.Item>
 				))}
-			</DropdownMenu.DropdownMenuContent>
-		</DropdownMenu.DropdownMenu>
+			</DropdownMenu.Group>
+		</DropdownMenu.Content>
 	)
 }

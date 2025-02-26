@@ -1,8 +1,8 @@
 import { Inter } from 'next/font/google'
+import Providers from '@/components/providers'
 import { cn } from '@/lib/shadcn'
 
 import './globals.css'
-import Providers from '@/components/providers'
 
 const inter = Inter({
 	subsets: ['latin', 'cyrillic'],
