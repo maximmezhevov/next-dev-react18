@@ -9,6 +9,9 @@ export {
 	SignOutClientButton,
 } from './sign-out'
 
+export { RegistrationButton } from './registration'
+export { SignInButton } from './sign-in'
+
 //
 
 export { User, UserAvatar, Trigger, DropdownMenuGroupSignOut } from './user'

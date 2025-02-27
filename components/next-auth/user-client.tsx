@@ -2,7 +2,7 @@
 
 import type { Session } from 'next-auth'
 import { useSession } from 'next-auth/react'
-import { UserAvatar } from '@/components/auth'
+import { User2 } from 'lucide-react'
 import { ButtonAddCallback } from '@/components/shared'
 
 import { UserDropdownClient } from './dropdown-client'
@@ -13,8 +13,8 @@ export const UserClient: React.FC = () => {
 
 	if (!user) {
 		return (
-			<ButtonAddCallback href='/sign-in' variant='secondary' size='icon' className='rounded-full'>
-				<UserAvatar image={null} />
+			<ButtonAddCallback href='/sign-in' size='icon' className='rounded-full'>
+				<User2 />
 			</ButtonAddCallback>
 		)
 	} else {

@@ -1,4 +1,4 @@
-import { Session } from '@/components/auth'
+import { RegistrationButton, Session, SignInButton } from '@/components/auth'
 import { UserClient, UserServer } from '@/components/next-auth'
 
 interface Props {
@@ -17,7 +17,7 @@ export default function NextAuthParallelLayout({ ...props }: Props) {
 
 const Header: React.FC = () => {
 	return (
-		<header className='flex flex-wrap items-center justify-between gap-3'>
+		<header className='text-center'>
 			<h1>next-auth/parallel</h1>
 		</header>
 	)
@@ -26,6 +26,11 @@ const Header: React.FC = () => {
 const Main: React.FC<Props> = ({ server, client }) => {
 	return (
 		<main className='space-y-6'>
+			<section className='flex justify-center gap-1'>
+				<SignInButton />
+				<RegistrationButton />
+			</section>
+
 			<section className='space-y-3'>
 				<header className='flex items-center justify-between gap-3'>
 					<h2>@server</h2>
