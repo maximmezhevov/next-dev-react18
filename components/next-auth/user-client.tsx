@@ -3,7 +3,7 @@
 import type { Session } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import { UserAvatar } from '@/components/auth'
-import { ButtonAddCallback } from '@/components/ui'
+import { ButtonAddCallback } from '@/components/shared'
 
 import { UserDropdownClient } from './dropdown-client'
 

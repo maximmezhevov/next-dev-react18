@@ -1,24 +1,23 @@
-import Link from 'next/link'
-import { Button } from '@/components/ui'
+import { ButtonActive, Render } from '@/components/shared'
+
+type Routes = { href: string; label: string }
+const ROUTES: Routes[] = [
+	{ href: '/next-auth', label: 'next-auth' },
+	{ href: '/next-auth/server', label: 'next-auth/server' },
+	{ href: '/next-auth/client', label: 'next-auth/client (useSession)' },
+	{ href: '/next-auth/parallel', label: 'next-auth/parallel' },
+]
 
 export default function NextAuthLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className='space-y-6'>
 			<header className='flex items-center justify-between'>
-				<div className='inline-flex flex-wrap gap-1'>
-					<Button asChild variant='secondary'>
-						<Link href='/next-auth'>next-auth</Link>
-					</Button>
-					<Button asChild variant='secondary'>
-						<Link href='/next-auth/server'>next-auth/server</Link>
-					</Button>
-					<Button asChild variant='secondary'>
-						<Link href='/next-auth/client'>next-auth/client (useSession)</Link>
-					</Button>
-					<Button asChild variant='secondary'>
-						<Link href='/next-auth/parallel'>next-auth/parallel</Link>
-					</Button>
-				</div>
+				<nav className='inline-flex flex-wrap gap-1'>
+					<Render<Routes>
+						items={ROUTES}
+						render={(item) => <ButtonActive href={item.href} label={item.label} />}
+					/>
+				</nav>
 			</header>
 			{children}
 		</div>

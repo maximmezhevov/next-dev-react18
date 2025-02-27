@@ -1,7 +1,7 @@
 import type { User } from 'next-auth'
 import { auth } from '@/lib/auth'
+import { ButtonAddCallback } from '@/components/shared'
 import { UserAvatar } from '@/components/auth'
-import { ButtonAddCallback } from '@/components/ui'
 
 import { UserDropdownServer } from './dropdown-server'
 

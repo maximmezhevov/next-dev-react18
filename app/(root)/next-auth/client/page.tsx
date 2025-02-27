@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 
 import { SignOutClientButton } from '@/components/auth'
-import { ButtonAddCallback } from '@/components/ui'
+import { ButtonAddCallback } from '@/components/shared'
 
 export default function NextAuthServerPage() {
 	const { data: session } = useSession()

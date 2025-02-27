@@ -2,8 +2,10 @@
 
 import type { ButtonVariantProps } from '@/components/ui'
 import { FaGithub } from 'react-icons/fa6'
-import { ButtonSubmit } from '@/components/ui'
+import { ButtonSubmit } from '@/components/shared'
+
 import { useOAuthServerAction } from './use-server-action'
+import React from 'react'
 
 const iconMap = {
 	github: <FaGithub size={16} className='shrink-0' />,
@@ -16,14 +18,11 @@ const providerMap = {
 
 interface Props extends ButtonVariantProps {
 	provider: Provider
+	children?: React.ReactNode
 	className?: string
 }
 
-export const OAuthServerActionButton: React.FC<React.PropsWithChildren<Props>> = ({
-	children,
-	provider,
-	...props
-}) => {
+export const OAuthServerActionButton: React.FC<Props> = ({ provider, children, ...props }) => {
 	const { handleOAuthServerAction, isPending } = useOAuthServerAction(provider)
 
 	return (

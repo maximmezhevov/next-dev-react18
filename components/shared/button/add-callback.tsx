@@ -1,8 +1,9 @@
 'use client'
 
-import type { ButtonVariantProps } from './button-variants'
-import { usePathname } from 'next/navigation'
+import type { ButtonVariantProps } from '@/components/ui'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui'
 
 interface Props extends ButtonVariantProps {

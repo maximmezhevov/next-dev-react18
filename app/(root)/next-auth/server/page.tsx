@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth'
 import { SignOutServerRefreshButton, SignOutServerReloadButton } from '@/components/auth'
-import { ButtonAddCallback } from '@/components/ui'
+import { ButtonAddCallback } from '@/components/shared'
 
 export default async function NextAuthServerPage() {
 	const session = await auth()

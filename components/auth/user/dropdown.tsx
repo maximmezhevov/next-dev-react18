@@ -61,7 +61,7 @@ const Links: React.FC = () => {
 const SignOut: React.FC = () => {
 	return (
 		<DropdownMenuGroupSignOut>
-			<SignOutServerRefreshButton variant='ghost'>Выход</SignOutServerRefreshButton>
+			<SignOutServerRefreshButton variant='ghost' />
 		</DropdownMenuGroupSignOut>
 	)
 }
