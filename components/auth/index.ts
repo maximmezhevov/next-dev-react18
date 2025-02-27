@@ -1,7 +1,5 @@
 // auth
 
-export { SignInForm } from './sign-in'
-
 export { OAuthServerActionButton } from './o-auth'
 export {
 	SignOutServerRefreshButton,
@@ -9,10 +7,16 @@ export {
 	SignOutClientButton,
 } from './sign-out'
 
-export { RegistrationButton } from './registration'
-export { SignInButton } from './sign-in'
+export { SignInForm } from './sign-in'
+export { RegistrationForm } from './registration'
 
-//
+// components & ui
 
 export { User, UserAvatar, Trigger, DropdownMenuGroupSignOut } from './user'
+export { AuthCard } from './card'
 export { Session } from './session'
+
+// удалить
+
+export { RegistrationButton } from './registration' // TODO // удалить
+export { SignInButton } from './sign-in' // TODO // удалить

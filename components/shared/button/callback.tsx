@@ -3,24 +3,25 @@
 import type { ButtonVariantProps } from '@/components/ui'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui'
+import { useWatchCallback } from '@/hooks'
 
 interface Props extends ButtonVariantProps {
-	href: string
 	label?: string
 	children?: React.ReactNode
 	className?: string
 }
 
-export const ButtonAddCallback: React.FC<Props> = ({ href, label, children, ...props }) => {
-	const pathname = usePathname()
+export const ButtonCallback: React.FC<Props> = ({ label, children, ...props }) => {
+	const { callback } = useWatchCallback()
 
-	const callbackUrl = `callbackUrl=${pathname}`
+	if (!callback) {
+		return null
+	}
 
 	return (
 		<Button asChild {...props}>
-			<Link href={`${href}?${callbackUrl}`}>{label || children}</Link>
+			<Link href={`${callback}`}>{label || children}</Link>
 		</Button>
 	)
 }

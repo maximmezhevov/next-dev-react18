@@ -14,9 +14,14 @@ export default function NextAuthServerPage() {
 
 			<div className='flex flex-wrap items-center justify-center gap-1'>
 				{!session ? (
-					<ButtonAddCallback href='/sign-in' size='lg'>
-						Войти
-					</ButtonAddCallback>
+					<>
+						<ButtonAddCallback href='/sign-in' size='lg'>
+							Авторизация
+						</ButtonAddCallback>
+						<ButtonAddCallback href='/registration' variant='secondary' size='lg'>
+							Регистрация
+						</ButtonAddCallback>
+					</>
 				) : (
 					<SignOutClientButton variant='secondary' wrap />
 				)}

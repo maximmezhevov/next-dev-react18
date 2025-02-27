@@ -1,2 +1,3 @@
-export { SignInForm } from './sign-In'
-export { SignInButton } from './button'
+export { SignInForm } from './sign-in-form'
+
+export { SignInButton } from './button' // TODO // удалить

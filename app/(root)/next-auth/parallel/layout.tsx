@@ -26,7 +26,7 @@ const Header: React.FC = () => {
 const Main: React.FC<Props> = ({ server, client }) => {
 	return (
 		<main className='space-y-6'>
-			<section className='flex justify-center gap-1'>
+			<section /* TODO // удалить */ className='flex justify-center gap-1'>
 				<SignInButton />
 				<RegistrationButton />
 			</section>
