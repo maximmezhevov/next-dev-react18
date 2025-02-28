@@ -8,9 +8,9 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useWatchCallback } from '@/hooks'
 import { registrationSchema } from '@/lib/zod/auth'
-import { registrationAction } from '@/actions/auth'
+import { registrationAction, signInAction } from '@/actions/auth'
 
-const DEFAULE_REDIRECT = '/next-auth'
+const DEFAULE_REDIRECT = '/sign-in'
 
 export const useRegistrationForm = () => {
 	const [isPending, setIsPending] = useState(false)
@@ -41,17 +41,31 @@ export const useRegistrationForm = () => {
 				setSuccess(registrationData.success)
 				toast.success(registrationData.success)
 
-				router.push(callback || DEFAULE_REDIRECT)
+				try {
+					const signInData = await signInAction(values)
+					if (signInData.error) {
+						throw new Error(signInData.error)
+					}
+
+					if (signInData.success) {
+						setSuccess(signInData.success)
+						toast.success(signInData.success)
+
+						router.push(callback || DEFAULE_REDIRECT)
+					}
+				} catch (error) {
+					throw error
+				}
 			}
 		} catch (error) {
 			if (error instanceof Error) {
+				setError(error.message)
 				toast.error(error.message)
-				console.log('Error', error)
-				return setError(error.message)
+				console.log('Ошибка:', error)
 			} else {
-				toast.error('An unknown error occurred!')
-				console.log('Unknown error occurred:', error)
-				return setError('An unknown error occurred!')
+				setError('Что-то пошло не так (Неизвестная ошибка)!')
+				toast.error('Что-то пошло не так (Неизвестная ошибка)!')
+				console.log('Неизвестная ошибка:', error)
 			}
 		} finally {
 			setIsPending(false)

@@ -6,6 +6,7 @@ export type { ButtonVariantProps } from './button'
 
 export { Separator, NamedSeparator } from './separator'
 export { Skeleton, SuspenseSkeleton } from './skeleton'
+export { Input, PasswordInput } from './input'
 
 // namespaces
 
@@ -17,5 +18,4 @@ export * as Form from './form'
 
 export { Avatar, AvatarFallback, AvatarImage } from './avatar'
 export { Button } from './button'
-export { Input } from './input'
 export { Label } from './label'

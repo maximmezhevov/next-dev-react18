@@ -37,14 +37,13 @@ const Content: React.FC<{ user: User }> = ({ user }) => {
 	)
 }
 
-// TODO //  удалить ... || undefined ...
 const Profile: React.FC<{ user: User }> = ({ user }) => {
 	return (
 		<div className='flex items-center gap-2 px-1 py-1.5 text-sm'>
 			<UserAvatar image={user.image} className='size-9 rounded-md' />
 			<div className='flex flex-col justify-between *:truncate'>
-				<span className='text-sm'>{user?.name || 'undefined'}</span>
-				<span className='text-xs'>{user?.email || 'undefined'}</span>
+				<span className='text-sm'>{user?.name}</span>
+				<span className='text-xs'>{user?.email}</span>
 			</div>
 		</div>
 	)

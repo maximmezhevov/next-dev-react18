@@ -1,25 +1,50 @@
 'use server'
 
 import * as z from 'zod'
-import { LoginSchema } from '@/lib/zod/auth'
-import { prisma } from '@/lib/prisma'
+import { signInSchema } from '@/lib/zod/auth'
+import { sanitizeEmail } from '@/lib/validator'
+import { getUserByEmail } from '@/lib/services/auth'
 import { signIn } from '@/lib/auth'
+import { AuthError } from 'next-auth'
 
-export async function signInAction(values: z.infer<typeof LoginSchema>) {
-	const validatedFields = LoginSchema.safeParse(values)
+export const signInAction = async (values: z.infer<typeof signInSchema>) => {
+	const validatedFields = signInSchema.safeParse(values)
 	if (!validatedFields.success) {
 		return { error: 'invalid fields' }
 	}
 
-	const { email, password } = validatedFields.data
+	const email = sanitizeEmail(validatedFields.data.email)
+	const password = validatedFields.data.password
 
-	const user = await prisma.user.findFirst({ where: { email } })
-	if (!user || !user.email) {
-		return { error: 'Неверные учетные данные' }
+	const existingUser = await getUserByEmail(email)
+	if (!existingUser || !existingUser.email || !existingUser.password) {
+		return { error: 'Неверные учетные данные!' }
 	}
 
-	await signIn('credentials', {
-		email,
-		password,
-	})
+	try {
+		await signIn('credentials', { email, password, redirect: false })
+		return { success: 'Авторизация прошла успешно!' }
+	} catch (error) {
+		if (error instanceof AuthError) {
+			switch (error.type) {
+				case 'CredentialsSignin': {
+					console.log('Неверные учетные данные!:', error)
+					return { error: 'Неверные учетные данные!' }
+				}
+
+				default: {
+					console.log('Ошибка:', error)
+					return { error: 'Что-то пошло не так!' }
+				}
+			}
+		}
+
+		if (error instanceof Error) {
+			console.log('Ошибка:', error)
+			return { error: 'Что-то пошло не так!' }
+		} else {
+			console.log('Неизвестная ошибка:', error)
+			return { error: 'Что-то пошло не так (Неизвестная ошибка)!' }
+		}
+	}
 }

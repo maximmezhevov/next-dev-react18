@@ -10,6 +10,7 @@ interface Props extends ButtonVariantProps {
 	href: string
 	label?: string
 	children?: React.ReactNode
+	disabled?: boolean
 	className?: string
 }
 

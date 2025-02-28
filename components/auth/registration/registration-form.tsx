@@ -4,7 +4,7 @@ import type { Control } from 'react-hook-form'
 import * as z from 'zod'
 import { registrationSchema } from '@/lib/zod/auth'
 import { Alert, ButtonSubmit } from '@/components/shared'
-import { Form, Input } from '@/components/ui'
+import { Form, Input, PasswordInput } from '@/components/ui'
 
 import { useRegistrationForm } from './use-registration-form'
 
@@ -20,9 +20,9 @@ export const RegistrationForm: React.FC = () => {
 					<PasswordField control={form.control} isPending={isPending} />
 				</div>
 
-				{error && <Alert className='bg-red-50'>{error}</Alert>}
+				{error && <Alert color='red'>{error}</Alert>}
 				{success ? (
-					<Alert className='bg-green-50'>{success}</Alert>
+					<Alert color='green'>{success}</Alert>
 				) : (
 					<ButtonSubmit type='submit' disabled={isPending} className='w-full'>
 						Создать учетную запись
@@ -83,12 +83,7 @@ const PasswordField: React.FC<FieldProps> = ({ control, isPending }) => {
 				<Form.Item>
 					<Form.Label>Пароль</Form.Label>
 					<Form.Control>
-						<Input
-							{...field}
-							disabled={isPending}
-							type='password'
-							placeholder='&bull;&bull;&bull;&bull;&bull;&bull;'
-						/>
+						<PasswordInput {...field} disabled={isPending} />
 					</Form.Control>
 					<Form.Message />
 				</Form.Item>

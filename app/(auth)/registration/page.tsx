@@ -1,4 +1,5 @@
 import { AuthCard, RegistrationForm } from '@/components/auth'
+import { SuspenseSkeleton } from '@/components/ui'
 
 export default function RegistrationPage() {
 	return (
@@ -8,7 +9,9 @@ export default function RegistrationPage() {
 			footerButtonLabel='Eсть учетная запись?'
 			classNameContent='space-y-6'
 		>
-			<RegistrationForm />
+			<SuspenseSkeleton className='h-[296px]'>
+				<RegistrationForm />
+			</SuspenseSkeleton>
 		</AuthCard>
 	)
 }

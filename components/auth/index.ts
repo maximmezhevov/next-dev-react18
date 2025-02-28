@@ -15,8 +15,3 @@ export { RegistrationForm } from './registration'
 export { User, UserAvatar, Trigger, DropdownMenuGroupSignOut } from './user'
 export { AuthCard } from './card'
 export { Session } from './session'
-
-// удалить
-
-export { RegistrationButton } from './registration' // TODO // удалить
-export { SignInButton } from './sign-in' // TODO // удалить

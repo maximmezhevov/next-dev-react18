@@ -19,7 +19,9 @@ export default function SignIsPage() {
 
 			<NamedSeparator text='или с учетной записью' />
 
-			<SignInForm />
+			<SuspenseSkeleton className='h-[212px]'>
+				<SignInForm />
+			</SuspenseSkeleton>
 		</AuthCard>
 	)
 }

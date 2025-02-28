@@ -18,12 +18,7 @@ export const useOAuthServerAction = (provider: Provider) => {
 
 		await OAuthAction(provider, redirectUrl)
 
-		/*
-			TODO
-
-			...
-		
-		*/
+		// TODO // ...
 	}
 
 	return {

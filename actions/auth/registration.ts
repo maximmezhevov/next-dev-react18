@@ -2,6 +2,8 @@
 
 import * as z from 'zod'
 import { registrationSchema } from '@/lib/zod/auth'
+import { sanitizeEmail, sanitizeName } from '@/lib/validator'
+import { getUserByEmail } from '@/lib/services/auth'
 import { prisma } from '@/lib/prisma'
 import bcryptjs from 'bcryptjs'
 
@@ -10,9 +12,12 @@ export const registrationAction = async (values: z.infer<typeof registrationSche
 	if (!validatedFields.success) {
 		return { error: 'invalid fields' }
 	}
-	const { name, email, password } = validatedFields.data
 
-	const existingUser = await prisma.user.findFirst({ where: { email } })
+	const name = sanitizeName(validatedFields.data.name)
+	const email = sanitizeEmail(validatedFields.data.email)
+	const password = validatedFields.data.password
+
+	const existingUser = await getUserByEmail(email)
 	if (existingUser) {
 		return {
 			error: 'Электронная почта уже зарегистрирована или используется другим провайдером',
@@ -34,11 +39,11 @@ export const registrationAction = async (values: z.infer<typeof registrationSche
 		}
 	} catch (error) {
 		if (error instanceof Error) {
-			console.log('Error:', error)
-			return { error: 'Something went wrong!' }
+			console.log('Ошибка:', error)
+			return { error: 'Что-то пошло не так!' }
 		} else {
-			console.log('Unknown error occurred:', error)
-			return { error: 'An unknown error occurred!' }
+			console.log('Неизвестная ошибка:', error)
+			return { error: 'Что-то пошло не так (Неизвестная ошибка)!' }
 		}
 	}
 }

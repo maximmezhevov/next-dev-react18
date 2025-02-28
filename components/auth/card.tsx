@@ -39,13 +39,17 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 
 			<Card.Footer className='gap-1'>
 				<SuspenseSkeleton className='h-9 w-full'>
-					<ButtonCallback variant='ghost' size='icon' className='shrink-0'>
+					<ButtonCallback
+						variant='ghost'
+						size='icon'
+						className='shrink-0 text-muted-foreground hover:text-foreground'
+					>
 						<ArrowLeft />
 					</ButtonCallback>
 					<ButtonWatchCallback
 						href={footerButtonHref}
 						variant='link'
-						className='w-full data-[callback=true]:pr-14'
+						className='w-full text-muted-foreground hover:text-foreground data-[callback=true]:pr-14'
 					>
 						{footerButtonLabel}
 					</ButtonWatchCallback>
