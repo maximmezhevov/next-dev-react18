@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
-import { signOutAction } from '@/action/auth'
+import { signOutAction } from '@/actions/auth'
 
 export const useSignOutServerRefresh = () => {
 	const [isPending, setIsPending] = useState(false)

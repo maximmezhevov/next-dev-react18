@@ -52,4 +52,11 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 )
 CardFooter.displayName = 'CardFooter'
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+export {
+	Card,
+	CardHeader as Header,
+	CardFooter as Footer,
+	CardTitle as Title,
+	CardDescription as Description,
+	CardContent as Content,
+}

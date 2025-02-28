@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { signOutAction } from '@/action/auth'
+import { signOutAction } from '@/actions/auth'
 import toast from 'react-hot-toast'
 
 export const useSignOutServerReload = () => {

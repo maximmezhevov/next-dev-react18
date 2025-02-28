@@ -29,17 +29,15 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 	return (
 		<Card.Card className='w-[400px] border-0 shadow-none sm:border sm:shadow-md'>
 			{(headerTitle || headerDescription) && (
-				<Card.CardHeader className={cn('text-center', classNameHeader)}>
-					{headerTitle && (
-						<Card.CardTitle className={cn(classNameTitle)}>{headerTitle}</Card.CardTitle>
-					)}
-					{headerDescription && <Card.CardDescription>{headerDescription}</Card.CardDescription>}
-				</Card.CardHeader>
+				<Card.Header className={cn('text-center', classNameHeader)}>
+					{headerTitle && <Card.Title className={cn(classNameTitle)}>{headerTitle}</Card.Title>}
+					{headerDescription && <Card.Description>{headerDescription}</Card.Description>}
+				</Card.Header>
 			)}
 
-			{children && <Card.CardContent className={classNameContent}>{children}</Card.CardContent>}
+			{children && <Card.Content className={classNameContent}>{children}</Card.Content>}
 
-			<Card.CardFooter className='gap-1'>
+			<Card.Footer className='gap-1'>
 				<SuspenseSkeleton className='h-9 w-full'>
 					<ButtonCallback variant='ghost' size='icon' className='shrink-0'>
 						<ArrowLeft />
@@ -52,7 +50,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 						{footerButtonLabel}
 					</ButtonWatchCallback>
 				</SuspenseSkeleton>
-			</Card.CardFooter>
+			</Card.Footer>
 		</Card.Card>
 	)
 }

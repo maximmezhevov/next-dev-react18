@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useWatchCallback } from '@/hooks'
-import { OAuthAction } from '@/action/auth'
+import { OAuthAction } from '@/actions/auth'
 
 import type { Provider } from './server-action-button'
 

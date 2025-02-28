@@ -7,3 +7,5 @@ export {
 } from './button'
 
 export { Render } from './render'
+
+export { Alert } from './alert'

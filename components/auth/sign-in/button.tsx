@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui'
-import { signInAction } from '@/action/auth'
+import { signInAction } from '@/actions/auth'
 
 export const SignInButton = () => {
 	const handleSignIn = async () => {

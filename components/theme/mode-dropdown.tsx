@@ -19,10 +19,10 @@ export const ThemeToggle: React.FC = () => {
 		setTheme(value)
 	}
 	return (
-		<DropdownMenu.Root>
+		<DropdownMenu.DropdownMenu>
 			<Trigger />
 			<Content themes={themes} theme={theme} handleTheme={handleTheme} />
-		</DropdownMenu.Root>
+		</DropdownMenu.DropdownMenu>
 	)
 }
 

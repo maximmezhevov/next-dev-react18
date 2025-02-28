@@ -11,8 +11,11 @@ export { Skeleton, SuspenseSkeleton } from './skeleton'
 
 export * as Card from './card'
 export * as DropdownMenu from './dropdown-menu'
+export * as Form from './form'
 
 // components
 
 export { Avatar, AvatarFallback, AvatarImage } from './avatar'
 export { Button } from './button'
+export { Input } from './input'
+export { Label } from './label'

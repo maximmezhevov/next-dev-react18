@@ -10,10 +10,10 @@ const UserDropdown: React.FC<{ user: User | undefined }> = ({ user }) => {
 	if (!user) return null
 
 	return (
-		<DropdownMenu.Root>
+		<DropdownMenu.DropdownMenu>
 			<Trigger image={user.image} />
 			<Content user={user} />
-		</DropdownMenu.Root>
+		</DropdownMenu.DropdownMenu>
 	)
 }
 

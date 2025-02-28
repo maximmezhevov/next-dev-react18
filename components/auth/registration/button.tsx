@@ -1,6 +1,6 @@
 'use client'
 
-import { registrationAction } from '@/action/auth'
+import { registrationAction } from '@/actions/auth'
 import { Button } from '@/components/ui'
 
 export const RegistrationButton = () => {
