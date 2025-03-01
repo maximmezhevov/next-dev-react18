@@ -1,8 +1,8 @@
 import type { User as UserType } from 'next-auth'
+import { User2 } from 'lucide-react'
 import { auth } from '@/lib/auth'
-import { ButtonAddCallback } from '@/components/ui'
+import { ButtonAddCallback } from '@/components/shared'
 
-import { UserAvatar } from './avarat'
 import { UserDropdown } from './dropdown'
 
 export const User: React.FC = async () => {
@@ -11,11 +11,11 @@ export const User: React.FC = async () => {
 
 	if (!user) {
 		return (
-			<ButtonAddCallback href='/sign-in' variant='secondary' size='icon' className='rounded-full'>
-				<UserAvatar image={null} />
+			<ButtonAddCallback href='/sign-in' size='icon' className='rounded-full'>
+				<User2 />
 			</ButtonAddCallback>
 		)
-	} else {
-		return <UserDropdown user={user} />
 	}
+
+	return <UserDropdown user={user} />
 }

@@ -171,7 +171,7 @@ const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTML
 DropdownMenuShortcut.displayName = 'DropdownMenuShortcut'
 
 export {
-	DropdownMenu as Root,
+	DropdownMenu,
 	DropdownMenuTrigger as Trigger,
 	DropdownMenuContent as Content,
 	DropdownMenuItem as Item,

@@ -1,33 +1,29 @@
 import { Session } from '@/components/auth'
 import { UserClient, UserServer } from '@/components/next-auth'
 
-export default function NextAuthParallelLayout({
-	server,
-	client,
-}: {
+interface Props {
 	server: React.ReactNode
 	client: React.ReactNode
-}) {
+}
+
+export default function NextAuthParallelLayout({ ...props }: Props) {
 	return (
 		<div className='space-y-6'>
 			<Header />
-			<Main server={server} client={client} />
+			<Main {...props} />
 		</div>
 	)
 }
 
 const Header: React.FC = () => {
 	return (
-		<header className='flex flex-wrap items-center justify-between gap-3'>
+		<header className='text-center'>
 			<h1>next-auth/parallel</h1>
 		</header>
 	)
 }
 
-const Main: React.FC<{ server: React.ReactNode; client: React.ReactNode }> = ({
-	server,
-	client,
-}) => {
+const Main: React.FC<Props> = ({ server, client }) => {
 	return (
 		<main className='space-y-6'>
 			<section className='space-y-3'>

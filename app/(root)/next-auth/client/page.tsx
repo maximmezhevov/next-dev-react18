@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 
 import { SignOutClientButton } from '@/components/auth'
-import { ButtonAddCallback } from '@/components/ui'
+import { ButtonAddCallback } from '@/components/shared'
 
 export default function NextAuthServerPage() {
 	const { data: session } = useSession()
@@ -14,9 +14,14 @@ export default function NextAuthServerPage() {
 
 			<div className='flex flex-wrap items-center justify-center gap-1'>
 				{!session ? (
-					<ButtonAddCallback href='/sign-in' size='lg'>
-						Войти
-					</ButtonAddCallback>
+					<>
+						<ButtonAddCallback href='/sign-in' size='lg'>
+							Авторизация
+						</ButtonAddCallback>
+						<ButtonAddCallback href='/registration' variant='secondary' size='lg'>
+							Регистрация
+						</ButtonAddCallback>
+					</>
 				) : (
 					<SignOutClientButton variant='secondary' wrap />
 				)}

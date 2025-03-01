@@ -12,10 +12,10 @@ export const UserDropdownClient: React.FC = () => {
 	if (!user) return null
 
 	return (
-		<DropdownMenu.Root>
+		<DropdownMenu.DropdownMenu>
 			<Trigger image={user.image} />
 			<Content />
-		</DropdownMenu.Root>
+		</DropdownMenu.DropdownMenu>
 	)
 }
 

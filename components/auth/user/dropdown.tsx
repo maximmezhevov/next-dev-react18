@@ -5,23 +5,22 @@ import { SignOutServerRefreshButton } from '@/components/auth'
 import { DropdownMenu } from '@/components/ui'
 
 import { UserAvatar } from './avarat'
-import React from 'react'
 
 const UserDropdown: React.FC<{ user: User | undefined }> = ({ user }) => {
 	if (!user) return null
 
 	return (
-		<DropdownMenu.Root>
+		<DropdownMenu.DropdownMenu>
 			<Trigger image={user.image} />
 			<Content user={user} />
-		</DropdownMenu.Root>
+		</DropdownMenu.DropdownMenu>
 	)
 }
 
 const Trigger: React.FC<{ image: User['image'] }> = ({ image }) => {
 	return (
-		<DropdownMenu.Trigger>
-			<UserAvatar image={image} className='size-9 rounded-full' />
+		<DropdownMenu.Trigger className='size-9 overflow-hidden rounded-full'>
+			<UserAvatar image={image} className='size-9' />
 		</DropdownMenu.Trigger>
 	)
 }
@@ -61,13 +60,12 @@ const Links: React.FC = () => {
 const SignOut: React.FC = () => {
 	return (
 		<DropdownMenuGroupSignOut>
-			<SignOutServerRefreshButton variant='ghost'>Выход</SignOutServerRefreshButton>
+			<SignOutServerRefreshButton variant='ghost' />
 		</DropdownMenuGroupSignOut>
 	)
 }
 
-// TODO
-
+// TODO // временный компонент
 const DropdownMenuGroupSignOut: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	return (
 		<DropdownMenu.Group className='space-y-0.5 *:flex *:min-h-8 *:w-full *:justify-start *:rounded-sm *:px-2 *:py-1.5 *:text-sm'>
