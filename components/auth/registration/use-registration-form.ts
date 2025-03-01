@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useWatchCallback } from '@/hooks'
+import { useCallback } from '@/hooks'
 import { registrationSchema } from '@/lib/zod/auth'
 import { registrationAction, signInAction } from '@/actions/auth'
 
@@ -17,7 +17,7 @@ export const useRegistrationForm = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 
-	const { callback } = useWatchCallback()
+	const { callback } = useCallback()
 
 	const router = useRouter()
 

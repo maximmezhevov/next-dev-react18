@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 
-export const useWatchCallback = (prefixUrl?: '?' | '&') => {
+export const useCallback = (prefixUrl?: '?' | '&') => {
 	const searchParams = useSearchParams()
 
 	const callback: string | undefined = searchParams.get('callbackUrl') ?? undefined

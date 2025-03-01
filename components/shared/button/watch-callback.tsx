@@ -4,7 +4,7 @@ import type { ButtonVariantProps } from '@/components/ui'
 
 import Link from 'next/link'
 import { Button } from '@/components/ui'
-import { useWatchCallback } from '@/hooks'
+import { useCallback } from '@/hooks'
 
 interface Props extends ButtonVariantProps {
 	href: string
@@ -15,7 +15,7 @@ interface Props extends ButtonVariantProps {
 }
 
 export const ButtonWatchCallback: React.FC<Props> = ({ href, label, children, ...props }) => {
-	const { callbackUrl } = useWatchCallback('?')
+	const { callbackUrl } = useCallback('?')
 
 	return (
 		<Button data-callback={Boolean(callbackUrl !== '')} asChild {...props}>

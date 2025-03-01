@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { resetPasswordSchema } from '@/lib/zod/auth'
 import toast from 'react-hot-toast'
 import { resetPasswordAction, signInAction } from '@/actions/auth'
-import { useWatchCallback } from '@/hooks'
+import { useCallback } from '@/hooks'
 
 const DEFAULE_REDIRECT = '/next-auth'
 
@@ -17,7 +17,7 @@ export const useResetPasswordForm = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 
-	const { callback } = useWatchCallback()
+	const { callback } = useCallback()
 
 	const router = useRouter()
 
