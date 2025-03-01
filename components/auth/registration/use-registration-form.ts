@@ -17,9 +17,9 @@ export const useRegistrationForm = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 
-	const router = useRouter()
-
 	const { callback } = useWatchCallback()
+
+	const router = useRouter()
 
 	const form = useForm<z.infer<typeof registrationSchema>>({
 		resolver: zodResolver(registrationSchema),

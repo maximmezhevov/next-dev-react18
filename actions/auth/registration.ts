@@ -4,8 +4,8 @@ import * as z from 'zod'
 import { registrationSchema } from '@/lib/zod/auth'
 import { sanitizeEmail, sanitizeName } from '@/lib/validator'
 import { getUserByEmail } from '@/lib/services/auth'
-import { prisma } from '@/lib/prisma'
 import bcryptjs from 'bcryptjs'
+import { prisma } from '@/lib/prisma'
 
 export const registrationAction = async (values: z.infer<typeof registrationSchema>) => {
 	const validatedFields = registrationSchema.safeParse(values)
@@ -28,15 +28,9 @@ export const registrationAction = async (values: z.infer<typeof registrationSche
 
 	try {
 		await prisma.user.create({
-			data: {
-				name,
-				email,
-				password: hashedPassword,
-			},
+			data: { name, email, password: hashedPassword },
 		})
-		return {
-			success: 'Регистрация прошла успешно',
-		}
+		return { success: 'Регистрация прошла успешно' }
 	} catch (error) {
 		if (error instanceof Error) {
 			console.log('Ошибка:', error)

@@ -7,8 +7,8 @@ type AuthCardProps = {
 	headerTitle: string
 	headerDescription?: string
 	children: React.ReactNode
-	footerButtonHref: string
-	footerButtonLabel: string
+	footerButtonHref?: string
+	footerButtonLabel?: string
 
 	classNameHeader?: string
 	classNameTitle?: string
@@ -19,8 +19,8 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 	headerTitle,
 	headerDescription,
 	children,
-	footerButtonHref,
-	footerButtonLabel,
+	footerButtonHref = '/sign-in',
+	footerButtonLabel = 'Вернуться к авторизации',
 
 	classNameHeader,
 	classNameTitle,

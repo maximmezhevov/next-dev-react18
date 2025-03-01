@@ -10,6 +10,8 @@ export {
 export { SignInForm } from './sign-in'
 export { RegistrationForm } from './registration'
 
+export { ResetPasswordForm } from './reset-password'
+
 // components & ui
 
 export { User, UserAvatar, Trigger, DropdownMenuGroupSignOut } from './user'

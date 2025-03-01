@@ -2,14 +2,14 @@
 
 import type { Control } from 'react-hook-form'
 import * as z from 'zod'
-import { signInSchema } from '@/lib/zod/auth'
-import { Alert, ButtonSubmit, ButtonWatchCallback } from '@/components/shared'
+import { resetPasswordSchema } from '@/lib/zod/auth'
+import { Alert, ButtonSubmit } from '@/components/shared'
 import { Form, Input, PasswordInput } from '@/components/ui'
 
-import { useSignInForm } from './use-sign-in-form'
+import { useResetPasswordForm } from './use-reset-password-form'
 
-export const SignInForm: React.FC = () => {
-	const { isPending, error, success, form, onSubmit } = useSignInForm()
+export const ResetPasswordForm = () => {
+	const { isPending, error, success, form, onSubmit } = useResetPasswordForm()
 
 	return (
 		<Form.Form {...form}>
@@ -17,14 +17,15 @@ export const SignInForm: React.FC = () => {
 				<div className='space-y-4'>
 					<EmailField control={form.control} isPending={isPending} />
 					<PasswordField control={form.control} isPending={isPending} />
+					<PasswordConfirmField control={form.control} isPending={isPending} />
 				</div>
 
 				{error && <Alert color='red'>{error}</Alert>}
 				{success ? (
 					<Alert color='green'>{success}</Alert>
 				) : (
-					<ButtonSubmit type='submit' disabled={isPending} variant='secondary' className='w-full'>
-						Войти
+					<ButtonSubmit type='submit' disabled={isPending} className='w-full'>
+						Сохранить новый пароль
 					</ButtonSubmit>
 				)}
 			</form>
@@ -33,7 +34,7 @@ export const SignInForm: React.FC = () => {
 }
 
 interface FieldProps {
-	control: Control<z.infer<typeof signInSchema>>
+	control: Control<z.infer<typeof resetPasswordSchema>>
 	isPending: boolean
 }
 
@@ -62,17 +63,25 @@ const PasswordField: React.FC<FieldProps> = ({ control, isPending }) => {
 			name='password'
 			render={({ field }) => (
 				<Form.Item>
-					<div className='inline-flex h-[15px] w-full items-center justify-between'>
-						<Form.Label>Пароль</Form.Label>
-						<ButtonWatchCallback
-							disabled={isPending}
-							href='/reset-password'
-							variant='link'
-							className='min-h-[15px] p-0 text-xs text-muted-foreground hover:text-foreground'
-						>
-							Сбросить пароль?
-						</ButtonWatchCallback>
-					</div>
+					<Form.Label>Новый пароль</Form.Label>
+					<Form.Control>
+						<PasswordInput {...field} disabled={isPending} />
+					</Form.Control>
+					<Form.Message />
+				</Form.Item>
+			)}
+		/>
+	)
+}
+
+const PasswordConfirmField: React.FC<FieldProps> = ({ control, isPending }) => {
+	return (
+		<Form.Field
+			control={control}
+			name='confirmPassword'
+			render={({ field }) => (
+				<Form.Item>
+					<Form.Label>Новый пароль (еще раз)</Form.Label>
 					<Form.Control>
 						<PasswordInput {...field} disabled={isPending} />
 					</Form.Control>

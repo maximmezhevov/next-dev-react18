@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signInSchema } from '@/lib/zod/auth'
-import { signInAction } from '@/actions/auth'
+import { resetPasswordSchema } from '@/lib/zod/auth'
 import toast from 'react-hot-toast'
+import { resetPasswordAction, signInAction } from '@/actions/auth'
 import { useWatchCallback } from '@/hooks'
 
 const DEFAULE_REDIRECT = '/next-auth'
 
-export const useSignInForm = () => {
+export const useResetPasswordForm = () => {
 	const [isPending, setIsPending] = useState(false)
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
@@ -21,27 +21,41 @@ export const useSignInForm = () => {
 
 	const router = useRouter()
 
-	const form = useForm<z.infer<typeof signInSchema>>({
-		resolver: zodResolver(signInSchema),
-		defaultValues: { email: '', password: '' },
+	const form = useForm<z.infer<typeof resetPasswordSchema>>({
+		resolver: zodResolver(resetPasswordSchema),
+		defaultValues: { email: '', password: '', confirmPassword: '' },
 	})
 
-	const onSubmit = async (values: z.infer<typeof signInSchema>) => {
+	const onSubmit = async (values: z.infer<typeof resetPasswordSchema>) => {
 		setIsPending(true)
 		setError(undefined)
 		setSuccess(undefined)
 
 		try {
-			const data = await signInAction(values)
-			if (data.error) {
-				throw new Error(data.error)
+			const resetPasswordData = await resetPasswordAction(values)
+			if (resetPasswordData.error) {
+				throw Error(resetPasswordData.error)
 			}
 
-			if (data.success) {
-				setSuccess(data.success)
-				toast.success(data.success)
+			if (resetPasswordData.success) {
+				setSuccess(resetPasswordData.success)
+				toast.success(resetPasswordData.success)
 
-				router.push(callback || DEFAULE_REDIRECT)
+				try {
+					const signInData = await signInAction(values)
+					if (signInData.error) {
+						throw new Error(signInData.error)
+					}
+
+					if (signInData.success) {
+						setSuccess(signInData.success)
+						toast.success(signInData.success)
+
+						router.push(callback || DEFAULE_REDIRECT)
+					}
+				} catch (error) {
+					throw error
+				}
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -58,11 +72,5 @@ export const useSignInForm = () => {
 		}
 	}
 
-	return {
-		isPending,
-		error,
-		success,
-		form,
-		onSubmit,
-	}
+	return { isPending, error, success, form, onSubmit }
 }
