@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useWatchCallback } from '@/hooks'
+import { useCallbackUrl } from '@/hooks'
 import { OAuthAction } from '@/actions/auth'
 
 import type { Provider } from './server-action-button'
@@ -9,9 +9,9 @@ import type { Provider } from './server-action-button'
 export const useOAuthServerAction = (provider: Provider) => {
 	const [isPending, setIsPending] = useState(false)
 
-	const { callbackUrl } = useWatchCallback()
+	const { callback } = useCallbackUrl()
 
-	const redirectUrl = callbackUrl || 'next-auth'
+	const redirectUrl = callback || 'next-auth'
 
 	const handleOAuthServerAction = async () => {
 		setIsPending(true)

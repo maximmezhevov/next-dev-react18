@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema } from '@/lib/zod/auth'
 import { signInAction } from '@/actions/auth'
 import toast from 'react-hot-toast'
-import { useWatchCallback } from '@/hooks'
+import { useCallbackUrl } from '@/hooks'
 
 const DEFAULE_REDIRECT = '/next-auth'
 
@@ -17,7 +17,7 @@ export const useSignInForm = () => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [success, setSuccess] = useState<string | undefined>(undefined)
 
-	const { callback } = useWatchCallback()
+	const { callback } = useCallbackUrl()
 
 	const router = useRouter()
 
